@@ -1,0 +1,231 @@
+@font-face {
+  font-family: "BeyondWonderland";
+  src: local("BeyondWonderland"), url("BeyondWonderland.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MedievalSharp-Book";
+  src: local("MedievalSharp-Book"), url("MedievalSharp-Book.ttf") format("truetype");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: url("images/bg.png") no-repeat center center fixed;
+  font-family: "BeyondWonderland";
+  color: white;
+  /* text-shadow: 1px 1px black, -2px -2px #444; */
+  --PhoneInputCountryFlag-aspectRatio: 1.333;
+}
+
+:root {
+  --PhoneInputCountryFlag-aspectRatio: 1.333;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.main-div {
+  width: 100% !important;
+  height: 100%;
+}
+
+.fade-in {
+  opacity: 1;
+  animation: 2s fadeIn;
+}
+
+.fade-out {
+  opacity: 0;
+  animation: 1s fadeOut;
+}
+
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.solidarity-button {
+  background: transparent;
+  background-color: #e4baa9;
+  color: #282c34;
+}
+
+.solidarity-button:hover {
+  background-color: #e6c8bc;
+}
+
+.solidarity-button:disabled {
+  background-color: #c1bebc;
+  color: #282c3463;
+}
+
+.solidarity-button-small {
+  width: 200px;
+  height: 50px;
+}
+
+.solidarity-button-medium {
+  font-size: 20px;
+  width: 450px;
+  height: 70px;
+}
+
+.solidarity-button-large {
+  font-size: 30px;
+  width: 600px;
+  height: 300px;
+}
+
+.solidarity-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.solidarity-brand {
+  width: 160px;
+  cursor: pointer;
+}
+
+.solidarity-input {
+  font-size: 20px;
+  width: 450px;
+  height: 55px;
+}
+
+.solidarity-phone-input {
+  font-size: 20px;
+  width: 335px;
+  height: 55px;
+}
+
+.solidarity-phone-select {
+  font-size: 20px;
+  width: 110px;
+  height: 55px;
+  margin-right: 5px;
+}
+
+.solidarity-link {
+  color: #47c0f0;
+  cursor: pointer;
+}
+
+.solidarity-link:hover {
+  color: #87d0ec;
+}
+
+.solidarity-link-bad {
+  color: #f0474f;
+  cursor: pointer;
+}
+
+.solidarity-link-bad:hover {
+  color: #e9777c;
+}
+
+.solidarity-undertext {
+  font-size: 13px;
+}
+
+.solidarity-speech-bubble {
+  background-color: white;
+  color: #333;
+  border-radius: 225px 15px 225px 15px / 15px 225px 15px 225px;
+  padding: 1rem;
+  position: relative;
+  font-size: 20px;
+  margin-right: 100px;
+}
+
+.solidarity-speech-bubble::before {
+  content: "";
+  position: absolute;
+  background-color: white;
+  left: calc(50% - 50px / 2);
+  clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%);
+}
+
+.PhoneInputInput {
+  border-radius: 225px 15px 225px 15px / 15px 225px 15px 225px;
+  font-size: 20px;
+  width: 350px;
+  height: 55px;
+  padding-left: 0.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.character {
+  width: 80%;
+  height: 700px;
+  border: 2px solid #161311;
+  background-color: #282c34;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.gear {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #161311;
+  padding: 0;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.gear-name {
+  font-size: 38px;
+}
+
+.stats {
+  width: 100%;
+  height: 696px;
+  border: 2px solid #161311;
+  padding: 15px;
+  font-size: 18px;
+  overflow-y: scroll;
+  scrollbar-color: #3d4554 #282c34;
+  scrollbar-width: thin;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family: "MedievalSharp-Book";
+}
+
+.inventory {
+  width: 100%;
+  height: 696px;
+  border: 2px solid #161311;
+  scrollbar-color: #3d4554 #282c34;
+  scrollbar-width: thin;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family: "MedievalSharp-Book";
+}
+
+.slot {
+  width: 65px;
+  height: 65px;
+  /* background: #3d4554;
+  background: radial-gradient(circle, rgba(61, 69, 84, 1) 0%, rgba(40, 44, 52, 1) 100%); */
+  /* background: #baa09c;
+  background: radial-gradient(circle, rgba(186, 160, 156, 1) 0%, rgba(77, 62, 58, 1) 100%); */
+  background: #8c8281;
+  background: radial-gradient(circle, rgba(140, 130, 129, 1) 0%, rgba(82, 73, 71, 1) 100%);
+  border: 2px solid #161311;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 0;
+  padding-left: 6px;
+  padding-top: 6px;
+}
+
+.slot-icon-empty {
+  opacity: 15%;
+  width: 48px;
+  height: 48px;
+}

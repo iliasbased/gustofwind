@@ -11,6 +11,7 @@ import ForgotPassword from "./pages/forgot-password";
 import Player from "./pages/player";
 import GameMaster from "./pages/gamemaster";
 import Choice from "./pages/choice";
+import GFooter from "./components/footer";
 
 export default function GustOfWind() {
   return (
@@ -30,6 +31,7 @@ export default function GustOfWind() {
           </Route>
         </Routes>
       </SCentered>
+      <GFooter />
     </>
   );
 }

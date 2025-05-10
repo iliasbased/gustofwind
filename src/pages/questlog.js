@@ -4,7 +4,7 @@ import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 
-export default function Character() {
+export default function QuestLog() {
   useEffect(() => {}, []);
 
   return (

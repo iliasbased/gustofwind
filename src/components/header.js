@@ -59,7 +59,7 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/gamemaster");
+                    navigate("/combat");
                   }}
                 >
                   <Image
@@ -71,7 +71,7 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/gamemaster");
+                    navigate("/combat");
                   }}
                 >
                   <Image

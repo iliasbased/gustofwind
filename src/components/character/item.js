@@ -1,7 +1,7 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useDraggable } from "@dnd-kit/core";
 
-export default function Item({ type, disabled, item}) {
+export default function Item({ type, disabled, item, isLarge}) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: 'draggable'+item.id,
     data: {
@@ -17,7 +17,7 @@ export default function Item({ type, disabled, item}) {
 
   return (
     <Container className="p-0" ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <Image src={item.img} className="slot-icon" />
+      <Image src={item.img} className={isLarge ? "slot-icon-large" : "slot-icon"} />
     </Container>
   );
 }

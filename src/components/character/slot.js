@@ -2,12 +2,11 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { useDroppable } from "@dnd-kit/core";
 import Item from "./item";
 
-export default function Slot({ slotId, type, disabled, item }) {
+export default function Slot({ id, type, disabled, item }) {
   const { isOver, setNodeRef } = useDroppable({
-    id: slotId,
+    id: id,
     data: {
-      type: "slot",
-      slotType: type,
+      type: type,
       disabled: disabled,
       item: item,
     },
@@ -22,7 +21,7 @@ export default function Slot({ slotId, type, disabled, item }) {
       <Container
         className={disabled ? "slot-bag-disabled" : "slot-bag"}
         ref={setNodeRef}
-        style={{ backgroundColor: isOver ? "lightblue" : "" }}
+        // style={{ backgroundColor: isOver ? "lightblue" : "" }}
       >
         <Row>
           <Col>{item ? <Item item={item} /> : ""}</Col>
@@ -38,7 +37,7 @@ export default function Slot({ slotId, type, disabled, item }) {
       style={{ backgroundColor: isOver ? "lightblue" : "" }}
     >
       <Row>
-        <Col>{item ? <Item item={item} /> : getEmptyIcon()}</Col>
+        <Col>{item ? <Item item={item} isLarge /> : getEmptyIcon()}</Col>
       </Row>
     </Container>
   );

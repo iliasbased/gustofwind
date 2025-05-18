@@ -15,77 +15,111 @@ export default function Character() {
       name: "Iron Sword",
       type: "weapon",
       equipped: true,
-      img: "/assets/images/items/base/sword.png",
-      slot: 0,
+      img: "/assets/images/items/base/weapon.png",
+      slot: 'weapon0',
     },
     {
       id: 1,
       name: "Leather Belt",
-      type: "armor",
+      type: "belt",
       equipped: false,
       img: "/assets/images/items/base/belt.png",
-      slot: 1,
+      slot: 'bag0',
     },
     {
       id: 2,
       name: "Health Potion",
-      type: "misc",
+      type: "potion_health",
       equipped: false,
       img: "/assets/images/items/base/potion_health.png",
-      slot: 2,
+      slot: 'bag1',
     },
     {
       id: 3,
       name: "Mana Potion",
-      type: "misc",
+      type: "potion_mana",
       equipped: false,
       img: "/assets/images/items/base/potion_mana.png",
-      slot: 3,
+      slot: 'bag2',
     },
     {
       id: 4,
       name: "Common Helmet",
-      type: "armor",
+      type: "head",
       equipped: false,
       img: "/assets/images/items/base/head.png",
-      slot: 4,
+      slot: 'bag3',
     },
     {
       id: 5,
       name: "Leather Boots",
-      type: "armor",
+      type: "boots",
       equipped: false,
       img: "/assets/images/items/base/boots.png",
-      slot: 5,
+      slot: 'bag4',
     },
   ]);
 
-  // const [activeItem, setActiveItem] = useState(null);
-
   function handleDragEnd(event) {
-    // console.log(event);
     if (event.over) {
-      console.log("2", event);
-      console.log(event.over);
+      console.log(event);
 
-      let draggableSlot = event.active.data.current.item.slot;
-      let droppableSlot = event.over.id;
-
-      playerItems.find((item) => item.id == event.active.data.current.item.id).slot = droppableSlot;
-      if (event.over.data.current.item) {
-        playerItems.find((item) => item.id == event.over.data.current.item.id).slot = draggableSlot;
+      if (event.over.data.current.type == "bag") {
+        dropItemInBag(event.active.data.current.item, event.over);
+      } else {
+        dropItemInGear(event.active.data.current.item, event.over);
       }
 
       setPlayerItems([...playerItems]);
     }
-
-    // setActiveItem(null);
   }
 
-  function handleDragStart(event) {
-    let id = event.active.id.replace("draggable", "");
+  function dropItemInBag(item, slot) {
+    if (slot.data.current.disabled) {
+      return;
+    }
 
-    // setActiveItem(playerItems.find((item) => item.id === id));
+    if (item.equipped && slot.data.current.item && slot.data.current.item.type != item.type) {
+      return;
+    }
+
+    let draggableSlot = item.slot;
+    let draggableEquipped = item.equipped;
+    let droppableSlot = slot.id;
+
+    item.slot = droppableSlot;
+    item.equipped = false;
+
+    if (slot.data.current.item) {
+      slot.data.current.item.slot = draggableSlot;
+      slot.data.current.item.equipped = draggableEquipped;
+    }
+  }
+
+  function dropItemInGear(item, slot) {
+    if (slot.data.current.disabled) {
+      return;
+    }
+
+    if (item.equipped && slot.data.current.item && slot.data.current.item.type != item.type) {
+      return;
+    }
+
+    if (slot.data.current.type != item.type) {
+      return;
+    }
+
+    let draggableSlot = item.slot;
+    let draggableEquipped = item.equipped;
+    let droppableSlot = slot.id;
+
+    item.slot = droppableSlot;
+    item.equipped = true;
+
+    if (slot.data.current.item) {
+      slot.data.current.item.slot = draggableSlot;
+      slot.data.current.item.equipped = draggableEquipped;
+    }
   }
 
   return (
@@ -108,18 +142,13 @@ export default function Character() {
           <Col className="pe-0" xs={3}>
             <Stats />
           </Col>
-          <Col className="px-0" xs={3}>
-            <Gear playerItems={playerItems.filter((item) => item.equipped)} />
-          </Col>
-          <DndContext
-            onDragEnd={handleDragEnd}
-            onDragStart={handleDragStart}
-            collisionDetection={closestCorners}
-          >
+          <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+            <Col className="px-0" xs={3}>
+              <Gear playerItems={playerItems.filter((item) => item.equipped)} />
+            </Col>
             <Col className="ps-0" xs={6}>
               <Inventory playerItems={playerItems.filter((item) => !item.equipped)} />
             </Col>
-            {/* <DragOverlay>{activeItem ? <Item id={activeItem} /> : null}</DragOverlay> */}
           </DndContext>
         </Row>
       </Container>

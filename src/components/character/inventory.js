@@ -79,11 +79,11 @@ export default function Inventory({ playerItems }) {
     const slots = [];
     for (let i = 0; i < availableSlots; i++) {
       slots.push(
-        <Slot key={i} slotId={i} type="bag" item={playerItems.find((item)=>item.slot==i)} />
+        <Slot key={i} id={'bag'+i} type="bag" item={playerItems.find((item)=>item.slot=='bag'+i)} />
       );
     }
     for (let i = availableSlots; i < totalSlots; i++) {
-      slots.push(<Slot key={i} slotId={i} type="bag" disabled />);
+      slots.push(<Slot key={i} id={'bag'+i} type="bag" disabled />);
     }
     return slots;
   };

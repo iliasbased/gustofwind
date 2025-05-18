@@ -1,30 +1,44 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
+import { useDroppable } from "@dnd-kit/core";
+import Item from "./item";
 
-export default function Slot({ type, disabled }) {
-  const empty = true;
+export default function Slot({ slotId, type, disabled, item }) {
+  const { isOver, setNodeRef } = useDroppable({
+    id: slotId,
+    data: {
+      type: "slot",
+      slotType: type,
+      disabled: disabled,
+      item: item,
+    },
+  });
 
   const getEmptyIcon = () => {
     return <Image src={`/assets/images/items/base/${type}.png`} className="slot-icon-empty" />;
   };
 
-  const getEquippedItem = () => {
-    // return <Image src={'weapon'} className="slot-icon" />;
-  };
-
   if (type == "bag") {
     return (
-      <Container className={disabled ? "slot-bag-disabled" : "slot-bag"}>
+      <Container
+        className={disabled ? "slot-bag-disabled" : "slot-bag"}
+        ref={setNodeRef}
+        style={{ backgroundColor: isOver ? "lightblue" : "" }}
+      >
         <Row>
-          <Col></Col>
+          <Col>{item ? <Item item={item} /> : ""}</Col>
         </Row>
       </Container>
     );
   }
 
   return (
-    <Container className="slot">
+    <Container
+      className="slot"
+      ref={setNodeRef}
+      style={{ backgroundColor: isOver ? "lightblue" : "" }}
+    >
       <Row>
-        <Col>{empty ? getEmptyIcon() : getEquippedItem}</Col>
+        <Col>{item ? <Item item={item} /> : getEmptyIcon()}</Col>
       </Row>
     </Container>
   );

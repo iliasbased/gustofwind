@@ -2,7 +2,9 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Slot from "./slot";
 
-export default function Inventory({}) {
+export default function Inventory({ playerItems }) {
+  console.log(playerItems);
+
   const [headers, setHeaders] = useState([
     { id: 0, name: "All", selected: true, style: { borderWidth: "2px 1px 0px 0px" } },
     { id: 1, name: "Weapons", selected: false },
@@ -49,12 +51,11 @@ export default function Inventory({}) {
     return (
       <>
         {headers.map((header) => (
-          <Col className="px-0" xs={2}>
+          <Col className="px-0" xs={2} key={header.id}>
             <button
               onClick={() => selectHeader(header.id)}
               className={header.selected ? "bag-button-pressed" : "bag-button"}
               style={header.style}
-              key={header.id}
             >
               {header.name}
             </button>
@@ -77,10 +78,12 @@ export default function Inventory({}) {
   const getBagSlots = () => {
     const slots = [];
     for (let i = 0; i < availableSlots; i++) {
-      slots.push(<Slot key={i} type="bag" />);
+      slots.push(
+        <Slot key={i} slotId={i} type="bag" item={playerItems.find((item)=>item.slot==i)} />
+      );
     }
-    for (let i = 0; i < totalSlots - availableSlots; i++) {
-      slots.push(<Slot key={i} type="bag" disabled />);
+    for (let i = availableSlots; i < totalSlots; i++) {
+      slots.push(<Slot key={i} slotId={i} type="bag" disabled />);
     }
     return slots;
   };

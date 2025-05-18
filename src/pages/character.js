@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Context } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
-import DropdownContext from "react-bootstrap/esm/DropdownContext";
-import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
-import Item from "../components/character/item";
-import { replace } from "react-router-dom";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+
+export const PlayerItemsContext = React.createContext();
 
 export default function Character() {
   const [playerItems, setPlayerItems] = useState([
@@ -16,7 +15,7 @@ export default function Character() {
       type: "weapon",
       equipped: true,
       img: "/assets/images/items/base/weapon.png",
-      slot: 'weapon0',
+      slot: "weapon0",
     },
     {
       id: 1,
@@ -24,7 +23,7 @@ export default function Character() {
       type: "belt",
       equipped: false,
       img: "/assets/images/items/base/belt.png",
-      slot: 'bag0',
+      slot: "bag0",
     },
     {
       id: 2,
@@ -32,7 +31,7 @@ export default function Character() {
       type: "potion_health",
       equipped: false,
       img: "/assets/images/items/base/potion_health.png",
-      slot: 'bag1',
+      slot: "bag1",
     },
     {
       id: 3,
@@ -40,7 +39,7 @@ export default function Character() {
       type: "potion_mana",
       equipped: false,
       img: "/assets/images/items/base/potion_mana.png",
-      slot: 'bag2',
+      slot: "bag2",
     },
     {
       id: 4,
@@ -48,7 +47,7 @@ export default function Character() {
       type: "head",
       equipped: false,
       img: "/assets/images/items/base/head.png",
-      slot: 'bag3',
+      slot: "bag3",
     },
     {
       id: 5,
@@ -56,7 +55,7 @@ export default function Character() {
       type: "boots",
       equipped: false,
       img: "/assets/images/items/base/boots.png",
-      slot: 'bag4',
+      slot: "bag4",
     },
   ]);
 
@@ -139,17 +138,19 @@ export default function Character() {
       </Container>
       <Container className="character">
         <Row>
-          <Col className="pe-0" xs={3}>
-            <Stats />
-          </Col>
-          <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-            <Col className="px-0" xs={3}>
-              <Gear playerItems={playerItems.filter((item) => item.equipped)} />
+          <PlayerItemsContext.Provider value={[playerItems, setPlayerItems]}>
+            <Col className="pe-0" xs={3}>
+              <Stats />
             </Col>
-            <Col className="ps-0" xs={6}>
-              <Inventory playerItems={playerItems.filter((item) => !item.equipped)} />
-            </Col>
-          </DndContext>
+            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+              <Col className="px-0" xs={3}>
+                <Gear playerItems={playerItems.filter((item) => item.equipped)} />
+              </Col>
+              <Col className="ps-0" xs={6}>
+                <Inventory playerItems={playerItems.filter((item) => !item.equipped)} />
+              </Col>
+            </DndContext>
+          </PlayerItemsContext.Provider>
         </Row>
       </Container>
     </>

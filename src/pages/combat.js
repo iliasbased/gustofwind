@@ -3,8 +3,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import CharacterPortait from "../components/combat/character-portait";
 import CombatLog from "../components/combat/combat-log";
 import Loot from "../components/combat/loot";
+import { usePlayerItems } from "../hooks/usePlayerItems";
+import { usePlayerStats } from "../hooks/usePlayerStats";
 
 export default function Combat() {
+  let { playerItems } = usePlayerItems();
+  let { secondaryStats } = usePlayerStats(playerItems);
+
   const loot = [
     {
       type: "common",
@@ -37,33 +42,45 @@ export default function Combat() {
       name: "Goblin",
       currentHealth: 50,
       maxHealth: 50,
-      damage: 5,
+      minDamage: 5,
+      maxDamage: 6,
     },
     {
       name: "Orc",
       currentHealth: 50,
       maxHealth: 80,
-      damage: 10,
+      minDamage: 10,
+      maxDamage: 12,
     },
     {
       name: "Troll",
       currentHealth: 120,
       maxHealth: 120,
-      damage: 15,
+      minDamage: 15,
+      maxDamage: 25,
     },
   ]);
   const [player, setPlayer] = useState({
     name: "Norewind",
-    currentHealth: 200,
-    maxHealth: 200,
-    damage: 200,
+    currentHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
+    maxHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
+    minDamage: secondaryStats.find((stat) => stat.id === "min_dmg").value,
+    maxDamage: secondaryStats.find((stat) => stat.id === "max_dmg").value,
   });
+
   const [combatText, setCombatText] = useState([]);
   const [playerTurn, setPlayerTurn] = useState(true);
 
   useEffect(() => {
+    setPlayer({
+      name: "Norewind",
+      currentHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
+      maxHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
+      minDamage: secondaryStats.find((stat) => stat.id === "min_dmg").value,
+      maxDamage: secondaryStats.find((stat) => stat.id === "max_dmg").value,
+    });
     setCombatText([<p>{`You engage combat against ${enemies[0].name}`}</p>]);
-  }, []);
+  }, [secondaryStats]);
 
   return (
     <>

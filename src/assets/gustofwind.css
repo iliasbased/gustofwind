@@ -337,10 +337,10 @@ body,
   margin: 2px;
 }
 
-.slot-bag:hover {
+/* .slot-bag:hover {
   opacity: 80%;
   cursor: grab;
-}
+} */
 
 .slot-bag-disabled {
   width: 50px;

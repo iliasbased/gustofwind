@@ -31,12 +31,18 @@ export default function CombatLog({
     }, 1000);
   }, [player, enemies]);
 
+  console.log(player);
+
   const playerAttack = () => {
     let enemy = enemies[0];
     let newCombatLog = [];
 
-    let enemyHealth = enemy.currentHealth - player.damage;
-    newCombatLog.push(<p>{`${player.name} attacks ${enemy.name} for ${player.damage} damage!`}</p>);
+    let playerDamage = Math.floor(
+      Math.random() * (player.maxDamage - player.minDamage + 1) + player.minDamage
+    );
+
+    let enemyHealth = enemy.currentHealth - playerDamage;
+    newCombatLog.push(<p>{`${player.name} attacks ${enemy.name} for ${playerDamage} damage!`}</p>);
 
     if (enemyHealth <= 0) {
       newCombatLog.push(<p>{`${enemy.name} has been defeated!`}</p>);
@@ -58,14 +64,18 @@ export default function CombatLog({
   const enemyAttack = () => {
     let enemy = enemies[0];
 
+    let enemyDamage = Math.floor(
+      Math.random() * (enemy.maxDamage - enemy.minDamage + 1) + enemy.minDamage
+    );
+
     setPlayer((prevPlayer) => ({
       ...prevPlayer,
-      currentHealth: prevPlayer.currentHealth - enemy.damage,
+      currentHealth: prevPlayer.currentHealth - enemyDamage,
     }));
 
     setCombatText((prevLog) => [
       ...prevLog,
-      <p>{`${enemy.name} attacks ${player.name} for ${enemy.damage} damage!`}</p>,
+      <p>{`${enemy.name} attacks ${player.name} for ${enemyDamage} damage!`}</p>,
     ]);
 
     setPlayerTurn(true);

@@ -26,7 +26,7 @@ export default function CharacterPortait({ character }) {
         <Row className="justify-content-start px-3">
           {`❤️ ${character.currentHealth}/${character.maxHealth}`}
         </Row>
-        <Row className="justify-content-start px-3">{`⚔️ ${character.damage}`}</Row>
+        <Row className="justify-content-start px-3">{`⚔️ ${character.minDamage} - ${character.maxDamage}`}</Row>
       </>
     );
   };

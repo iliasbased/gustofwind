@@ -4,60 +4,12 @@ import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
+import { usePlayerItems } from "../hooks/usePlayerItems";
 
 export const PlayerItemsContext = React.createContext();
 
 export default function Character() {
-  const [playerItems, setPlayerItems] = useState([
-    {
-      id: 0,
-      name: "Iron Sword",
-      type: "weapon",
-      equipped: true,
-      img: "/assets/images/items/base/weapon.png",
-      slot: "weapon0",
-    },
-    {
-      id: 1,
-      name: "Leather Belt",
-      type: "belt",
-      equipped: false,
-      img: "/assets/images/items/base/belt.png",
-      slot: "bag0",
-    },
-    {
-      id: 2,
-      name: "Health Potion",
-      type: "potion_health",
-      equipped: false,
-      img: "/assets/images/items/base/potion_health.png",
-      slot: "bag1",
-    },
-    {
-      id: 3,
-      name: "Mana Potion",
-      type: "potion_mana",
-      equipped: false,
-      img: "/assets/images/items/base/potion_mana.png",
-      slot: "bag2",
-    },
-    {
-      id: 4,
-      name: "Common Helmet",
-      type: "head",
-      equipped: false,
-      img: "/assets/images/items/base/head.png",
-      slot: "bag3",
-    },
-    {
-      id: 5,
-      name: "Leather Boots",
-      type: "boots",
-      equipped: false,
-      img: "/assets/images/items/base/boots.png",
-      slot: "bag4",
-    },
-  ]);
+  const {playerItems, setPlayerItems} = usePlayerItems();
 
   function handleDragEnd(event) {
     if (event.over) {
@@ -140,14 +92,14 @@ export default function Character() {
         <Row>
           <PlayerItemsContext.Provider value={[playerItems, setPlayerItems]}>
             <Col className="pe-0" xs={3}>
-              <Stats />
+              <Stats equippedItems={playerItems.filter((item) => item.equipped)}/>
             </Col>
             <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
               <Col className="px-0" xs={3}>
-                <Gear playerItems={playerItems.filter((item) => item.equipped)} />
+                <Gear equippedItems={playerItems.filter((item) => item.equipped)} />
               </Col>
               <Col className="ps-0" xs={6}>
-                <Inventory playerItems={playerItems.filter((item) => !item.equipped)} />
+                <Inventory bagItems={playerItems.filter((item) => !item.equipped)} />
               </Col>
             </DndContext>
           </PlayerItemsContext.Provider>

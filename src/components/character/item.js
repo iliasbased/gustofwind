@@ -1,4 +1,4 @@
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { useDraggable } from "@dnd-kit/core";
 import { PlayerItemsContext } from "../../pages/character";
 import { useContext } from "react";
@@ -58,16 +58,34 @@ export default function Item({ type, disabled, item, isLarge }) {
     return nextAvailableSlot;
   }
 
+  function getTooltip() {
+    return (
+      <Tooltip id="tooltip" className="tooltip">
+        <div className="tooltip-content">
+          <h5>{item.name}</h5>
+          <p>{item.type}</p>
+          {item.stats.map((stat) => (
+            <p key={stat.id}>
+              {stat.id}: {stat.value}
+            </p>
+          ))}
+        </div>
+      </Tooltip>
+    );
+  }
+
   return (
-    <Container
-      className="p-0"
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
-      onContextMenu={handleClick}
-    >
-      <Image src={item.img} className={isLarge ? "slot-icon-large" : "slot-icon"} />
-    </Container>
+    <OverlayTrigger overlay={getTooltip()} placement="bottom" delay={{ show: 250, hide: 400 }}>
+      <Container
+        className="p-0"
+        ref={setNodeRef}
+        style={style}
+        {...listeners}
+        {...attributes}
+        onContextMenu={handleClick}
+      >
+        <Image src={item.img} className={isLarge ? "slot-icon-large" : "slot-icon"} />
+      </Container>
+    </OverlayTrigger>
   );
 }

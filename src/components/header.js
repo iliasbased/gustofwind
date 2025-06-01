@@ -24,7 +24,7 @@ export default function SHeader() {
                   onClick={() => {
                     navigate("/player");
                   }}
-                  style={{ backgroundColor: "#50db7f" }}
+                  style={window.location.pathname == "/player" ? { backgroundColor: "#50db7f" } : {}}
                 >
                   <Image
                     width="40px"
@@ -35,8 +35,9 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/gamemaster");
+                    navigate("/skillbook");
                   }}
+                  style={window.location.pathname == "/skillbook" ? { backgroundColor: "#50db7f" } : {}}
                 >
                   <Image
                     width="40px"
@@ -47,8 +48,9 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/gamemaster");
+                    navigate("/questlog");
                   }}
+                  style={window.location.pathname == "/questlog" ? { backgroundColor: "#50db7f" } : {}}
                 >
                   <Image
                     width="40px"
@@ -61,6 +63,7 @@ export default function SHeader() {
                   onClick={() => {
                     navigate("/combat");
                   }}
+                  style={window.location.pathname == "/combat" ? { backgroundColor: "#50db7f" } : {}}
                 >
                   <Image
                     width="40px"
@@ -71,8 +74,9 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/combat");
+                    navigate("/crafting");
                   }}
+                  style={window.location.pathname == "/crafting" ? { backgroundColor: "#50db7f" } : {}}
                 >
                   <Image
                     width="40px"

@@ -1,12 +1,14 @@
 import { Container, Row, Col, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { useDraggable } from "@dnd-kit/core";
 import { PlayerItemsContext } from "../../pages/character";
-import { useContext } from "react";
+import { useContext, useState, useRef } from "react";
+import ItemTooltip from "./item_tooltip";
 
 export default function Item({ type, disabled, item, isLarge }) {
   const [playerItems, setPlayerItems] = useContext(PlayerItemsContext);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: "draggable" + item.id,
     data: {
       type: "item",
@@ -58,34 +60,40 @@ export default function Item({ type, disabled, item, isLarge }) {
     return nextAvailableSlot;
   }
 
-  function getTooltip() {
-    return (
-      <Tooltip id="tooltip" className="tooltip">
-        <div className="tooltip-content">
-          <h5>{item.name}</h5>
-          <p>{item.type}</p>
-          {item.stats.map((stat) => (
-            <p key={stat.id}>
-              {stat.id}: {stat.value}
-            </p>
-          ))}
-        </div>
-      </Tooltip>
-    );
+  const tooltipTimeout = useRef();
+
+  function handleMouseEnter() {
+    tooltipTimeout.current = setTimeout(() => {
+      setTooltipVisible(true);
+    }, 500);
+  }
+
+  function handleMouseLeave() {
+    clearTimeout(tooltipTimeout.current);
+    setTooltipVisible(false);
+  }
+
+  // Hide tooltip immediately when dragging starts
+  if (isDragging && tooltipVisible) {
+    setTooltipVisible(false);
   }
 
   return (
-    <OverlayTrigger overlay={getTooltip()} placement="bottom" delay={{ show: 250, hide: 400 }}>
+    <>
       <Container
+        fluid
         className="p-0"
         ref={setNodeRef}
         style={style}
         {...listeners}
         {...attributes}
         onContextMenu={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <Image src={item.img} className={isLarge ? "slot-icon-large" : "slot-icon"} />
+        <ItemTooltip item={item} visible={tooltipVisible} setVisible={setTooltipVisible} />
       </Container>
-    </OverlayTrigger>
+    </>
   );
 }

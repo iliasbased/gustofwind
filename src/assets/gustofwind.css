@@ -8,6 +8,11 @@
   src: local("MedievalSharp-Book"), url("MedievalSharp-Book.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "AppleGaramond-Light";
+  src: local("AppleGaramond-Light"), url("AppleGaramond-Light.ttf") format("truetype");
+}
+
 html,
 body,
 #root {
@@ -186,7 +191,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   font-weight: bold;
   width: 70px;
   margin-right: 3px;
@@ -198,10 +203,9 @@ body,
   cursor: pointer;
 }
 
-.header-button .selected{
-  background-color: #50db7f
+.header-button .selected {
+  background-color: #50db7f;
 }
-
 
 .character {
   width: 80%;
@@ -234,7 +238,7 @@ body,
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   color: #dbdbdb;
 }
 
@@ -255,18 +259,59 @@ body,
   width: 48px;
   height: 48px;
   filter: grayscale(1);
-} 
+}
 
 .slot-icon {
   width: 38px;
   height: 38px;
-  z-index: 999;
+  z-index: 500;
+  margin-bottom: 5px;
 }
 
 .slot-icon-large {
   width: 48px;
   height: 48px;
-  z-index: 999;
+  z-index: 500;
+}
+
+.item-tooltip-show {
+  left: -15px;
+  top: 30%;
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background-color: #282c34;
+  border-radius: 20px;
+  padding: 10px;
+  padding-left: 30px;
+  font-size: 30px;
+  font-family: "BeyondWonderland";
+  border: 2px solid #161311;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation: slideIn 0.2s;
+}
+
+.item-tooltip-hide {
+  left: -15px;
+  top: 30%;
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background-color: #282c34;
+  border-radius: 20px;
+  padding: 10px;
+  padding-left: 30px;
+  font-size: 30px;
+  font-family: "BeyondWonderland";
+  border: 2px solid #161311;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation: slideOut 0.2s;
+  display: none;
+}
+
+.item-tooltip-stats {
+  font-family: "AppleGaramond-Light";
+  line-height: 1;
 }
 
 .inventory {
@@ -276,7 +321,7 @@ body,
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   color: #dbdbdb;
   font-size: 25px;
 }
@@ -317,7 +362,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   font-weight: bold;
 }
 
@@ -353,8 +398,7 @@ body,
   padding-left: 6px;
   padding-top: 6px;
   margin: 2px;
-  filter:grayscale(1);
-  z-index: 10;
+  filter: grayscale(1);
 }
 
 .combat-log {
@@ -366,14 +410,14 @@ body,
   font-size: 25px;
   border: 2px solid #161311;
   border-width: 4px 4px 4px 4px;
-  border-radius:0px 0px 0px 0px;
+  border-radius: 0px 0px 0px 0px;
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   font-weight: bold;
   display: flex;
-  flex-direction: column-reverse
+  flex-direction: column-reverse;
 }
 
 .character-portrait {
@@ -382,11 +426,11 @@ body,
   font-size: 25px;
   border: 2px solid #161311;
   border-width: 4px 4px 4px 4px;
-  border-radius:20px 20px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   font-weight: bold;
 }
 
@@ -405,10 +449,50 @@ body,
   font-size: 25px;
   border: 2px solid #161311;
   border-width: 4px 4px 4px 4px;
-  border-radius:20px 20px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "MedievalSharp-Book";
+  font-family: "AppleGaramond-Light";
   font-weight: bold;
+}
+
+/*-------------------------------------------------------------------------*/
+/*----------------------------  Animations -------------------------------*/
+/*-------------------------------------------------------------------------*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: -10px;
+  }
+}
+@keyframes slideOut {
+  0% {
+    left: -10px;
+    display: block;
+  }
+  100% {
+    left: -300px;
+    display: none;
+  }
 }

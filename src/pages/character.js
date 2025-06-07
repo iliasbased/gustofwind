@@ -5,11 +5,14 @@ import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
+import Player from "./player";
+import { usePlayerStats } from "../hooks/usePlayerStats";
 
-export const PlayerItemsContext = React.createContext();
+export const PlayerDataContext = React.createContext();
 
 export default function Character() {
-  const {playerItems, setPlayerItems} = usePlayerItems();
+  const { playerItems, refreshItems } = usePlayerItems();
+  const { playerStats, refreshStats } = usePlayerStats();
 
   function handleDragEnd(event) {
     if (event.over) {
@@ -21,7 +24,7 @@ export default function Character() {
         dropItemInGear(event.active.data.current.item, event.over);
       }
 
-      setPlayerItems([...playerItems]);
+      refreshItems();
     }
   }
 
@@ -30,7 +33,11 @@ export default function Character() {
       return;
     }
 
-    if (item.equipped && slot.data.current.item && slot.data.current.item.type != item.type) {
+    if (
+      item.equipped &&
+      slot.data.current.item &&
+      slot.data.current.item.template.slotType != item.template.slotType
+    ) {
       return;
     }
 
@@ -52,11 +59,15 @@ export default function Character() {
       return;
     }
 
-    if (item.equipped && slot.data.current.item && slot.data.current.item.type != item.type) {
+    if (
+      item.equipped &&
+      slot.data.current.item &&
+      slot.data.current.item.template.slotType != item.template.slotType
+    ) {
       return;
     }
 
-    if (slot.data.current.type != item.type) {
+    if (slot.data.current.type != item.template.slotType) {
       return;
     }
 
@@ -81,7 +92,7 @@ export default function Character() {
           <Col xs={3}></Col>
           <Col xs={3}>
             <Container className="ui-header">
-              <Row className="justify-content-center">CHARACTER</Row>
+              <Row className="justify-content-center">C H A R A C T E R</Row>
             </Container>
           </Col>
           <Col xs={3}></Col>
@@ -89,21 +100,21 @@ export default function Character() {
         </Row>
       </Container>
       <Container className="character">
-        <Row>
-          <PlayerItemsContext.Provider value={[playerItems, setPlayerItems]}>
+        <PlayerDataContext.Provider value={{ playerItems, playerStats, refreshItems, refreshStats }}>
+          <Row>
             <Col className="pe-0" xs={3}>
-              <Stats equippedItems={playerItems.filter((item) => item.equipped)}/>
+              <Stats />
             </Col>
             <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
               <Col className="px-0" xs={3}>
-                <Gear equippedItems={playerItems.filter((item) => item.equipped)} />
+                <Gear />
               </Col>
               <Col className="ps-0" xs={6}>
-                <Inventory bagItems={playerItems.filter((item) => !item.equipped)} />
+                <Inventory />
               </Col>
             </DndContext>
-          </PlayerItemsContext.Provider>
-        </Row>
+          </Row>
+        </PlayerDataContext.Provider>
       </Container>
     </>
   );

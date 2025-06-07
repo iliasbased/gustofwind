@@ -1,9 +1,12 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slot from "./slot";
+import { usePlayerItems } from "../../hooks/usePlayerItems";
+import { PlayerDataContext } from "../../pages/character";
 
-export default function Inventory({ bagItems }) {
-  console.log(bagItems);
+export default function Inventory() {
+  const { playerItems } = useContext(PlayerDataContext);
+  console.log("Inventory items:", playerItems);
 
   const [headers, setHeaders] = useState([
     { id: 0, name: "All", selected: true, style: { borderWidth: "2px 1px 0px 0px" } },
@@ -79,7 +82,7 @@ export default function Inventory({ bagItems }) {
     const slots = [];
     for (let i = 0; i < availableSlots; i++) {
       slots.push(
-        <Slot key={i} id={'bag'+i} type="bag" item={bagItems.find((item)=>item.slot=='bag'+i)} />
+        <Slot key={i} id={'bag'+i} type="bag" item={playerItems.find((item)=>item.slot=='bag'+i)} />
       );
     }
     for (let i = availableSlots; i < totalSlots; i++) {

@@ -191,7 +191,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   font-weight: bold;
   width: 70px;
   margin-right: 3px;
@@ -238,7 +238,7 @@ body,
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   color: #dbdbdb;
 }
 
@@ -279,7 +279,6 @@ body,
   top: 30%;
   position: fixed;
   width: 300px;
-  height: 300px;
   background-color: #282c34;
   border-radius: 20px;
   padding: 10px;
@@ -296,7 +295,6 @@ body,
   top: 30%;
   position: fixed;
   width: 300px;
-  height: 300px;
   background-color: #282c34;
   border-radius: 20px;
   padding: 10px;
@@ -310,8 +308,17 @@ body,
 }
 
 .item-tooltip-stats {
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   line-height: 1;
+}
+
+.impact {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: gold;
+}
+
+.engraved {
+  text-shadow: 5px 5px 5px rgba(22, 22, 22, 0.5);
 }
 
 .inventory {
@@ -321,7 +328,7 @@ body,
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   color: #dbdbdb;
   font-size: 25px;
 }
@@ -362,7 +369,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   font-weight: bold;
 }
 
@@ -414,7 +421,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   font-weight: bold;
   display: flex;
   flex-direction: column-reverse;
@@ -430,7 +437,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   font-weight: bold;
 }
 
@@ -453,7 +460,7 @@ body,
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
-  font-family: "AppleGaramond-Light";
+  font-family: "Calibri";
   font-weight: bold;
 }
 

@@ -1,35 +1,12 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
+import { getStatName, useStats } from "../../context/statsContext";
 
 export default function ItemTooltip({ item, visible }) {
-  function getType() {
-    switch (item.type) {
-      case "head":
-        return "Head";
-      case "shoulders":
-        return "Shoulders";
-      case "chest":
-        return "Chest";
-      case "cloak":
-        return "Cloak";
-      case "belt":
-        return "Belt";
-      case "legs":
-        return "Legs";
-      case "gloves":
-        return "Gloves";
-      case "boots":
-        return "Boots";
-      case "ring":
-        return "Ring";
-      case "amulet":
-        return "Amulet";
-      default:
-        return "";
-    }
-  }
-  function getRarity() {
+  const { stats } = useStats();
+
+  function getQuality() {
     let color = "";
-    switch (item.rarity) {
+    switch (item.template.quality) {
       case "common":
         color = "DarkGray";
         break;
@@ -46,11 +23,17 @@ export default function ItemTooltip({ item, visible }) {
         color = "Yellow";
     }
 
-    return <span style={{ color: color, fontSize: "18px" }}>{`Common ${getType()}`}</span>;
+    return (
+      <b style={{ color: color, fontSize: "15px", textAlign: "end" }}>
+        {`${item.template.quality} ${item.template.type}`.toUpperCase()}
+      </b>
+    );
   }
 
   function getDescription() {
-    return <i style={{ fontSize: "18px" }}>{`"${item.description}"`}</i>;
+    return (
+      <i style={{ fontSize: "18px", lineHeight: "10px", color: 'darkgray' }}>{`"${item.template.description}"`}</i>
+    );
   }
 
   function getMainStats() {
@@ -99,7 +82,7 @@ export default function ItemTooltip({ item, visible }) {
   }
 
   function getSecondaryStats() {
-    let stats = item.stats.filter(
+    let itemStats = item.stats.filter(
       (s) =>
         s.id !== "min_damage" &&
         s.id !== "max_damage" &&
@@ -107,18 +90,18 @@ export default function ItemTooltip({ item, visible }) {
         s.id !== "magic_res"
     );
 
-    if (stats.length === 0) {
+    if (itemStats.length === 0) {
       return "";
     }
 
     return (
-      <Row style={{ fontSize: "20px", color: "DarkGray", textAlign: "start" }}>
+      <Row className="engraved" style={{ fontSize: "20px", textAlign: "start" }}>
         <Col>
-          {stats.map((stat) => (
+          {itemStats.map((stat) => (
             <Row key={stat.id}>
-              <Col xs={8}>{`${stat.text}: `}</Col>
-              <Col xs={4}>
-                <b style={{ color: "white" }}>{stat.value}</b>
+              <Col xs={6} style={{ textAlign: "end", fontWeight:'bold' }}>{getStatName(stats, stat.id)}</Col>
+              <Col xs={6} style={{ textAlign: "start" }}>
+                <span className="impact" style={{ color: "white" }}>{stat.value}</span>
               </Col>
             </Row>
           ))}
@@ -127,36 +110,41 @@ export default function ItemTooltip({ item, visible }) {
     );
   }
 
+  function getPrice() {
+    return (
+      <Row style={{ fontSize: "16px" }} className="mx-1 impact">
+        <Col style={{ textAlign: "end" }}>
+          <Image src={`assets/images/items/base/coin.png`} style={{ width: "20px" }} />
+          {" "}
+          {item.template.basePrice}
+        </Col>
+      </Row>
+    );
+  }
+
   return (
     <Container className={visible ? "item-tooltip-show" : "item-tooltip-hide"}>
       <Row>
-        <Col xs={9}>{item.name}</Col>
+        <Col xs={9} className="align-self-center">{item.template.name}</Col>
         <Col xs={3}>
-          <Image src={item.img} className={"slot-icon"} />
+          <Image src={item.template.icon} className={"slot-icon-large"} />
         </Col>
       </Row>
       <Container className="item-tooltip-stats p-0">
-        <Row>
-          <Col>{getRarity()}</Col>
+        <Row className="mb-2">
+          <Col style={{ textAlign: "end" }}>{getQuality()}</Col>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Col>{getDescription()}</Col>
         </Row>
-        <Row>
-          <Col>
-            <hr />
-          </Col>
-        </Row>
-        <Row>
+        <Row className="mb-3">
           <Col>{getMainStats()}</Col>
         </Row>
-        <Row>
-          <Col>
-            <hr />
-          </Col>
-        </Row>
-        <Row>
+        <Row className="mb-4">
           <Col>{getSecondaryStats()}</Col>
+        </Row>
+        <Row className="mb-1">
+          <Col>{getPrice()}</Col>
         </Row>
       </Container>
     </Container>

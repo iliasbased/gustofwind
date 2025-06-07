@@ -6,21 +6,25 @@ export function usePlayerStats() {
   const [loading, setLoading] = useState(true);
 
   const refreshStats = useCallback(() => {
-    setLoading(true);
-    fetchPlayerStats().then((data) => {
-      setPlayerStats(Array.isArray(data) ? [...data] : []);
-      setLoading(false);
-    });
+    fetchStats();
   }, []);
 
   useEffect(() => {
+    fetchStats();
+  }, []);
+
+  async function fetchStats() { 
     setLoading(true);
 
-    fetchPlayerStats().then((data) => {
+    try {
+      const data = await fetchPlayerStats();
       setPlayerStats(Array.isArray(data) ? [...data] : []);
       setLoading(false);
-    });
-  }, []);
+    } catch (error) {
+      console.error("Failed to fetch player stats:", error);
+      setLoading(false);
+    }
+  }
 
   return {
     playerStats,

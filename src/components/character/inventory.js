@@ -9,12 +9,12 @@ export default function Inventory() {
   console.log("Inventory items:", playerItems);
 
   const [headers, setHeaders] = useState([
-    { id: 0, name: "All", selected: true, style: { borderWidth: "2px 1px 0px 0px" } },
-    { id: 1, name: "Weapons", selected: false },
-    { id: 2, name: "Armor", selected: false },
-    { id: 3, name: "Jewels", selected: false },
-    { id: 4, name: "Misc.", selected: false },
-    { id: 5, name: "Materials", selected: false, style: { borderWidth: "2px 0px 4px 1px" } },
+    { id: 0, name: "All", key: "all", selected: true, style: { borderWidth: "2px 1px 0px 0px" } },
+    { id: 1, name: "Weapons", key: "weapon", selected: false },
+    { id: 2, name: "Armor", key: "armor", selected: false },
+    { id: 3, name: "Jewels", key: "jewel", selected: false },
+    { id: 4, name: "Misc.", key: "misc", selected: false },
+    { id: 5, name: "Materials", key: "material", selected: false, style: { borderWidth: "2px 0px 4px 1px" } },
   ]);
 
   const availableSlots = 52;
@@ -82,11 +82,17 @@ export default function Inventory() {
     const slots = [];
     for (let i = 0; i < availableSlots; i++) {
       slots.push(
-        <Slot key={i} id={'bag'+i} type="bag" item={playerItems.find((item)=>item.slot=='bag'+i)} />
+        <Slot
+          key={i}
+          id={"bag" + i}
+          type="bag"
+          item={playerItems.find((item) => item.slot == "bag" + i)}
+          selectedHeader={headers.find((e) => e.selected)}
+        />
       );
     }
     for (let i = availableSlots; i < totalSlots; i++) {
-      slots.push(<Slot key={i} id={'bag'+i} type="bag" disabled />);
+      slots.push(<Slot key={i} id={"bag" + i} type="bag" disabled />);
     }
     return slots;
   };

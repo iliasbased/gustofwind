@@ -5,8 +5,8 @@ import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
-import Player from "./player";
 import { usePlayerStats } from "../hooks/usePlayerStats";
+import { changeSlot } from "../services/itemService";
 
 export const PlayerDataContext = React.createContext();
 
@@ -14,7 +14,7 @@ export default function Character() {
   const { playerItems, refreshItems } = usePlayerItems();
   const { playerStats, refreshStats } = usePlayerStats();
 
-  function handleDragEnd(event) {
+  async function handleDragEnd(event) {
     if (event.over) {
       console.log(event);
 
@@ -24,7 +24,8 @@ export default function Character() {
         dropItemInGear(event.active.data.current.item, event.over);
       }
 
-      refreshItems();
+      await refreshItems();
+      refreshStats();
     }
   }
 
@@ -42,16 +43,15 @@ export default function Character() {
     }
 
     let draggableSlot = item.slot;
-    let draggableEquipped = item.equipped;
     let droppableSlot = slot.id;
-
-    item.slot = droppableSlot;
-    item.equipped = false;
 
     if (slot.data.current.item) {
       slot.data.current.item.slot = draggableSlot;
-      slot.data.current.item.equipped = draggableEquipped;
+      changeSlot(slot.data.current.item.id, draggableSlot);
     }
+
+    item.slot = droppableSlot;
+    changeSlot(item.id, droppableSlot);
   }
 
   function dropItemInGear(item, slot) {
@@ -77,10 +77,12 @@ export default function Character() {
 
     item.slot = droppableSlot;
     item.equipped = true;
+    changeSlot(item.id, item.slot);
 
     if (slot.data.current.item) {
       slot.data.current.item.slot = draggableSlot;
       slot.data.current.item.equipped = draggableEquipped;
+      changeSlot(slot.data.current.item.id, slot.data.current.item.slot);
     }
   }
 

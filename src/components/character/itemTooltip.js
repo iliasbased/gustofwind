@@ -32,24 +32,29 @@ export default function ItemTooltip({ item, visible }) {
 
   function getDescription() {
     return (
-      <i style={{ fontSize: "18px", lineHeight: "10px", color: 'darkgray' }}>{`"${item.template.description}"`}</i>
+      <i
+        style={{ fontSize: "18px", lineHeight: "10px", color: "darkgray" }}
+      >{`"${item.template.description}"`}</i>
     );
   }
 
   function getMainStats() {
-    let minDamage = item.stats.find((s) => s.id === "min_damage");
-    let maxDamage = item.stats.find((s) => s.id === "max_damage");
+    let minDamage = item.stats.find((s) => s.id === "min_dmg");
+    let maxDamage = item.stats.find((s) => s.id === "max_dmg");
     let physicalRes = item.stats.find((s) => s.id === "physical_res");
     let magicRes = item.stats.find((s) => s.id === "magic_res");
 
     if (minDamage && maxDamage) {
       return (
-        <Row
-          className="justify-content-center"
-          style={{ fontSize: "20px", color: "DarkGray", textAlign: "center" }}
-        >
-          {`Damage: `}
-          <b style={{ color: "white" }}>{`${minDamage.value} - ${maxDamage.value}`}</b>
+        <Row className="mb-2 engraved" style={{ fontSize: "19px" }}>
+          <Col xs={6} style={{ textAlign: "center" }}>
+            <p className="mb-1">{getStatName(stats, minDamage.id)}</p>
+            <p className="impact">{minDamage.value}</p>
+          </Col>
+          <Col xs={6} style={{ textAlign: "center" }}>
+            <p className="mb-1">{getStatName(stats, maxDamage.id)}</p>
+            <p className="impact">{maxDamage.value}</p>
+          </Col>
         </Row>
       );
     }
@@ -61,7 +66,7 @@ export default function ItemTooltip({ item, visible }) {
           style={{ fontSize: "20px", color: "DarkGray", textAlign: "center" }}
         >
           <span>
-            {`Physical Resistance: `}
+            {`Physical Defence: `}
             <b style={{ color: "white" }}>{physicalRes.value}</b>
           </span>
         </Row>
@@ -74,7 +79,7 @@ export default function ItemTooltip({ item, visible }) {
           className="justify-content-center"
           style={{ fontSize: "20px", color: "DarkGray", textAlign: "center" }}
         >
-          {`Magic Resistance: `}
+          {`Magic Defence: `}
           <b style={{ color: "white" }}>{magicRes.value}</b>
         </Row>
       );
@@ -84,10 +89,7 @@ export default function ItemTooltip({ item, visible }) {
   function getSecondaryStats() {
     let itemStats = item.stats.filter(
       (s) =>
-        s.id !== "min_damage" &&
-        s.id !== "max_damage" &&
-        s.id !== "physical_res" &&
-        s.id !== "magic_res"
+        s.id !== "min_dmg" && s.id !== "max_dmg" && s.id !== "physical_res" && s.id !== "magic_res"
     );
 
     if (itemStats.length === 0) {
@@ -95,13 +97,17 @@ export default function ItemTooltip({ item, visible }) {
     }
 
     return (
-      <Row className="engraved" style={{ fontSize: "20px", textAlign: "start" }}>
+      <Row className="engraved" style={{ fontSize: "18px", textAlign: "start" }}>
         <Col>
           {itemStats.map((stat) => (
-            <Row key={stat.id}>
-              <Col xs={6} style={{ textAlign: "end", fontWeight:'bold' }}>{getStatName(stats, stat.id)}</Col>
-              <Col xs={6} style={{ textAlign: "start" }}>
-                <span className="impact" style={{ color: "white" }}>{stat.value}</span>
+            <Row key={stat.id} className="mb-2">
+              <Col xs={7} style={{ textAlign: "end" }}>
+                {getStatName(stats, stat.id)}
+              </Col>
+              <Col xs={5} style={{ textAlign: "start" }}>
+                <span className="impact">
+                  {stat.value}
+                </span>
               </Col>
             </Row>
           ))}
@@ -113,9 +119,8 @@ export default function ItemTooltip({ item, visible }) {
   function getPrice() {
     return (
       <Row style={{ fontSize: "16px" }} className="mx-1 impact">
-        <Col style={{ textAlign: "end" }}>
-          <Image src={`assets/images/items/base/coin.png`} style={{ width: "20px" }} />
-          {" "}
+        <Col style={{ textAlign: "end", color: "gold" }}>
+          <Image src={`assets/images/items/base/coin.png`} style={{ width: "20px" }} />{" "}
           {item.template.basePrice}
         </Col>
       </Row>
@@ -125,7 +130,9 @@ export default function ItemTooltip({ item, visible }) {
   return (
     <Container className={visible ? "item-tooltip-show" : "item-tooltip-hide"}>
       <Row>
-        <Col xs={9} className="align-self-center">{item.template.name}</Col>
+        <Col xs={9} className="align-self-center">
+          {item.template.name}
+        </Col>
         <Col xs={3}>
           <Image src={item.template.icon} className={"slot-icon-large"} />
         </Col>
@@ -134,10 +141,10 @@ export default function ItemTooltip({ item, visible }) {
         <Row className="mb-2">
           <Col style={{ textAlign: "end" }}>{getQuality()}</Col>
         </Row>
-        <Row className="mb-3">
+        <Row className="mb-4">
           <Col>{getDescription()}</Col>
         </Row>
-        <Row className="mb-3">
+        <Row className="">
           <Col>{getMainStats()}</Col>
         </Row>
         <Row className="mb-4">

@@ -19,10 +19,12 @@ export default function Item({ type, disabled, item, isLarge }) {
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        zIndex: 1000,
+        position: "relative"
       }
     : undefined;
 
-  function handleClick(e) {
+  async function handleClick(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -34,7 +36,7 @@ export default function Item({ type, disabled, item, isLarge }) {
       }
     }
 
-    refreshItems();
+    await refreshItems();
     refreshStats();
   }
 

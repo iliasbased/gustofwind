@@ -15,12 +15,12 @@ export default function SHeader() {
         className="gustofwind-header"
       >
         <Row>
-          <Col xs={4}>
+          <Col xs={5}>
             <GustBar />
           </Col>
-          <Col xs={4}>
+          <Col xs={7}>
             <Container>
-              <Row className="justify-content-center">
+              <Row className="justify-content-start">
                 <button
                   className="header-button"
                   onClick={() => {
@@ -99,7 +99,6 @@ export default function SHeader() {
               </Row>
             </Container>
           </Col>
-          <Col xs={4}></Col>
         </Row>
       </Container>
     </SFadeInOut>

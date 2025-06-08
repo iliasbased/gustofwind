@@ -106,7 +106,7 @@ export default function Inventory() {
         </Col>
       </Row>
       <Row>{getHeaders()}</Row>
-      <Row>{getBag()}</Row>
+      <Row style={{overflow:'auto', maxHeight:'600px'}}>{getBag()}</Row>
     </Container>
   );
 }

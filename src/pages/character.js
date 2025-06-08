@@ -7,6 +7,7 @@ import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
+import FadeInOut from "../layouts/fade-in-out";
 
 export const PlayerDataContext = React.createContext();
 
@@ -87,7 +88,7 @@ export default function Character() {
   }
 
   return (
-    <>
+    <FadeInOut>
       <Container>
         <Row>
           <Col xs={2}></Col>
@@ -120,6 +121,6 @@ export default function Character() {
           </Row>
         </PlayerDataContext.Provider>
       </Container>
-    </>
+    </FadeInOut>
   );
 }

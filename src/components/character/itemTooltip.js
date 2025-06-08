@@ -97,18 +97,12 @@ export default function ItemTooltip({ item, visible }) {
     }
 
     return (
-      <Row className="engraved" style={{ fontSize: "18px", textAlign: "start" }}>
-        <Col>
+      <Row className="engraved justify-content-center" style={{ fontSize: "18px", textAlign: "start" }}>
+        <Col style={{width: "max-content", flex:'none'}}>
           {itemStats.map((stat) => (
-            <Row key={stat.id} className="mb-2">
-              <Col xs={7} style={{ textAlign: "end" }}>
-                {getStatName(stats, stat.id)}
-              </Col>
-              <Col xs={5} style={{ textAlign: "start" }}>
-                <span className="impact">
-                  {stat.value}
-                </span>
-              </Col>
+            <Row key={stat.id} className="mb-2 justify-content-start">
+              <span className="impact w-auto fs-6" style={{paddingTop:'1px'}}>+{stat.value}</span>
+              {getStatName(stats, stat.id)}
             </Row>
           ))}
         </Col>

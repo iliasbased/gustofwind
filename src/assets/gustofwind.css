@@ -175,6 +175,8 @@ body,
 /*-------------------------------------------------------------------------*/
 .gustofwind-header {
   position: fixed;
+  background: linear-gradient(to top, #e4eaeb00, #000000c5);
+  padding-bottom: 50px;
 }
 
 .gustofwind-footer {
@@ -462,9 +464,48 @@ body,
   font-weight: bold;
 }
 
+.gust-bar {
+  /* font-family: "Impact"; */
+  font-weight: 500;
+  font-size: 23px;
+  width: 50%;
+}
+
+.gust-bar-wrapper {
+  height: 20px;
+  background-color: #1b1b1b;
+  border: 2px solid #3c3c3c;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gust-bar-fill {
+  height: 100%;
+  background: linear-gradient(-45deg, #30e0e6, #1d769f, #30e0e6, #1d769f);
+  background-size: 300% 300%;
+  animation: windFlow 16s linear infinite;
+  transition: width 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
 /*-------------------------------------------------------------------------*/
 /*----------------------------  Animations -------------------------------*/
 /*-------------------------------------------------------------------------*/
+
+@keyframes windFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

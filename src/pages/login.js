@@ -52,7 +52,7 @@ export default function Login() {
   return (
     <>
       <SFadeInOut fadeOut={fadeOut} onFadeOutEnd={onFadeOutEnd}>
-        <Container>
+        <Container className="gustofwind-login">
           <Row className="mb-2">
             <Col>
               <SInput placeholder="email..." type="text" onChange={setEmail} />

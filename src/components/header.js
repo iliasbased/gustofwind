@@ -6,7 +6,7 @@ import GustBar from "./gustbar";
 
 export default function SHeader() {
   const navigate = useNavigate();
-  sessionStorage.setItem("loggedIn", "true");
+  // sessionStorage.setItem("loggedIn", "true");
   return (
     <SFadeInOut fadeOut={window.location.pathname == "/"}>
       <Container
@@ -15,12 +15,12 @@ export default function SHeader() {
         className="gustofwind-header"
       >
         <Row>
-          <Col xs={5}>
+          <Col xs={3}>
             <GustBar />
           </Col>
-          <Col xs={7}>
+          <Col xs={6}>
             <Container>
-              <Row className="justify-content-start">
+              <Row className="justify-content-center">
                 <button
                   className="header-button"
                   onClick={() => {
@@ -98,6 +98,8 @@ export default function SHeader() {
                 </button>
               </Row>
             </Container>
+          </Col>
+          <Col xs={3}>
           </Col>
         </Row>
       </Container>

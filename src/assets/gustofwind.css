@@ -173,10 +173,14 @@ body,
 /*-------------------------------------------------------------------------*/
 /*----------------------------  GUST OF WIND -------------------------------*/
 /*-------------------------------------------------------------------------*/
+.gustofwind-login {
+  width: fit-content !important ;
+}
+
 .gustofwind-header {
   position: fixed;
-  background: linear-gradient(to top, #e4eaeb00, #000000c5);
-  padding-bottom: 50px;
+  background: linear-gradient(to top, #e4eaeb00, #000000e5);
+  padding-bottom: 200px;
 }
 
 .gustofwind-footer {
@@ -468,7 +472,8 @@ body,
   /* font-family: "Impact"; */
   font-weight: 500;
   font-size: 23px;
-  width: 40%;
+  margin-left: 100px;
+  width: 100%;
 }
 
 .gust-bar-wrapper {
@@ -488,6 +493,7 @@ body,
   transition: width 0.3s ease-in-out;
   position: relative;
   overflow: hidden;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /*-------------------------------------------------------------------------*/

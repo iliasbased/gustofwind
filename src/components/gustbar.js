@@ -7,15 +7,16 @@ export default function GustBar() {
   const percentage = Math.min((current / max) * 100, 100);
 
   return (
-    <Container className="gust-bar engraved mt-1">
-      <Row className="">
-        <Col style={{ textAlign: "start", paddingLeft: "5px" }}>Gust</Col>
-        <Col style={{ textAlign: "end", paddingRight: "5px" }}>
-          {current} / {max}
+    <Container className="gust-bar engraved mt-2">
+      <Row>
+        <Col xs={3} style={{textAlign:'end'}}>Gust</Col>
+        <Col xs={6} className="align-self-center mt-1">
+          <Row className="gust-bar-wrapper">
+            <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none" }}></Col>
+          </Row>
         </Col>
-      </Row>
-      <Row className="gust-bar-wrapper">
-        <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none" }}>
+        <Col xs={3} style={{textAlign:'start'}}>
+          {current} / {max}
         </Col>
       </Row>
     </Container>

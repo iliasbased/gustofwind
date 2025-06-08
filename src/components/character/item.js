@@ -6,7 +6,7 @@ import ItemTooltip from "./itemTooltip";
 import { changeSlot } from "../../services/itemService";
 
 export default function Item({ type, disabled, item, isLarge }) {
-  const { playerItems, refreshItems, refreshStats } = useContext(PlayerDataContext);
+  const { playerItems, setPlayerItems, refreshItems, refreshStats } = useContext(PlayerDataContext);
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
@@ -30,9 +30,9 @@ export default function Item({ type, disabled, item, isLarge }) {
 
     if (e.button === 2) {
       if (item.equipped) {
-        unequipItem();
+        await unequipItem();
       } else {
-        equipItem();
+        await equipItem();
       }
     }
 
@@ -40,7 +40,7 @@ export default function Item({ type, disabled, item, isLarge }) {
     refreshStats();
   }
 
-  function equipItem() {
+  async function equipItem() {
     let alreadyEquippedItem = playerItems.find(
       (i) => i.equipped && i.template.slotType === item.template.slotType
     );
@@ -52,13 +52,15 @@ export default function Item({ type, disabled, item, isLarge }) {
 
     item.equipped = true;
     item.slot = item.template.slotType + "0";
-    changeSlot(item.id, item.slot);
+    setPlayerItems([...playerItems]);
+    await changeSlot(item.id, item.slot);
   }
 
-  function unequipItem() {
+  async function unequipItem() {
     item.equipped = false;
     item.slot = "bag" + getNextAvailableSlot();
-    changeSlot(item.id, item.slot);
+    setPlayerItems([...playerItems]);
+    await changeSlot(item.id, item.slot);
   }
 
   function getNextAvailableSlot() {

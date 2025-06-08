@@ -28,6 +28,7 @@ export function usePlayerItems() {
 
   return {
     playerItems,
+    setPlayerItems,
     refreshItems,
     loading,
   };

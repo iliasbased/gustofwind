@@ -11,17 +11,15 @@ import { changeSlot } from "../services/itemService";
 export const PlayerDataContext = React.createContext();
 
 export default function Character() {
-  const { playerItems, refreshItems } = usePlayerItems();
+  const { playerItems, refreshItems, setPlayerItems } = usePlayerItems();
   const { playerStats, refreshStats } = usePlayerStats();
 
   async function handleDragEnd(event) {
     if (event.over) {
-      console.log(event);
-
       if (event.over.data.current.type == "bag") {
-        dropItemInBag(event.active.data.current.item, event.over);
+        await dropItemInBag(event.active.data.current.item, event.over);
       } else {
-        dropItemInGear(event.active.data.current.item, event.over);
+        await dropItemInGear(event.active.data.current.item, event.over);
       }
 
       await refreshItems();
@@ -29,7 +27,7 @@ export default function Character() {
     }
   }
 
-  function dropItemInBag(item, slot) {
+  async function dropItemInBag(item, slot) {
     if (slot.data.current.disabled) {
       return;
     }
@@ -51,10 +49,11 @@ export default function Character() {
     }
 
     item.slot = droppableSlot;
-    changeSlot(item.id, droppableSlot);
+    setPlayerItems([...playerItems]);
+    await changeSlot(item.id, droppableSlot);
   }
 
-  function dropItemInGear(item, slot) {
+  async function dropItemInGear(item, slot) {
     if (slot.data.current.disabled) {
       return;
     }
@@ -75,15 +74,16 @@ export default function Character() {
     let draggableEquipped = item.equipped;
     let droppableSlot = slot.id;
 
-    item.slot = droppableSlot;
-    item.equipped = true;
-    changeSlot(item.id, item.slot);
-
     if (slot.data.current.item) {
       slot.data.current.item.slot = draggableSlot;
       slot.data.current.item.equipped = draggableEquipped;
       changeSlot(slot.data.current.item.id, slot.data.current.item.slot);
     }
+
+    item.slot = droppableSlot;
+    item.equipped = true;
+    setPlayerItems([...playerItems]);
+    await changeSlot(item.id, item.slot);
   }
 
   return (
@@ -102,7 +102,9 @@ export default function Character() {
         </Row>
       </Container>
       <Container className="character">
-        <PlayerDataContext.Provider value={{ playerItems, playerStats, refreshItems, refreshStats }}>
+        <PlayerDataContext.Provider
+          value={{ playerItems, playerStats, refreshItems, refreshStats, setPlayerItems }}
+        >
           <Row>
             <Col className="pe-0" xs={3}>
               <Stats />

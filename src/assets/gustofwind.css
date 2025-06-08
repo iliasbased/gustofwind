@@ -14,15 +14,19 @@
 }
 
 html,
-body,
 #root {
   height: 100%;
   margin: 0;
-  background: url("images/bg.png") no-repeat center center fixed;
   font-family: "BeyondWonderland";
   color: white;
-  text-shadow: 1px 1px black, -2px -2px #444;
   --PhoneInputCountryFlag-aspectRatio: 1.333;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background: url("images/bg.png") no-repeat center center fixed;
+  background-size: cover;
 }
 
 :root {
@@ -179,8 +183,8 @@ body,
 
 .gustofwind-header {
   position: fixed;
-  background: linear-gradient(to top, #e4eaeb00, #000000e5);
-  padding-bottom: 200px;
+  background: linear-gradient(to top, #e4eaeb00, #000000d5);
+  padding-bottom: 150px;
 }
 
 .gustofwind-footer {
@@ -213,13 +217,73 @@ body,
   background-color: #50db7f;
 }
 
-.character {
+.base-ui {
   width: 80%;
   height: 700px;
   border: 2px solid #161311;
   background-color: #282c34;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.tavern-bg {
+  background: url("images/tavern.png") no-repeat left center fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 25px 0px 25px 25px;
+  margin-left: 0;
+  margin-right: 0;
+  margin:0;
+}
+
+.adventures-bg {
+  background: linear-gradient(to right, #05050500 0%, #050505 40%, #050505) ;
+  height: 100%;
+  z-index: 100;
+}
+
+.adventures {
+  font-size: 35px;
+  margin-right: 140px;
+  font-family: "MedievalSharp-Book";
+}
+
+.adventure-container{
+  margin-right: 20px;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.adventure-image {
+  transition: box-shadow 0.3s;
+}
+
+.adventure-image:hover {
+  box-shadow: 0 0 8px 2px #50db7f;
+  cursor: pointer;
+}
+
+.adventure-name {
+  font-size: 30px;
+}
+
+.adventure-description {
+  font-size: 15px;
+  font-family: "Calibri";
+  text-align: justify;
+}
+
+.adventure-hover-text {
+  position: absolute;
+  bottom: 5%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: #dbdbdb;
+  font-size: 20px;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
 }
 
 .gear {
@@ -332,7 +396,7 @@ body,
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "Calibri";
+  font-family: "MedievalSharp-Book";
   color: #dbdbdb;
   font-size: 25px;
 }
@@ -347,6 +411,7 @@ body,
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
   font-size: 17px;
+  font-family: 'Calibri';
 }
 
 .bag-button:hover {
@@ -477,7 +542,7 @@ body,
 }
 
 .gust-bar-wrapper {
-  height: 20px;
+  height: 30px;
   background-color: #1b1b1b;
   border: 2px solid #3c3c3c;
   border-radius: 6px;
@@ -494,6 +559,18 @@ body,
   position: relative;
   overflow: hidden;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.gust-bar-value {
+  position: absolute;
+  left: 115%;
+  top:40%;
+  font-size: 22px;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px #000;
 }
 
 /*-------------------------------------------------------------------------*/

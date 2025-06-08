@@ -69,10 +69,10 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/combat");
+                    navigate("/tavern");
                   }}
                   style={
-                    window.location.pathname == "/combat" ? { backgroundColor: "#50db7f" } : {}
+                    window.location.pathname == "/tavern" ? { backgroundColor: "#50db7f" } : {}
                   }
                 >
                   <Image

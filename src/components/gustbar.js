@@ -9,14 +9,16 @@ export default function GustBar() {
   return (
     <Container className="gust-bar engraved mt-2">
       <Row>
-        <Col xs={3} style={{textAlign:'end'}}>Gust</Col>
+        <Col xs={3} style={{ textAlign: "end" }}>
+          Gust
+        </Col>
         <Col xs={6} className="align-self-center mt-1">
           <Row className="gust-bar-wrapper">
             <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none" }}></Col>
+            <span className="gust-bar-value">{current} / {max}</span>
           </Row>
         </Col>
-        <Col xs={3} style={{textAlign:'start'}}>
-          {current} / {max}
+        <Col xs={3} style={{ textAlign: "start" }}>
         </Col>
       </Row>
     </Container>

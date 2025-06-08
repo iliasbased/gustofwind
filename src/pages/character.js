@@ -88,21 +88,17 @@ export default function Character() {
   }
 
   return (
-    <FadeInOut>
-      <Container>
+    <>
+      <Container style={{paddingTop:'120px'}}>
         <Row>
-          <Col xs={2}></Col>
-          <Col xs={3}></Col>
-          <Col xs={3}>
-            <Container className="ui-header">
-              <Row className="justify-content-center">C H A R A C T E R</Row>
-            </Container>
+          <Col xs={4}></Col>
+          <Col xs={4}>
+            <Row className="justify-content-center fs-1 engraved mb-4">C h a r a c t e r</Row>
           </Col>
-          <Col xs={3}></Col>
-          <Col xs={2}></Col>
+          <Col xs={4}></Col>
         </Row>
       </Container>
-      <Container className="character">
+      <Container className="base-ui">
         <PlayerDataContext.Provider
           value={{ playerItems, playerStats, refreshItems, refreshStats, setPlayerItems }}
         >
@@ -121,6 +117,6 @@ export default function Character() {
           </Row>
         </PlayerDataContext.Provider>
       </Container>
-    </FadeInOut>
+    </>
   );
 }

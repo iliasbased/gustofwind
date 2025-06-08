@@ -6,6 +6,7 @@ import SButton from "../components/button";
 import SInput from "../components/input";
 import AccountService from "../services/account-service";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import SCentered from "../layouts/centered";
 
 export default function Login() {
   const [fadeOut, setFadeOut] = useState(false);
@@ -50,7 +51,7 @@ export default function Login() {
   }
 
   return (
-    <>
+    <SCentered>
       <SFadeInOut fadeOut={fadeOut} onFadeOutEnd={onFadeOutEnd}>
         <Container className="gustofwind-login">
           <Row className="mb-2">
@@ -88,6 +89,6 @@ export default function Login() {
           </Row>
         </Container>
       </SFadeInOut>
-    </>
+    </SCentered>
   );
 }

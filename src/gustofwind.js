@@ -13,26 +13,25 @@ import GameMaster from "./pages/gamemaster";
 import Choice from "./pages/choice";
 import GFooter from "./components/footer";
 import Combat from "./pages/combat";
+import Tavern from "./pages/tavern";
 
 export default function GustOfWind() {
   return (
     <>
       <SHeader />
-      <SCentered>
         <Routes>
           <Route path="/" element={<Intro />} /> 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/player" element={<Player />}/>
+          <Route path="/tavern" element={<Tavern />} />
           <Route path="/combat" element={<Combat />} />
           <Route element={<AuthOutlet fallbackPath='/' />}>
             <Route path="/choice" element={<Choice />} />
-            <Route path="/player" element={<Player />}/>
             <Route path="/gamemaster" element={<GameMaster />} />
           </Route>
         </Routes>
-      </SCentered>
       <GFooter />
     </>
   );

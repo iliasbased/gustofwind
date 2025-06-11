@@ -7,34 +7,9 @@ import Inventory from "../components/character/inventory";
 export default function QuestLog() {
   useEffect(() => {}, []);
 
-  return (
-    <>
-      <Container>
-        <Row>
-          <Col xs={2}></Col>
-          <Col xs={3}></Col>
-          <Col xs={3}>
-            <Container className="ui-header">
-              <Row className="justify-content-center">CHARACTER</Row>
-            </Container>
-          </Col>
-          <Col xs={3}></Col>
-          <Col xs={2}></Col>
-        </Row>
-      </Container>
-      <Container className="character">
-        <Row>
-          <Col className="pe-0" xs={3}>
-            <Stats />
-          </Col>
-          <Col className="px-0" xs={3}>
-            <Gear />
-          </Col>
-          <Col className="ps-0" xs={6}>
-            <Inventory />
-          </Col>
-        </Row>
-      </Container>
-    </>
-  );
+  return <Container fluid className="questlog-bg">
+    <Row>
+      test
+    </Row>
+  </Container>;
 }

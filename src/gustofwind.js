@@ -14,6 +14,7 @@ import Choice from "./pages/choice";
 import GFooter from "./components/footer";
 import Combat from "./pages/combat";
 import Tavern from "./pages/tavern";
+import QuestLog from "./pages/questlog";
 
 export default function GustOfWind() {
   return (
@@ -26,6 +27,7 @@ export default function GustOfWind() {
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/player" element={<Player />}/>
           <Route path="/tavern" element={<Tavern />} />
+          <Route path="/questlog" element={<QuestLog />} />
           <Route path="/combat" element={<Combat />} />
           <Route element={<AuthOutlet fallbackPath='/' />}>
             <Route path="/choice" element={<Choice />} />

@@ -223,7 +223,7 @@ body {
   border: 2px solid #161311;
   background-color: #282c34;
   padding: 0;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 55px;
 }
 
 .tavern-bg {
@@ -234,13 +234,12 @@ body {
   box-shadow: inset rgba(0, 0, 0, 0.35) 25px 0px 25px 25px;
   margin-left: 0;
   margin-right: 0;
-  margin:0;
+  margin: 0;
 }
 
 .adventures-bg {
-  background: linear-gradient(to right, #05050500 0%, #050505 40%, #050505) ;
+  background: linear-gradient(to right, #05050500 0%, #050505 40%, #050505);
   height: 100%;
-  z-index: 100;
 }
 
 .adventures {
@@ -249,7 +248,7 @@ body {
   font-family: "MedievalSharp-Book";
 }
 
-.adventure-container{
+.adventure-container {
   margin-right: 20px;
   transition: color 0.3s;
   position: relative;
@@ -286,6 +285,59 @@ body {
   pointer-events: none;
 }
 
+.adventure-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.6);
+  z-index: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.adventure-popup {
+  background: #282c34;
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: cover;
+  border: 2px solid #161311;
+}
+
+.adventure-difficulty-button {
+  width: 100%;
+  height: 80px;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  opacity: 0.9;
+
+}
+
+.adventure-difficulty-button:hover {
+  opacity: 1;
+}
+
+.questlog-bg {
+  background: url("images/book_edited.png") no-repeat center center fixed;
+  background-size: 70%;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 25px 0px 25px 25px;
+  margin-left: 0;
+  margin-right: 0;
+  margin: 0;
+}
+
 .gear {
   width: 100%;
   height: 100%;
@@ -301,7 +353,6 @@ body {
 .stats {
   width: 100%;
   height: 696px;
-  border: 2px solid #161311;
   padding: 15px;
   font-size: 18px;
   overflow-y: scroll;
@@ -386,7 +437,7 @@ body {
 }
 
 .engraved {
-  text-shadow: 5px 5px 5px rgba(22, 22, 22, 0.5);
+  text-shadow: 5px 5px 5px rgba(22, 22, 22, 0.7);
 }
 
 .inventory {
@@ -411,7 +462,7 @@ body {
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
   font-size: 17px;
-  font-family: 'Calibri';
+  font-family: "Calibri";
 }
 
 .bag-button:hover {
@@ -564,7 +615,7 @@ body {
 .gust-bar-value {
   position: absolute;
   left: 115%;
-  top:40%;
+  top: 40%;
   font-size: 22px;
   z-index: 2;
   transform: translate(-50%, -50%);

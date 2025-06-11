@@ -4,7 +4,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { usePlayerStats } from "../../hooks/usePlayerStats";
 import { PlayerDataContext } from "../../pages/character";
 
-export default function Adventure({ adventure }) {
+export default function Adventure({ adventure, onClickToEnter }) {
   const [textColor, setTextColor] = useState("white");
   const [textOpacity, setTextOpacity] = useState(0);
 
@@ -32,6 +32,7 @@ export default function Adventure({ adventure }) {
               setTextColor("#50db7f");
               setTextOpacity(1);
             }}
+            onClick={()=>onClickToEnter(adventure)}
             onMouseLeave={() => {
               setTextColor("white");
               setTextOpacity(0);

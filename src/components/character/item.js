@@ -19,7 +19,7 @@ export default function Item({ type, disabled, item, isLarge }) {
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        zIndex: 1000,
+        zIndex: 9999,
         position: "relative"
       }
     : undefined;

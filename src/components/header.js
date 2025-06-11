@@ -39,21 +39,6 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/skillbook");
-                  }}
-                  style={
-                    window.location.pathname == "/skillbook" ? { backgroundColor: "#50db7f" } : {}
-                  }
-                >
-                  <Image
-                    width="40px"
-                    src={`/assets/images/items/header/abilities.png`}
-                    className="my-1"
-                  />
-                </button>
-                <button
-                  className="header-button"
-                  onClick={() => {
                     navigate("/questlog");
                   }}
                   style={
@@ -63,6 +48,21 @@ export default function SHeader() {
                   <Image
                     width="40px"
                     src={`/assets/images/items/header/questlog.png`}
+                    className="my-1"
+                  />
+                </button>
+                <button
+                  className="header-button"
+                  onClick={() => {
+                    navigate("/skillbook");
+                  }}
+                  style={
+                    window.location.pathname == "/skillbook" ? { backgroundColor: "#50db7f" } : {}
+                  }
+                >
+                  <Image
+                    width="40px"
+                    src={`/assets/images/items/header/abilities.png`}
                     className="my-1"
                   />
                 </button>
@@ -99,8 +99,7 @@ export default function SHeader() {
               </Row>
             </Container>
           </Col>
-          <Col xs={3}>
-          </Col>
+          <Col xs={3}></Col>
         </Row>
       </Container>
     </SFadeInOut>

@@ -8,12 +8,18 @@ import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
 import FadeInOut from "../layouts/fade-in-out";
+import {getRandomBorderLeftOnly} from "../utilities";
 
 export const PlayerDataContext = React.createContext();
 
 export default function Character() {
   const { playerItems, refreshItems, setPlayerItems } = usePlayerItems();
   const { playerStats, refreshStats } = usePlayerStats();
+  const [borderStyle, setBorderStyle] = useState({});
+
+  useEffect(() => {
+    setBorderStyle(getRandomBorderLeftOnly());
+  }, []);
 
   async function handleDragEnd(event) {
     if (event.over) {
@@ -98,7 +104,7 @@ export default function Character() {
           <Col xs={4}></Col>
         </Row>
       </Container>
-      <Container className="base-ui">
+      <Container className="base-ui" style={borderStyle}>
         <PlayerDataContext.Provider
           value={{ playerItems, playerStats, refreshItems, refreshStats, setPlayerItems }}
         >

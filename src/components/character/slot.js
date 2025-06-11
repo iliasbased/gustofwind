@@ -1,8 +1,18 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useDroppable } from "@dnd-kit/core";
 import Item from "./item";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import { useEffect, useState } from "react";
 
 export default function Slot({ id, type, disabled, item, selectedHeader }) {
+  const [borderStyleSubtle, setBorderStyleSubtle] = useState({});
+  const [borderStyle, setBorderStyle] = useState({});
+
+  useEffect(() => {
+    setBorderStyleSubtle(getRandomBorderSubtle());
+    setBorderStyle(getRandomBorder());
+  }, []);
+
   const { isOver, setNodeRef } = useDroppable({
     id: id,
     data: {
@@ -16,7 +26,6 @@ export default function Slot({ id, type, disabled, item, selectedHeader }) {
     return <Image src={`/assets/images/items/base/${type}.png`} className="slot-icon-empty" />;
   };
 
-
   if (type == "bag") {
     let opacity = 1;
     if (selectedHeader?.key != "all") {
@@ -28,9 +37,8 @@ export default function Slot({ id, type, disabled, item, selectedHeader }) {
     return (
       <Container
         className={disabled ? "slot-bag-disabled" : "slot-bag"}
-        style={{opacity: opacity}}
+        style={{ opacity: opacity, ...borderStyleSubtle }}
         ref={setNodeRef}
-        // style={{ backgroundColor: isOver ? "lightblue" : "" }}
       >
         <Row>
           <Col>{item ? <Item item={item} /> : ""}</Col>
@@ -40,11 +48,7 @@ export default function Slot({ id, type, disabled, item, selectedHeader }) {
   }
 
   return (
-    <Container
-      className="slot"
-      ref={setNodeRef}
-      style={{ backgroundColor: isOver ? "lightblue" : "" }}
-    >
+    <Container className="slot" ref={setNodeRef} style={borderStyle}>
       <Row>
         <Col>{item ? <Item item={item} isLarge /> : getEmptyIcon()}</Col>
       </Row>

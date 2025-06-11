@@ -3,9 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import Slot from "./slot";
 import { usePlayerItems } from "../../hooks/usePlayerItems";
 import { PlayerDataContext } from "../../pages/character";
+import {getRandomBorderTopOnly} from "../../utilities";
 
 export default function Inventory() {
   const { playerItems } = useContext(PlayerDataContext);
+  const [borderStyle, setBorderStyle] = useState({});
+  useEffect(() => {
+    setBorderStyle(getRandomBorderTopOnly());
+  }, []);
   console.log("Inventory items:", playerItems);
 
   const [headers, setHeaders] = useState([
@@ -58,7 +63,7 @@ export default function Inventory() {
             <button
               onClick={() => selectHeader(header.id)}
               className={header.selected ? "bag-button-pressed" : "bag-button"}
-              style={header.style}
+              style={{...header.style, ...borderStyle}}
             >
               {header.name}
             </button>
@@ -70,7 +75,7 @@ export default function Inventory() {
 
   const getBag = () => {
     return (
-      <Container className="bag">
+      <Container className="bag" >
         <Col>
           <Row className="justify-content-center pt-1">{getBagSlots()}</Row>
         </Col>
@@ -106,7 +111,7 @@ export default function Inventory() {
         </Col>
       </Row>
       <Row>{getHeaders()}</Row>
-      <Row style={{overflow:'auto', maxHeight:'600px'}}>{getBag()}</Row>
+      <Row style={{/* overflow:'auto', */ maxHeight:'600px'}}>{getBag()}</Row>
     </Container>
   );
 }

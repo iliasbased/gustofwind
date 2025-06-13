@@ -13,20 +13,28 @@
   src: local("AppleGaramond-Light"), url("AppleGaramond-Light.ttf") format("truetype");
 }
 
-html,
-#root {
-  height: 100%;
-  margin: 0;
-  font-family: "BeyondWonderland";
-  color: white;
-  --PhoneInputCountryFlag-aspectRatio: 1.333;
-}
-
-body {
-  height: 100%;
-  margin: 0;
+.fixed-app {
+  width: 1920px;
+  min-width: 1920px;
+  max-width: 1920px;
+  height: 991px;
+  margin: 0 auto;
   background: url("images/bg.png") no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+body, html, #root {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #181818;
+  font-family: "BeyondWonderland";
+  color: white;
 }
 
 :root {
@@ -182,7 +190,7 @@ body {
 }
 
 .gustofwind-header {
-  position: fixed;
+  position: absolute;
   background: linear-gradient(to top, #e4eaeb00, #000000d5);
   padding-bottom: 150px;
 }
@@ -197,7 +205,7 @@ body {
   font-size: 30px;
   border: 1px solid #161311;
   border-width: 0px 2px 2px 2px;
-  border-radius: 0px 0px 20px 20px;
+  border-radius: 0px 0px 40px 40px;
   background-color: #282c34;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #dbdbdb;
@@ -219,11 +227,12 @@ body {
 
 .base-ui {
   width: 80%;
-  height: 700px;
+  height: 703px;
+  max-width: 1320px !important;
   border: 2px solid #161311;
   background-color: #282c34;
   padding: 0;
-  box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 55px;
+  box-shadow: rgba(179, 152, 104, 0.35) 0px 0px 55px;
 }
 
 .tavern-bg {
@@ -308,7 +317,8 @@ body {
   width: 500px;
   height: 300px;
   border-radius: 10px;
-  box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  box-shadow: rgba(194, 134, 66, 0.45) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-size: cover;
   border: 2px solid #161311;
 }
@@ -319,23 +329,30 @@ body {
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
   font-size: 30px;
-  opacity: 0.9;
-
+  opacity: 1;
 }
 
 .adventure-difficulty-button:hover {
-  opacity: 1;
+  filter: brightness(1.1);
 }
 
 .questlog-bg {
   background: url("images/book_edited.png") no-repeat center center fixed;
-  background-size: 70%;
+  background-size: 65%;
   height: 100%;
   width: 100%;
   box-shadow: inset rgba(0, 0, 0, 0.35) 25px 0px 25px 25px;
   margin-left: 0;
   margin-right: 0;
   margin: 0;
+}
+
+.envelope {
+  position: relative;
+  width: 400px;
+  transform: rotate(40deg);
+  left: 65%;
+  top: 60%;
 }
 
 .gear {
@@ -352,7 +369,7 @@ body {
 
 .stats {
   width: 100%;
-  height: 696px;
+  height: 700px;
   padding: 15px;
   font-size: 18px;
   overflow-y: scroll;
@@ -442,7 +459,7 @@ body {
 
 .inventory {
   width: 100%;
-  height: 696px;
+  height: 700px;
   border: 2px solid #161311;
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
@@ -596,9 +613,13 @@ body {
   height: 30px;
   background-color: #1b1b1b;
   border: 2px solid #3c3c3c;
-  border-radius: 6px;
   overflow: hidden;
   position: relative;
+  box-shadow: rgba(179, 152, 104, 0.45) 0px 0px 25px;
+}
+
+.dusty {
+  text-shadow: 0px 0px 4px rgba(179, 152, 104, 0.45);
 }
 
 .gust-bar-fill {
@@ -676,3 +697,42 @@ body {
     display: none;
   }
 }
+
+/* COMPLETELY DISABLE BOOTSTRAP RESPONSIVENESS */
+@media (max-width: 575.98px) {
+  .container { max-width: 1920px ; }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .container { max-width: 1920px ; }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container { max-width: 1920px ; }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container { max-width: 1920px ; }
+}
+@media (min-width: 1200px) {
+  .container { max-width: 1920px ; }
+}
+
+/* Force all columns to maintain their width ratios */
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  flex: 0 0 auto !important;
+}
+
+/* Override all responsive column classes */
+@media (max-width: 575.98px) {
+  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
+  .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+  .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+  .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
+  .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6,
+  .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
+    flex: 0 0 auto !important;
+    max-width: none !important;
+  }
+}
+

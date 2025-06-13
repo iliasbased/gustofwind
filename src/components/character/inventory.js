@@ -77,7 +77,7 @@ export default function Inventory() {
     return (
       <Container className="bag" >
         <Col>
-          <Row className="justify-content-center pt-1">{getBagSlots()}</Row>
+          <Row className="justify-content-center pt-1" style={{paddingBottom:'3px'}}>{getBagSlots()}</Row>
         </Col>
       </Container>
     );
@@ -103,7 +103,7 @@ export default function Inventory() {
   };
 
   return (
-    <Container className="inventory">
+    <Container className="inventory " style={{paddingBottom:'4px'}}>
       <Row>
         <Col className="align-self-center text-end">Inventory</Col>
         <Col className="text-start">

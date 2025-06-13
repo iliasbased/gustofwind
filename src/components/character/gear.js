@@ -124,7 +124,7 @@ export default function Gear() {
   };
 
   return (
-    <Container className="gear">
+    <Container className="gear pb-1">
       {getName()}
       {getArmor()}
       {getJewels()}

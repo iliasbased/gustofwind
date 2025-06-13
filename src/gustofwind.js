@@ -18,7 +18,7 @@ import QuestLog from "./pages/questlog";
 
 export default function GustOfWind() {
   return (
-    <>
+    <div className="fixed-app">
       <SHeader />
         <Routes>
           <Route path="/" element={<Intro />} /> 
@@ -35,6 +35,6 @@ export default function GustOfWind() {
           </Route>
         </Routes>
       <GFooter />
-    </>
+    </div>
   );
 }

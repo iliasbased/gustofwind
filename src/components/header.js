@@ -10,15 +10,14 @@ export default function SHeader() {
   return (
     <SFadeInOut fadeOut={window.location.pathname == "/"}>
       <Container
-        fluid
         style={sessionStorage.getItem("loggedIn") ? { display: "block" } : { display: "none" }}
         className="gustofwind-header"
       >
         <Row>
-          <Col xs={3}>
+          <Col>
             <GustBar />
           </Col>
-          <Col xs={6}>
+          <Col>
             <Container>
               <Row className="justify-content-center">
                 <button
@@ -99,7 +98,7 @@ export default function SHeader() {
               </Row>
             </Container>
           </Col>
-          <Col xs={3}></Col>
+          <Col></Col>
         </Row>
       </Container>
     </SFadeInOut>

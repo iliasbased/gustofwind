@@ -38,7 +38,7 @@ export default function Tavern() {
         <Row className="h-100">
           <Col xs={5}></Col>
           <Col xs={2}>
-            <Row className="justify-content-center fs-1 engraved" style={{ paddingTop: "120px" }}>
+            <Row className="justify-content-center engraved" style={{ paddingTop: "120px", fontSize: '40px' }}>
               T a v e r n
             </Row>
           </Col>

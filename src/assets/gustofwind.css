@@ -27,7 +27,9 @@
   overflow-y: auto;
 }
 
-body, html, #root {
+body,
+html,
+#root {
   width: 100vw;
   min-height: 100vh;
   margin: 0;
@@ -193,6 +195,8 @@ body, html, #root {
   position: absolute;
   background: linear-gradient(to top, #e4eaeb00, #000000d5);
   padding-bottom: 150px;
+  z-index: 200;
+  z-index: 200;
 }
 
 .gustofwind-footer {
@@ -337,22 +341,116 @@ body, html, #root {
 }
 
 .questlog-bg {
-  background: url("images/book_edited.png") no-repeat center center fixed;
-  background-size: 65%;
+  background: url("images/towers.png") no-repeat left center fixed;
+  background-size: cover;
   height: 100%;
   width: 100%;
-  box-shadow: inset rgba(0, 0, 0, 0.35) 25px 0px 25px 25px;
   margin-left: 0;
   margin-right: 0;
   margin: 0;
+  z-index: 1;
+  position: absolute;
 }
 
-.envelope {
+.quest-button {
+  width: 100%;
+  height: 70px;
+  padding: 0;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  border: 0;
+  font-size: 35px;
+  opacity: 0.5;
+  background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+}
+
+.quest-button-active {
+  width: 100%;
+  height: 70px;
+  padding: 0;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
+  border: 0;
+  font-size: 35px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.quest-button:active:hover {
+  cursor: wait;
+}
+
+.quest-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.book {
+  position: absolute;
+  width: 1250px;
+  left: 18%;
+  top: 17%;
+  z-index: 1;
+}
+
+.quests {
+  z-index: 2;
   position: relative;
-  width: 400px;
-  transform: rotate(40deg);
-  left: 65%;
-  top: 60%;
+}
+
+.quest-list {
+  width: 100%;
+  height: 595px;
+  overflow-y: auto;
+  scrollbar-color: #3d4554 #282c34;
+  scrollbar-width: thin;
+  font-size: 18px;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  border-top: 1px solid #161311;
+}
+
+.quest {
+  background-color: #282c34b4;
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.quest-name {
+  font-size: 30px;
+  color: #dbdbdb;
+}
+
+.quest-description {
+  font-size: 15px;
+  color: #dbdbdb;
+  font-family: "Calibri";
+}
+
+.quest-reward {
+  font-size: 18px;
+  color: #dbdbdb;
+  font-family: "Impact";
+  font-weight: 100;
+  color: #47c0f0;
+  text-shadow: rgba(255, 255, 255, 0.397) 0px 0px 10px, rgba(0, 0, 0, 1) 0px 0px 1px;
+}
+
+.quest-done {
+  width: 130px;
+  height: 50px;
+  font-size: 30px;
+  background-color: #ffffffd8;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.quest-done:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
 .gear {
@@ -612,10 +710,9 @@ body, html, #root {
 .gust-bar-wrapper {
   height: 30px;
   background-color: #1b1b1b;
-  border: 2px solid #3c3c3c;
   overflow: hidden;
   position: relative;
-  box-shadow: rgba(179, 152, 104, 0.45) 0px 0px 25px;
+  box-shadow: rgba(179, 152, 104, 0.45) 0px 0px 25px, inset rgba(255, 255, 255, 0.35) 0px 0px 5px, rgba(0, 0, 0, 0.45) 0px 0px 2px;
 }
 
 .dusty {
@@ -635,8 +732,8 @@ body, html, #root {
 
 .gust-bar-value {
   position: absolute;
-  left: 115%;
-  top: 40%;
+  left: 124%;
+  top: 45%;
   font-size: 22px;
   z-index: 2;
   transform: translate(-50%, -50%);
@@ -700,39 +797,98 @@ body, html, #root {
 
 /* COMPLETELY DISABLE BOOTSTRAP RESPONSIVENESS */
 @media (max-width: 575.98px) {
-  .container { max-width: 1920px ; }
+  .container {
+    max-width: 1920px;
+  }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .container { max-width: 1920px ; }
+  .container {
+    max-width: 1920px;
+  }
 }
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .container { max-width: 1920px ; }
+  .container {
+    max-width: 1920px;
+  }
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  .container { max-width: 1920px ; }
+  .container {
+    max-width: 1920px;
+  }
 }
 @media (min-width: 1200px) {
-  .container { max-width: 1920px ; }
+  .container {
+    max-width: 1920px;
+  }
 }
 
 /* Force all columns to maintain their width ratios */
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
-.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
   flex: 0 0 auto !important;
 }
 
 /* Override all responsive column classes */
 @media (max-width: 575.98px) {
-  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
-  .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
-  .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
-  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
-  .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
-  .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6,
-  .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
+  .col-sm-1,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12,
+  .col-md-1,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-lg-1,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12,
+  .col-xl-1,
+  .col-xl-2,
+  .col-xl-3,
+  .col-xl-4,
+  .col-xl-5,
+  .col-xl-6,
+  .col-xl-7,
+  .col-xl-8,
+  .col-xl-9,
+  .col-xl-10,
+  .col-xl-11,
+  .col-xl-12 {
     flex: 0 0 auto !important;
     max-width: none !important;
   }
 }
-

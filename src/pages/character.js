@@ -99,7 +99,7 @@ export default function Character() {
         <Row>
           <Col xs={4}></Col>
           <Col xs={4}>
-            <Row className="justify-content-center fs-1 engraved mb-4">C h a r a c t e r</Row>
+            <Row className="justify-content-center engraved mb-4" style={{fontSize: '40px'}}>C h a r a c t e r</Row>
           </Col>
           <Col xs={4}></Col>
         </Row>

@@ -68,3 +68,21 @@ export function getRandomBorderSubtle() {
     borderBottomRightRadius: borderBottomRightRadius,
   };
 }
+
+export function getRandomBorderSubtleLeftSide() {
+  function getRandomBool() {
+    return Math.random() < 0.5;
+  }
+  let topLeft = getRandomBool();
+  let topRight = getRandomBool();
+
+  const borderTopLeftRadius = topLeft ? "225px 5px" : "5px 225px";
+  const borderTopRightRadius = topRight ? "225px 5px" : "5px 225px";
+  const borderBottomLeftRadius = !topLeft ? "225px 5px" : "5px 225px";
+  const borderBottomRightRadius = !topRight ? "225px 5px" : "5px 225px";
+
+  return {
+    borderTopLeftRadius: borderTopLeftRadius,
+    borderBottomLeftRadius: borderBottomLeftRadius,
+  };
+}

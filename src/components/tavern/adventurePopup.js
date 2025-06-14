@@ -20,8 +20,12 @@ export default function AdventurePopup({ adventure, closePopup }) {
   }
 
   return (
-    <div className="adventure-popup-overlay" onClick={closePopup}>
-      <Container className="adventure-popup" style={{backgroundImage: `url(${adventure.img})`, ...getRandomBorder()}} >
+    <>
+      <div className="popup-overlay" onClick={closePopup}></div>
+      <Container
+        className="adventure-popup"
+        style={{ backgroundImage: `url(${adventure.img})`, ...getRandomBorder() }}
+      >
         <Row className="mt-5 ps-3 fs-1 justify-content-center engraved">{adventure.name}</Row>
         <Row className="mt-5 justify-content-center">
           <Col xs={4} className="d-flex justify-content-center">
@@ -62,6 +66,6 @@ export default function AdventurePopup({ adventure, closePopup }) {
           </Col>
         </Row>
       </Container>
-    </div>
+    </>
   );
 }

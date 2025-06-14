@@ -30,9 +30,9 @@ export default function SHeader() {
                   }
                 >
                   <Image
-                    width="40px"
+                    width="35px"
                     src={`/assets/images/items/header/character.png`}
-                    className="my-1"
+                    className="mt-1 mb-2"
                   />
                 </button>
                 <button
@@ -45,9 +45,9 @@ export default function SHeader() {
                   }
                 >
                   <Image
-                    width="40px"
+                    width="35px"
                     src={`/assets/images/items/header/questlog.png`}
-                    className="my-1"
+                    className="mt-1 mb-2"
                   />
                 </button>
                 <button
@@ -60,9 +60,9 @@ export default function SHeader() {
                   }
                 >
                   <Image
-                    width="40px"
+                    width="35px"
                     src={`/assets/images/items/header/abilities.png`}
-                    className="my-1"
+                    className="mt-1 mb-2"
                   />
                 </button>
                 <button
@@ -75,9 +75,9 @@ export default function SHeader() {
                   }
                 >
                   <Image
-                    width="40px"
+                    width="35px"
                     src={`/assets/images/items/header/tavern.png`}
-                    className="my-1"
+                    className="mt-1 mb-2"
                   />
                 </button>
                 <button
@@ -90,9 +90,9 @@ export default function SHeader() {
                   }
                 >
                   <Image
-                    width="40px"
+                    width="35px"
                     src={`/assets/images/items/header/crafting.png`}
-                    className="my-1"
+                    className="mt-1 mb-2"
                   />
                 </button>
               </Row>

@@ -20,7 +20,8 @@ export default function Item({ type, disabled, item, isLarge }) {
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
         zIndex: 9999,
-        position: "relative"
+        position: "relative",
+        cursor: "url('cursors/cursor-grab.png'), grab !important",
       }
     : undefined;
 
@@ -93,7 +94,7 @@ export default function Item({ type, disabled, item, isLarge }) {
     <>
       <Container
         fluid
-        className="p-0"
+        className="slot-drag-container p-0"
         ref={setNodeRef}
         style={style}
         {...listeners}

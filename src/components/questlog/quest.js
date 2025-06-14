@@ -4,8 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { usePlayerStats } from "../../hooks/usePlayerStats";
 import { PlayerDataContext } from "../../pages/character";
 import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotate, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-export default function Quest({ quest }) {
+export default function Quest({ quest, onSelectQuest }) {
   const [borderStyle, setBorderStyle] = useState({});
   const [buttonBorder, setButtonBorder] = useState({});
   const [boxBorder, setBoxBorder] = useState({});
@@ -18,12 +20,20 @@ export default function Quest({ quest }) {
 
   function getQuestBox() {
     let icon = "";
-    if (!quest.completed && (quest.proof_text || quest.proof_img)) {
-      icon = "↻";
+    if (!quest.completed && quest.submitted) {
+      icon = (
+        <span>
+          <FontAwesomeIcon icon={faRotate} spin />
+        </span>
+      );
     }
 
     if (quest.completed) {
-      icon = "✔️";
+      icon = (
+        <span style={{ color: "rgb(80, 219, 127)" }}>
+          <FontAwesomeIcon icon={faCheck} size="xl" bounce />
+        </span>
+      );
     }
 
     return (
@@ -43,23 +53,31 @@ export default function Quest({ quest }) {
     } else {
       if (quest.proof_text || quest.proof_img) {
         return (
-          <button className="quest-done" style={buttonBorder} >
+          <button className="quest-done" style={buttonBorder}>
             Submitted
           </button>
         );
       }
       return (
-        <button className="quest-done" style={buttonBorder}>
+        <button className="quest-done" style={buttonBorder} onClick={()=>onSelectQuest(quest)}>
           Done?
         </button>
       );
     }
   }
 
+  let className = "quest";
+  if (quest.submitted) {
+    className = "quest-submitted";
+  }
+  if (quest.completed) {
+    className = "quest-completed";
+  }
+
   return (
     <>
       {getQuestBox()}
-      <Container className={quest.completed ? "quest-completed" : "quest"} style={borderStyle}>
+      <Container className={className} style={borderStyle}>
         <Row>
           <Col xs={8}>
             <Row className="mb-2">
@@ -74,16 +92,14 @@ export default function Quest({ quest }) {
               <Col className={`quest-reward engraved ${quest.completed ? "strike-through" : ""}`}>
                 {quest.reward} {" "}
                 <span
-                  style={{ fontFamily: "BeyondWonderland", fontSize: "22px", fontWeight: "500" }}
+                  style={{ fontFamily: "BeyondWonderland", fontSize: "25px", fontWeight: "500" }}
                 >
                   Gust
                 </span>
               </Col>
             </Row>
             <Row className="mt-4">
-              <Col>
-                {getDoneButton()}
-              </Col>
+              <Col>{getDoneButton()}</Col>
             </Row>
           </Col>
         </Row>

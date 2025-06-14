@@ -418,6 +418,17 @@ html,
   padding-bottom: 10px;
   padding-top: 10px;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 100;
+}
+
+.quest-completed {
+  background-color: #282c34b4;
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 100;
+  opacity: 0.5;
 }
 
 .quest-name {
@@ -451,6 +462,33 @@ html,
 .quest-done:hover {
   background-color: #f1f1f1;
   cursor: pointer;
+}
+
+.quest-done-completed {
+  width: 130px;
+  height: 50px;
+  font-size: 30px;
+  background-color: #ffffffd8;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.quest-box {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: -15px;
+  margin-left: -5px;
+  z-index: 200;
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  color: #f78c00;
+  font-weight: bold;
+}
+
+.strike-through {
+  text-decoration: line-through;
 }
 
 .gear {
@@ -712,7 +750,8 @@ html,
   background-color: #1b1b1b;
   overflow: hidden;
   position: relative;
-  box-shadow: rgba(179, 152, 104, 0.45) 0px 0px 25px, inset rgba(255, 255, 255, 0.35) 0px 0px 5px, rgba(0, 0, 0, 0.45) 0px 0px 2px;
+  box-shadow: rgba(179, 152, 104, 0.45) 0px 0px 25px, inset rgba(255, 255, 255, 0.35) 0px 0px 5px,
+    rgba(0, 0, 0, 0.45) 0px 0px 2px;
 }
 
 .dusty {

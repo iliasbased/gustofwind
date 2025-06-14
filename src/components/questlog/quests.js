@@ -27,10 +27,12 @@ export default function Quests() {
   let todayQuests = [
     {
       id: 1,
-      name: "A kitchen's Tale",
-      description: "Please do the dishes, clean the kitchen and take out the trash.",
+      name: "A Long Journey",
+      description: "Got to breaking class in Lamprini with your 2001 Citroen Xsara.",
       reward: 25,
       completed: false,
+      proof_text: "Dishes done, kitchen cleaned, trash taken out.",
+      proof_img: "https://example.com/proof-image.jpg",
     },
     {
       id: 2,
@@ -38,7 +40,7 @@ export default function Quests() {
       description:
         "Go to the pet shop and pick up food for the cats and also some cat litter and some treats :)",
       reward: 35,
-      completed: false,
+      completed: true,
     },
     {
       id: 1,
@@ -84,6 +86,13 @@ export default function Quests() {
     setActiveTab("today");
     setQuests(todayQuests);
   }, []);
+
+  quests.sort((a, b) => {
+    if (a.completed && !b.completed) return 1; // Completed quests go to the end
+    if (!a.completed && b.completed) return -1; // Uncompleted quests stay at the top
+    return 0; // Keep the order for quests with the same completion status
+  });
+
 
   return (
     <Container className="quests">

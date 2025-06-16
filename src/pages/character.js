@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Context } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Fade } from "react-bootstrap";
 import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
@@ -7,8 +7,9 @@ import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
-import FadeInOut from "../layouts/fade-in-out";
-import {getRandomBorderLeftOnly} from "../utilities";
+import { getRandomBorderLeftOnly } from "../utilities";
+import GHeader from "../components/header";
+import SFadeInOut from "../layouts/fade-in-out";
 
 export const PlayerDataContext = React.createContext();
 
@@ -94,12 +95,14 @@ export default function Character() {
   }
 
   return (
-    <>
-      <Container style={{paddingTop:'120px'}}>
+    <SFadeInOut>
+      <Container style={{ paddingTop: "120px" }}>
         <Row>
           <Col xs={4}></Col>
           <Col xs={4}>
-            <Row className="justify-content-center engraved mb-4" style={{fontSize: '40px'}}>C h a r a c t e r</Row>
+            <Row className="justify-content-center engraved mb-4" style={{ fontSize: "40px" }}>
+              C h a r a c t e r
+            </Row>
           </Col>
           <Col xs={4}></Col>
         </Row>
@@ -123,6 +126,6 @@ export default function Character() {
           </Row>
         </PlayerDataContext.Provider>
       </Container>
-    </>
+    </SFadeInOut>
   );
 }

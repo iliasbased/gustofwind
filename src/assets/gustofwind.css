@@ -37,7 +37,7 @@
 .perfect-scrollbar .ps__thumb-y {
   background-color: #3d4554;
   border-radius: 0px;
-  cursor: url('cursors/cursor-pointer.png'), pointer !important;
+  cursor: url("cursors/cursor-pointer.png"), pointer !important;
   width: 8px;
   right: 1px;
 }
@@ -47,11 +47,11 @@
 }
 
 .perfect-scrollbar .ps__rail-y:hover .ps__thumb-y {
-  cursor: url('cursors/cursor-pointer.png'), pointer !important;
+  cursor: url("cursors/cursor-pointer.png"), pointer !important;
 }
 
 .perfect-scrollbar .ps__rail-y:active .ps__thumb-y {
-  cursor: url('cursors/cursor-grab.png'), grab !important;
+  cursor: url("cursors/cursor-grab.png"), grab !important;
 }
 
 .perfect-scrollbar .ps__thumb-y,
@@ -84,15 +84,11 @@ html,
   cursor: url("cursors/cursor-default.png"), auto;
 }
 
-body::after {
-  content: '';
-  position: absolute;
-  left: -9999px;
-  cursor: url('cursors/cursor-default.png'), auto;
-  cursor: url('cursors/cursor-pointer.png'), pointer;
-  cursor: url('cursors/cursor-grab.png'), grab;
-  cursor: url('cursors/cursor-sword.png'), auto;
-  cursor: url('cursors/cursor-door.png'), pointer;
+button,
+input[type="button"],
+input[type="submit"],
+.btn {
+  cursor: url("cursors/cursor-pointer.png"), pointer !important;
 }
 
 :root {
@@ -243,6 +239,35 @@ body::after {
 /*-------------------------------------------------------------------------*/
 /*----------------------------  GUST OF WIND -------------------------------*/
 /*-------------------------------------------------------------------------*/
+.gustofwind-button {
+  padding: 0;
+  border: 0;
+  opacity: 1;
+  background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.gustofwind-button-medium {
+  font-size: 20px;
+  width: 450px;
+  height: 70px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.gustofwind-button-large {
+  width: 300px;
+  height: 200px;
+  font-size: 60px;
+  margin: 100px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(223, 174, 84, 0.39) 0px 0px 40px;
+}
+
+.gustofwind-button:hover {
+  filter: brightness(1.2);
+}
+
 .gustofwind-login {
   width: fit-content !important ;
 }
@@ -569,12 +594,43 @@ body::after {
 }
 
 .quest-popup {
-  position: absolute;
-  width: 1000px;
-  height: 900px;
-  background: url("images/scroll.png") no-repeat center center fixed;
-  background-size: 35%;
-  pointer-events: none;
+  position: fixed;
+  background: #dbcbbd;
+  top: 20%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  height: 570px;
+  box-shadow: rgba(194, 134, 66, 0.45) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: cover;
+  color: #333;
+  z-index: 1000;
+}
+
+.quest-textarea {
+  height: 100px;
+  font-family: "Calibri";
+  box-shadow: inset rgba(0, 0, 0, 0.171) 0px 0px 50px 1px;
+  resize: none;
+  border: 0;
+}
+
+.quest-clear {
+  font-family: "Calibri";
+  background: rgb(202, 39, 39);
+  color: #dbdbdb;
+  font-size: 15px;
+  width: 52px;
+  height: 25px;
+  border: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.quest-clear:hover {
+  background: rgb(240, 16, 16);
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+  font-weight: bold;
 }
 
 .strike-through {
@@ -713,7 +769,6 @@ body::after {
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-family: "MedievalSharp-Book";
   color: #dbdbdb;
   font-size: 25px;
 }
@@ -733,7 +788,7 @@ body::after {
 
 .bag-button:hover {
   background-color: rgb(122, 110, 107);
-  cursor: url("cursors/cursor-pointer.png"), pointer; 
+  cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
 .bag-button-pressed {
@@ -745,6 +800,7 @@ body::after {
   padding: 0;
   color: #dbdbdb;
   font-size: 20px;
+  font-family: "Calibri";
   cursor: url("cursors/cursor-default.png"), auto;
 }
 
@@ -877,14 +933,15 @@ body::after {
 }
 
 .gust-bar-fill {
-  height: 100%;
+  height: 26px;
   background: linear-gradient(-45deg, #30e0e6, #1d769f, #30e0e6, #1d769f);
   background-size: 300% 300%;
   animation: windFlow 16s linear infinite;
   transition: width 0.3s ease-in-out;
   position: relative;
   overflow: hidden;
-  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 5px 15px, rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 2px;
+  box-shadow: inset rgba(255, 255, 255, 0.445) 0px 0px 15px, rgba(71, 233, 245, 0.35) 5px 0px 25px;
 }
 
 .gust-bar-value {
@@ -897,6 +954,42 @@ body::after {
   color: #fff;
   pointer-events: none;
   text-shadow: 1px 1px 2px #000;
+}
+
+.hero-container {
+  background: #282c34;
+  box-shadow: rgba(194, 134, 66, 0.45) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-create-button {
+  background: #d8beb30e;
+  height: 60px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 40px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  opacity: 0.5;
+}
+
+.hero-create-button:hover {
+  filter: brightness(1.2);
+  opacity: 1;
+}
+
+.hero-select-button {
+  background: #cc4e1c0e;
+  height: 120px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 20px;
 }
 
 /*-------------------------------------------------------------------------*/

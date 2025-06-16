@@ -6,14 +6,14 @@ export function usePlayerStats() {
   const [loading, setLoading] = useState(true);
 
   const refreshStats = useCallback(() => {
-    fetchStats();
+    getPlayerStats();
   }, []);
 
   useEffect(() => {
-    fetchStats();
+    getPlayerStats();
   }, []);
 
-  async function fetchStats() { 
+  async function getPlayerStats() { 
     setLoading(true);
 
     try {

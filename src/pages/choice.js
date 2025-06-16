@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Stack } from "react-bootstrap";
 import SButton from "../components/button";
 import SFadeInOut from "../layouts/fade-in-out";
+import SCentered from "../layouts/centered";
+import { Container, Row, Col } from "react-bootstrap";
+import GButton from "../components/button";
 
 export default function Choice() {
   const [nextPage, setNextPage] = useState("");
@@ -15,26 +18,37 @@ export default function Choice() {
       }}
       fadeOut={nextPage != ""}
     >
-      <Stack direction="horizontal" gap={5}>
-        <SButton
-          size="large"
-          onClick={() => {
-            sessionStorage.setItem("choice", "consumer");
-            setNextPage("/consumer");
-          }}
-        >
-          i'm hungry
-        </SButton>
-        <SButton
-          size="large"
-          onClick={() => {
-            sessionStorage.setItem("choice", "vendor");
-            setNextPage("/vendorchoice");
-          }}
-        >
-          i've got food
-        </SButton>
-      </Stack>
+      <Container style={{ paddingTop: "200px" }}>
+        <Row>
+          <Col xs={4}></Col>
+          <Col xs={4}>
+            <Row className="justify-content-center engraved mb-4" style={{ fontSize: "40px" }}>
+              I am a...
+            </Row>
+          </Col>
+          <Col xs={4}></Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row className="justify-content-center">
+          <GButton
+            size="large"
+            onClick={() => {
+              setNextPage("/hero");
+            }}
+          >
+            Hero
+          </GButton>
+          <GButton
+            size="large"
+            onClick={() => {
+              setNextPage("/gamemaster");
+            }}
+          >
+            Game Master
+          </GButton>
+        </Row>
+      </Container>
     </SFadeInOut>
   );
 }

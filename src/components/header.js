@@ -4,7 +4,7 @@ import SFadeInOut from "../layouts/fade-in-out";
 import { useEffect, useState } from "react";
 import GustBar from "./gustbar";
 
-export default function SHeader() {
+export default function GHeader() {
   const navigate = useNavigate();
   // sessionStorage.setItem("loggedIn", "true");
   return (
@@ -23,10 +23,10 @@ export default function SHeader() {
                 <button
                   className="header-button"
                   onClick={() => {
-                    navigate("/player");
+                    navigate("/character");
                   }}
                   style={
-                    window.location.pathname == "/player" ? { backgroundColor: "#50db7f" } : {}
+                    window.location.pathname == "/character" ? { backgroundColor: "#50db7f" } : {}
                   }
                 >
                   <Image

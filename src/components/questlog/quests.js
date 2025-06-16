@@ -11,75 +11,9 @@ import getRandomBorder, {
 import QuestPopup from "./questPopup";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import { useQuests } from "../../hooks/useQuests";
 
-export default function Quests() {
-  let weeklyQuests = [
-    {
-      id: 1,
-      name: "A kitchen's Tale",
-      description: "Please do the dishes, clean the kitchen and take out the trash.",
-      reward: 25,
-      completed: false,
-    },
-    {
-      id: 2,
-      name: "Hungry kitties",
-      description:
-        "Go to the pet shop and pick up food for the cats and also some cat litter and some treats :)",
-      reward: 35,
-      completed: false,
-    },
-  ];
-  let todayQuests = [
-    {
-      id: 1,
-      name: "A Long Journey",
-      description: "Got to breaking class in Lamprini with your 2001 Citroen Xsara.",
-      reward: 25,
-      completed: false,
-      submitted: true,
-      proof_text: "Dishes done, kitchen cleaned, trash taken out.",
-      proof_img: "https://example.com/proof-image.jpg",
-    },
-    {
-      id: 2,
-      name: "Hungry kitties",
-      description:
-        "Go to the pet shop and pick up food for the cats and also some cat litter and some treats :)",
-      reward: 35,
-      completed: true,
-    },
-    {
-      id: 1,
-      name: "A kitchen's Tale",
-      description: "Please do the dishes, clean the kitchen and take out the trash.",
-      reward: 25,
-      completed: false,
-    },
-    {
-      id: 3,
-      name: "Hungry kitties",
-      description:
-        "Go to the pet shop and pick up food for the cats and also some cat litter and some treats :)",
-      reward: 35,
-      completed: false,
-    },
-    {
-      id: 4,
-      name: "A kitchen's Tale",
-      description: "Please do the dishes, clean the kitchen and take out the trash.",
-      reward: 25,
-      completed: false,
-    },
-    {
-      id: 5,
-      name: "Hungry kitties",
-      description:
-        "Go to the pet shop and pick up food for the cats and also some cat litter and some treats :)",
-      reward: 35,
-      completed: false,
-    },
-  ];
+export default function Quests({ todaysQuests, repeatableQuests, refreshQuests }) {
   const [currentQuest, setCurrentQuest] = useState(null);
   const [quests, setQuests] = useState([]);
   const [activeTab, setActiveTab] = useState([]);
@@ -88,26 +22,19 @@ export default function Quests() {
   const [listBorder, setListBorder] = useState({});
 
   useEffect(() => {
-    setTodayBorder(getRandomBorder());
-    setWeeklyBorder(getRandomBorder());
+    setTodayBorder(getRandomBorderSubtle());
+    setWeeklyBorder(getRandomBorderSubtle());
     setListBorder(
-      todayQuests.length > 4 ? getRandomBorderSubtleLeftSide() : getRandomBorderSubtle()
+      todaysQuests.length > 4 ? getRandomBorderSubtleLeftSide() : getRandomBorderSubtle()
     );
     setActiveTab("today");
-    setQuests(todayQuests);
-  }, []);
+    setQuests(todaysQuests);
+  }, [todaysQuests, repeatableQuests]);
 
-  quests.sort((a, b) => {
-    //submitted quest go to the bottom but above completed quests
-    if (a.completed && !b.completed) return 1; // Completed quests go to the end
-    if (!a.completed && b.completed) return -1; // Uncompleted quests stay at the top
-    if (a.submitted && !b.submitted) return 1; // Submitted quests go to the end
-    if (!a.submitted && b.submitted) return -1; // Unsubmitted quests stay at the top
-
-    return 0; // Keep the order for quests with the same completion status
-  });
-
-  function closePopup() {
+  function closePopup(refresh = false) {
+    if (refresh) {
+      refreshQuests();
+    }
     setCurrentQuest(null);
   }
 
@@ -128,7 +55,7 @@ export default function Quests() {
               style={todayBorder}
               onClick={() => {
                 setActiveTab("today");
-                setQuests(todayQuests);
+                setQuests(todaysQuests);
               }}
             >
               Today's Quests
@@ -142,10 +69,10 @@ export default function Quests() {
               style={weeklyBorder}
               onClick={() => {
                 setActiveTab("week");
-                setQuests(weeklyQuests);
+                setQuests(repeatableQuests);
               }}
             >
-              Weekly Quests
+              Repeatables
             </button>
           </Col>
         </Row>

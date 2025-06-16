@@ -9,7 +9,7 @@ export default function Gear() {
 
   const getName = () => {
     return (
-      <Container className="mb-2 my-1 gear-name">
+      <Container className="mb-2 my-1 gear-name engraved">
         <Row className="justify-content-center">Norewind</Row>
       </Container>
     );

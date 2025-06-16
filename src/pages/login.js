@@ -18,8 +18,8 @@ export default function Login() {
   const signIn = useSignIn();
 
   async function login() {
-    let response = await new AccountService().attemptLogin(email, password);
-    if (
+    // let response = await new AccountService().attemptLogin(email, password);
+    if (true/* 
       signIn({
         auth: {
           token: response.token,
@@ -30,7 +30,7 @@ export default function Login() {
           name: "React User",
           uid: 123456,
         },
-      })
+      }) */
     ) {
       setOnFadeOutEnd(() => navigate("/choice"));
       setFadeOut(true);

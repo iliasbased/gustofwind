@@ -51,7 +51,7 @@ export default function Quest({ quest, onSelectQuest }) {
         </button>
       );
     } else {
-      if (quest.proof_text || quest.proof_img) {
+      if (quest.proof_txt || quest.proof_img) {
         return (
           <button className="quest-done" style={buttonBorder}>
             Submitted
@@ -98,7 +98,7 @@ export default function Quest({ quest, onSelectQuest }) {
                 </span>
               </Col>
             </Row>
-            <Row className="mt-4">
+            <Row className="mt-3">
               <Col>{getDoneButton()}</Col>
             </Row>
           </Col>

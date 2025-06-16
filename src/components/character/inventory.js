@@ -103,12 +103,9 @@ export default function Inventory() {
   };
 
   return (
-    <Container className="inventory " style={{paddingBottom:'4px'}}>
-      <Row>
-        <Col className="align-self-center text-end">Inventory</Col>
-        <Col className="text-start">
-          <Image width="40px" src={`/assets/images/items/base/bag.png`} className="m-2" />
-        </Col>
+    <Container className="inventory" style={{paddingBottom:'4px'}}>
+      <Row className="justify-content-center my-2 pt-1">
+        I N V E N T O R Y
       </Row>
       <Row>{getHeaders()}</Row>
       <Row style={{/* overflow:'auto', */ maxHeight:'600px'}}>{getBag()}</Row>

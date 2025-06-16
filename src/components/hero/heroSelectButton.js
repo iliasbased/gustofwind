@@ -1,7 +1,7 @@
 import getRandomBorder from "../utilities";
 import { useState, useEffect, useRef } from "react";
 
-export default function GButton({ activateOnEnter, disabled, size, onClick, style, children }) {
+export default function HeroSelectButton({ hero }) {
   const [buttonStyle, setButtonStyle] = useState({});
   const buttonRef = useRef(null);
 
@@ -23,13 +23,26 @@ export default function GButton({ activateOnEnter, disabled, size, onClick, styl
 
   return (
     <button
-      ref={buttonRef}
-      className={`gustofwind-button gustofwind-button-${size}`}
-      style={{...buttonStyle, ...style}}
-      onClick={onClick}
-      disabled={disabled}
+      className="hero-select-button"
+      style={borderStyle}
+      onClick={() => {
+        setNextPage("/hero");
+      }}
     >
-      {children}
+      <Container>
+        <Row>
+          <Col xs={4}></Col>
+          <Col xs={4}>
+            <Row>{hero.name}</Row>
+            <Row>{/* gustbar */}</Row>
+          </Col>
+          <Col xs={4}>
+          <Row>
+            level
+          </Row>
+          </Col>
+        </Row>
+      </Container>
     </button>
   );
 }

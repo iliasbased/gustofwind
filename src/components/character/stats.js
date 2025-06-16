@@ -65,10 +65,10 @@ function getStatRow(statId, stats) {
   return (
     <Row className="mb-1">
       <Col xs={7} className="pe-0">
-        <Row className="justify-content-end pe-4">{stats.find((e) => e.id == statId).name}</Row>
+        <Row className="justify-content-end pe-4 engraved">{stats.find((e) => e.id == statId).name}</Row>
       </Col>
       <Col xs={5} className="ps-0">
-        <Row className="justify-content-start ps-4" style={{ fontFamily: "Impact" }}>
+        <Row className="justify-content-start ps-4 engraved" style={{ fontFamily: "Impact" }}>
           {Math.round((stats.find((e) => e.id == statId).value + Number.EPSILON) * 100) / 100}
         </Row>
       </Col>

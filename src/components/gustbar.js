@@ -6,7 +6,7 @@ export default function GustBar() {
   const [borderStyle, setBorderStyle] = React.useState({});
 
   useEffect(() => {
-    setBorderStyle(getRandomBorder());
+    setBorderStyle(getRandomBorderSubtle());
   }, []);
 
   let current = 30;
@@ -18,7 +18,7 @@ export default function GustBar() {
       <Row className="justify-content-center">
         <Col xs={6} className="align-self-center mt-1">
           <Row className="gust-bar-wrapper" style={borderStyle}>
-            <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none", ...borderStyle }}></Col>
+            <Col className="gust-bar-fill" style={{ width: `${percentage-1.3}%`, flex: "none", ...borderStyle }}></Col>
             <span className="dusty" style={{ position: "absolute", top:'-8%' }}>
               Gust
             </span>

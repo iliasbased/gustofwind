@@ -7,25 +7,40 @@ import SCentered from "../layouts/centered";
 import { Container, Row, Col } from "react-bootstrap";
 import GButton from "../components/button";
 import getRandomBorder, { getRandomBorderSubtle } from "../utilities";
+import HeroSelectionButton from "../components/hero/heroSelectButton";
+import HeroCreationPopup from "../components/hero/heroCreationPopup";
+import { useAccountPlayers } from "../hooks/useAccountPlayers";
+import HeroDeletionPopup from "../components/hero/heroDeletionPopup";
 
 export default function HeroSelection() {
+  const { players, refreshPlayers } = useAccountPlayers();
   const [borderStyle, setBorderStyle] = useState({});
   const [nextPage, setNextPage] = useState("");
+  const [showCreationPopup, setShowCreationPopup] = useState(false);
+  const [deletingHero, setDeletingHero] = useState(false);
   const navigate = useNavigate();
-
-  const heroes = [
-    {
-      name: "Norewind",
-      level: "1",
-      gust: "25",
-      weapon0: "/assets/images/items/weapons/common/training_sword.png",
-      weapon1: "/assets/images/items/weapons/common/training_sword.png",
-    },
-  ];
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
-  }, []);
+  }, [players]);
+
+  function closePopup() {
+    setShowCreationPopup(false);
+    setDeletingHero(null);
+  }
+
+  function refresh() {
+    refreshPlayers();
+  }
+
+  function onDelete(hero) {
+    setDeletingHero(hero);
+  }
+
+  function onSelectHero(hero) {
+    sessionStorage.setItem("selectedHero", JSON.stringify(hero));
+    setNextPage("/character");
+  }
 
   return (
     <SFadeInOut
@@ -34,6 +49,8 @@ export default function HeroSelection() {
       }}
       fadeOut={nextPage != ""}
     >
+      <HeroCreationPopup showPopup={showCreationPopup} closePopup={closePopup} refresh={refresh} />
+      <HeroDeletionPopup hero={deletingHero} closePopup={closePopup} refresh={refresh} />
       <Container style={{ paddingTop: "200px" }}>
         <Row>
           <Col xs={4}></Col>
@@ -50,7 +67,7 @@ export default function HeroSelection() {
             <Row
               className="justify-content-end px-5 mx-3 engraved"
               style={{ fontSize: "35px", fontFamily: "Garamond", fontWeight: "bold" }}
-            >{`${heroes.length}/3`}</Row>
+            >{`${players.length}/3`}</Row>
           </Col>
           <Col xs={4}></Col>
         </Row>
@@ -58,25 +75,20 @@ export default function HeroSelection() {
       <Container className="hero-container p-1" style={borderStyle}>
         <Row className="justify-content-center w-100 h-100">
           <Col className="align-self-start">
-            {heroes.map((hero, index) => (
-              <Row>
-                <button
-                  className="hero-select-button"
-                  style={borderStyle}
-                  onClick={() => {
-                    setNextPage("/hero");
-                  }}
-                >
-                  {hero.name}
-                </button>
+            {players.map((hero, index) => (
+              <Row key={index} className="m-1 mt-3">
+                <HeroSelectionButton hero={hero} onDelete={onDelete} onSelectHero={onSelectHero} />
               </Row>
             ))}
-            <Row>
+            <Row className="m-1 mt-2">
               <button
-                className="hero-create-button"
+                className={
+                  players.length >= 3 ? "hero-create-button-disabled" : "hero-create-button"
+                }
                 style={borderStyle}
+                disabled={players.length >= 3}
                 onClick={() => {
-                  setNextPage("/hero");
+                  setShowCreationPopup(true);
                 }}
               >
                 +

@@ -1,7 +1,6 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import Slot from "./slot";
-import { usePlayerItems } from "../../hooks/usePlayerItems";
 import { PlayerDataContext } from "../../pages/character";
 import {getRandomBorderTopOnly} from "../../utilities";
 

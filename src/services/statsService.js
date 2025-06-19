@@ -7,7 +7,8 @@ export async function fetchStats() {
 }
 
 export async function fetchPlayerStats() {
-  const res = await fetch(`${API_URL}/stats/getPlayerStats`);
+  const playerId = JSON.parse(sessionStorage.getItem("selectedHero")).id;
+  const res = await fetch(`${API_URL}/stats/getPlayerStats/${playerId}`);
   if (!res.ok) throw new Error("Failed to fetch player stats");
   return res.json();
 }

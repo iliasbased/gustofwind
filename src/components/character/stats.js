@@ -17,6 +17,18 @@ export default function Stats() {
     <Container className="stats p-0">
       <PerfectScrollbar className="perfect-scrollbar py-3">
         <Container>
+          <Row className="justify-content-center">
+            <Col>
+              <Row
+                className="justify-content-center engraved"
+                style={{ fontSize: "30px", fontFamily: "BeyondWonderland" }}
+              >
+                Level {JSON.parse(sessionStorage.getItem('selectedHero')).level}
+              </Row>
+            </Col>
+          </Row>
+          <hr />
+
           <Row>
             <Col>
               {getStatRow("str", playerStats)}
@@ -65,7 +77,9 @@ function getStatRow(statId, stats) {
   return (
     <Row className="mb-1">
       <Col xs={7} className="pe-0">
-        <Row className="justify-content-end pe-4 engraved">{stats.find((e) => e.id == statId).name}</Row>
+        <Row className="justify-content-end pe-4 engraved">
+          {stats.find((e) => e.id == statId).name}
+        </Row>
       </Col>
       <Col xs={5} className="ps-0">
         <Row className="justify-content-start ps-4 engraved" style={{ fontFamily: "Impact" }}>

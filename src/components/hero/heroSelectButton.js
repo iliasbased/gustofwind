@@ -1,24 +1,24 @@
-import getRandomBorder from "../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
 import { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Container, Row, Col } from "react-bootstrap";
+import HeroPortrait from "./heroPortrait";
 
-export default function HeroSelectButton({ hero }) {
-  const [buttonStyle, setButtonStyle] = useState({});
-  const buttonRef = useRef(null);
+export default function HeroSelectButton({ hero, onDelete, onSelectHero }) {
+  const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
-    setButtonStyle(getRandomBorder());
-
-    if (activateOnEnter) {
-      document.addEventListener("keypress", onEnterPressed);
-    }
+    setBorderStyle(getRandomBorderSubtle());
   }, []);
 
-  function onEnterPressed(e) {
-    if (buttonRef.current.disabled) return;
-
-    if (e.key === "Enter") {
-      buttonRef.current.click();
+  function getNameStyle(name) {
+    if (name.length >= 13) {
+      return { fontSize: "35px" };
+    } else if (name.length > 10) {
+      return { fontSize: "40px" };
     }
+    return {};
   }
 
   return (
@@ -26,20 +26,53 @@ export default function HeroSelectButton({ hero }) {
       className="hero-select-button"
       style={borderStyle}
       onClick={() => {
-        setNextPage("/hero");
+        onSelectHero(hero);
       }}
     >
-      <Container>
+      <Container className="h-100 pt-2">
         <Row>
-          <Col xs={4}></Col>
           <Col xs={4}>
-            <Row>{hero.name}</Row>
-            <Row>{/* gustbar */}</Row>
+            <HeroPortrait hero={hero} />
           </Col>
-          <Col xs={4}>
-          <Row>
-            level
-          </Row>
+          <Col xs={5} className="ps-4">
+            <Row className="hero-name engraved" style={getNameStyle(hero.name)}>{hero.name}</Row>
+            <Row>
+              <Container className="gust-bar ms-0 mt-2">
+                <Row className="justify-content-center">
+                  <Col xs={6} className="align-self-end w-100">
+                    <Row className="gust-bar-wrapper" style={{ height: "10px", ...borderStyle }}>
+                      <Col
+                        className="gust-bar-fill"
+                        style={{
+                          width: `${hero.gust == 0 ? 0 : (hero.gust - 1.3)}%`,
+                          flex: "none",
+                          height: "6.5px",
+                          ...borderStyle,
+                        }}
+                      ></Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </Container>
+            </Row>
+          </Col>
+          <Col xs={3}>
+            <Row className="justify-content-end pe-0">
+              <FontAwesomeIcon
+                className="hero-delete-icon"
+                icon={faTrash}
+                size="xs"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(hero);
+                }}
+              />
+            </Row>
+            <Row className="h-100">
+              <Col className="align-self-center engraved">
+                lvl <b style={{ fontSize: "55px", fontFamily: "Impact" }}>{hero.level}</b>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

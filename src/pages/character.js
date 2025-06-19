@@ -8,8 +8,6 @@ import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
 import { getRandomBorderLeftOnly } from "../utilities";
-import GHeader from "../components/header";
-import SFadeInOut from "../layouts/fade-in-out";
 
 export const PlayerDataContext = React.createContext();
 
@@ -95,7 +93,7 @@ export default function Character() {
   }
 
   return (
-    <SFadeInOut>
+    <>
       <Container style={{ paddingTop: "120px" }}>
         <Row>
           <Col xs={4}></Col>
@@ -126,6 +124,6 @@ export default function Character() {
           </Row>
         </PlayerDataContext.Provider>
       </Container>
-    </SFadeInOut>
+    </>
   );
 }

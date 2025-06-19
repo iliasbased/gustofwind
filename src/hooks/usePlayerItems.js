@@ -15,7 +15,7 @@ export function usePlayerItems() {
 
   async function fetchItems() {
     setLoading(true);
-
+    
     try {
       const data = await fetchPlayerItems();
       setPlayerItems(Array.isArray(data) ? [...data] : []);

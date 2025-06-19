@@ -395,7 +395,7 @@ input[type="submit"],
   align-items: center;
   margin: 0;
   padding: 0;
-  cursor: url("cursors/cursor-pointer.png"), pointer;
+  cursor: url("cursors/cursor-door.png"), pointer;
 }
 
 .adventure-popup {
@@ -942,6 +942,7 @@ input[type="submit"],
   overflow: hidden;
   margin: 2px;
   box-shadow: inset rgba(255, 255, 255, 0.445) 0px 0px 15px, rgba(71, 233, 245, 0.35) 5px 0px 25px;
+  padding: 0;
 }
 
 .gust-bar-value {
@@ -968,13 +969,24 @@ input[type="submit"],
 }
 
 .hero-create-button {
-  background: #d8beb30e;
+  background: radial-gradient(circle, #32d60934 0%, #268d070e 100%);
   height: 60px;
   border: 0;
   color: #dbdbdb;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   font-size: 40px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  opacity: 0.5;
+}
+
+.hero-create-button-disabled {
+  background: radial-gradient(circle, #d6092434 0%, #8d071d0e 100%);
+  height: 60px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 40px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   opacity: 0.5;
 }
 
@@ -984,12 +996,235 @@ input[type="submit"],
 }
 
 .hero-select-button {
-  background: #cc4e1c0e;
+  background: radial-gradient(circle, #be684634 0%, #cc4e1c0e 100%);
   height: 120px;
   border: 0;
   color: #dbdbdb;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   font-size: 20px;
+  padding: 0;
+}
+
+.hero-select-button:hover {
+  filter: brightness(1.2);
+}
+
+.hero-name {
+  font-size: 40px;
+  color: #dbdbdb;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.hero-delete-icon {
+  width: auto;
+  color: #d25c4f;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-delete-icon:hover {
+  filter: brightness(1.2);
+}
+
+.hero-portrait {
+  border: 2px solid #282c34;
+  width: 110px;
+  box-shadow: rgba(194, 134, 66, 0.25) 0px 0px 10px;
+}
+
+.hero-portrait-name {
+  font-family: "Calibri";
+  font-weight: bold;
+  color: #ffffffb6;
+  background-color: rgba(82, 73, 71, 1);
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.685) 0px 1px 1px;
+  padding-left: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  position: relative;
+}
+
+.hero-portrait-weapons {
+  background: radial-gradient(circle, rgba(140, 130, 129, 1) 0%, rgba(82, 73, 71, 1) 100%);
+  box-shadow: inset rgba(0, 0, 0, 0.3) 0px -5px 15px;
+  height: 67px;
+  z-index: 50;
+}
+
+.hero-portrait-image {
+  width: 32px;
+}
+
+.hero-creation-popup {
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  background: radial-gradient(circle, #2e2a29 0%, #282c34 100%);
+  top: 30%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 600px;
+  height: 400px;
+  box-shadow: rgba(194, 134, 66, 0.2) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 2px solid #161311;
+  z-index: 1000;
+}
+
+.hero-creation-text {
+  font-size: 40px;
+  text-align: center;
+  color: #dbdbdb;
+}
+
+.hero-creation-input {
+  width: 500px;
+  height: 50px;
+  font-family: "Calibri";
+  box-shadow: rgba(194, 134, 66, 0.3) 0px 0px 30px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 0;
+}
+
+.hero-creation-input:focus {
+  outline: none;
+}
+
+.hero-creation-button {
+  /* background: radial-gradient(circle, #be684634 0%, #cc4e1c0e 100%);
+   */
+  background: radial-gradient(circle, #32d60934 0%, #268d070e 100%);
+
+  height: 60px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  padding: 0;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-creation-button:hover {
+  filter: brightness(1.2);
+}
+
+.hero-creation-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.hero-creation-dropdown {
+  background: radial-gradient(circle, #be684634 0%, #cc4e1c0e 100%);
+  height: 60px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 17px;
+  padding: 10px;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-creation-dropdown-menu {
+  border: 0;
+  border-radius: 0%;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 15px;
+  padding: 10px;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-creation-dropdown:hover {
+  filter: brightness(1.2);
+}
+
+.hero-deletion-no {
+  background: radial-gradient(circle, #d6092434 0%, #8d071d0e 100%);
+  height: 120px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  padding: 0;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-deletion-no:hover {
+  filter: brightness(1.2);
+}
+
+.hero-deletion-yes {
+  background: radial-gradient(circle, #32d60934 0%, #268d070e 100%);
+  height: 120px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  padding: 0;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-deletion-yes:hover {
+  filter: brightness(1.2);
+}
+
+.hero-deletion-input {
+  width: 500px;
+  height: 50px;
+  font-family: "Calibri";
+  box-shadow: rgba(194, 66, 66, 0.2) 0px 0px 30px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 0;
+}
+
+.hero-deletion-input:focus {
+  outline: none;
+}
+
+.hero-deletion-delete {
+  background: radial-gradient(circle, #d6092434 0%, #8d071d0e 100%);
+  height: 60px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  padding: 0;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-deletion-delete:hover {
+  filter: brightness(1.2);
+}
+
+.hero-deletion-delete-disabled {
+  background: radial-gradient(circle, #d6092434 0%, #8d071d0e 100%);
+  opacity: 0.3;
+  height: 60px;
+  width: 200px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+  padding: 0;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.hero-deletion-popup {
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  background: radial-gradient(circle, #2e2a29 0%, #282c34 100%);
+  top: 30%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 600px;
+  height: 400px;
+  box-shadow: rgba(194, 66, 66, 0.2) 0px 0px 30px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 2px solid #161311;
+  z-index: 1000;
 }
 
 /*-------------------------------------------------------------------------*/

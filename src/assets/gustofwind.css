@@ -1134,6 +1134,10 @@ input[type="submit"],
   cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
+.hero-creation-dropdown-item {
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
 .hero-creation-dropdown:hover {
   filter: brightness(1.2);
 }

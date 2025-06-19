@@ -111,7 +111,11 @@ export default function HeroCreationPopup({ showPopup, closePopup, refresh }) {
 
               <Dropdown.Menu className="hero-creation-dropdown-menu">
                 {weapons.map((weapon) => (
-                  <Dropdown.Item key={weapon.id} onClick={() => setSelectedWeapon(weapon)}>
+                  <Dropdown.Item
+                    key={weapon.id}
+                    onClick={() => setSelectedWeapon(weapon)}
+                    className="hero-creation-dropdown-item"
+                  >
                     <div className="d-flex align-items-center">
                       <Image src={weapon.icon} width={24} height={24} className="me-2" />
                       {weapon.name}
@@ -166,7 +170,7 @@ export default function HeroCreationPopup({ showPopup, closePopup, refresh }) {
               style={{ width: "340px", ...borderStyle }}
               onClick={async () => {
                 await createPlayer(name, selectedWeapon.id);
-                await refresh()
+                await refresh();
                 exitPopup();
               }}
             >

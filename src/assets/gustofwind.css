@@ -1029,7 +1029,7 @@ input[type="submit"],
 .hero-portrait {
   border: 2px solid #282c34;
   width: 110px;
-  box-shadow: rgba(194, 134, 66, 0.25) 0px 0px 10px;
+  box-shadow: rgba(194, 134, 66, 0.25) 0px 0px 20px;
 }
 
 .hero-portrait-name {

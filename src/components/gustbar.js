@@ -17,8 +17,8 @@ export default function GustBar() {
   }
 
   return (
-    <Container className="gust-bar mt-2">
-      <Row className="justify-content-center">
+    <Container className="gust-bar mt-3">
+      <Row className="justify-content-start">
         <Col xs={6} className="align-self-center mt-1">
           <Row className="gust-bar-wrapper" style={borderStyle}>
             <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none", ...borderStyle }}></Col>

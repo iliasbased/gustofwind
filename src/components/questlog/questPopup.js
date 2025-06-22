@@ -21,7 +21,7 @@ export default function QuestPopup({ quest, closePopup }) {
     setClearStyle(getRandomBorder());
     function handleKeyDown(e) {
       if (e.key === "Escape") {
-        closePopup();
+        closePopup(false);
       }
     }
     window.addEventListener("keydown", handleKeyDown);
@@ -39,7 +39,7 @@ export default function QuestPopup({ quest, closePopup }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={closePopup} />
+      <div className="popup-overlay" onClick={()=>{closePopup(false)}} />
       <Container className="quest-popup p-3" style={borderStyle}>
         <Row className="px-3 justify-content-left engraved" style={{ fontSize: "30px" }}>
           {quest.name}

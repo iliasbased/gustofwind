@@ -49,6 +49,22 @@ export function getRandomBorderTopOnly() {
   };
 }
 
+export function getRandomBorderBottomOnly() {
+  function getRandomBool() {
+    return Math.random() < 0.5;
+  }
+  let topLeft = getRandomBool();
+  let topRight = getRandomBool();
+
+  const borderBottomLeftRadius = !topLeft ? "225px 15px" : "15px 225px";
+  const borderBottomRightRadius = !topRight ? "225px 15px" : "15px 225px";
+
+  return {
+    borderBottomLeftRadius: borderBottomLeftRadius,
+    borderBottomRightRadius: borderBottomRightRadius,
+  };
+}
+
 export function getRandomBorderTopOnlySubtle() {
   function getRandomBool() {
     return Math.random() < 0.5;

@@ -42,7 +42,7 @@ export default function Tavern() {
               T a v e r n
             </Row>
           </Col>
-          <Col xs={5} className="adventures-bg ">
+          <Col xs={5} className="adventures-bg " style={{pointerEvents: "none"  }}>
             <Container style={{ overflowY: "auto", height: "100%" }}>
               {availableAdventures.map((adventure) => (
                 <Row

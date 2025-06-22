@@ -3,10 +3,26 @@ import { Container, Row, Col, Image, ProgressBar } from "react-bootstrap";
 import SFadeInOut from "../layouts/fade-in-out";
 import { useEffect, useState } from "react";
 import GustBar from "./gustbar";
+import Menu from "./menu";
+import { getRandomBorderBottomOnly } from "../utilities";
 
 export default function GHeader() {
   const navigate = useNavigate();
+  const [characterBorder, setCharacterBorder] = useState({});
+  const [questLogBorder, setQuestLogBorder] = useState({});
+  const [skillBookBorder, setSkillBookBorder] = useState({});
+  const [tavernBorder, setTavernBorder] = useState({});
+  const [craftingBorder, setCraftingBorder] = useState({});
+
   // sessionStorage.setItem("loggedIn", "true");
+  useEffect(() => {
+    setCharacterBorder(getRandomBorderBottomOnly());
+    setQuestLogBorder(getRandomBorderBottomOnly());
+    setSkillBookBorder(getRandomBorderBottomOnly());
+    setTavernBorder(getRandomBorderBottomOnly());
+    setCraftingBorder(getRandomBorderBottomOnly());
+  }, []);
+
   return (
     <SFadeInOut fadeOut={window.location.pathname == "/"}>
       <Container
@@ -21,13 +37,15 @@ export default function GHeader() {
             <Container>
               <Row className="justify-content-center">
                 <button
-                  className="header-button"
+                  className={
+                    window.location.pathname == "/character"
+                      ? "header-button-active"
+                      : "header-button"
+                  }
                   onClick={() => {
                     navigate("/character");
                   }}
-                  style={
-                    window.location.pathname == "/character" ? { backgroundColor: "#50db7f" } : {}
-                  }
+                  style={characterBorder}
                 >
                   <Image
                     width="35px"
@@ -36,13 +54,15 @@ export default function GHeader() {
                   />
                 </button>
                 <button
-                  className="header-button"
+                  className={
+                    window.location.pathname == "/questlog"
+                      ? "header-button-active"
+                      : "header-button"
+                  }
                   onClick={() => {
                     navigate("/questlog");
                   }}
-                  style={
-                    window.location.pathname == "/questlog" ? { backgroundColor: "#50db7f" } : {}
-                  }
+                  style={questLogBorder}
                 >
                   <Image
                     width="35px"
@@ -51,13 +71,15 @@ export default function GHeader() {
                   />
                 </button>
                 <button
-                  className="header-button"
+                  className={
+                    window.location.pathname == "/skillbook"
+                      ? "header-button-active"
+                      : "header-button"
+                  }
                   onClick={() => {
                     navigate("/skillbook");
                   }}
-                  style={
-                    window.location.pathname == "/skillbook" ? { backgroundColor: "#50db7f" } : {}
-                  }
+                  style={skillBookBorder}
                 >
                   <Image
                     width="35px"
@@ -66,13 +88,13 @@ export default function GHeader() {
                   />
                 </button>
                 <button
-                  className="header-button"
+                  className={
+                    window.location.pathname == "/tavern" ? "header-button-active" : "header-button"
+                  }
                   onClick={() => {
                     navigate("/tavern");
                   }}
-                  style={
-                    window.location.pathname == "/tavern" ? { backgroundColor: "#50db7f" } : {}
-                  }
+                  style={tavernBorder}
                 >
                   <Image
                     width="35px"
@@ -81,13 +103,15 @@ export default function GHeader() {
                   />
                 </button>
                 <button
-                  className="header-button"
+                  className={
+                    window.location.pathname == "/crafting"
+                      ? "header-button-active"
+                      : "header-button"
+                  }
                   onClick={() => {
                     navigate("/crafting");
                   }}
-                  style={
-                    window.location.pathname == "/crafting" ? { backgroundColor: "#50db7f" } : {}
-                  }
+                  style={craftingBorder}
                 >
                   <Image
                     width="35px"
@@ -98,9 +122,10 @@ export default function GHeader() {
               </Row>
             </Container>
           </Col>
-          <Col></Col>
+          <Col className="pe-0"></Col>
         </Row>
       </Container>
+      <Menu />
     </SFadeInOut>
   );
 }

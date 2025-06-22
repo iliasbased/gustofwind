@@ -10,7 +10,7 @@ export default function Adventure({ adventure, onClickToEnter }) {
 
 
   return (
-    <Container className="adventure-container" style={{ color: textColor }}>
+    <Container className="adventure-container" style={{ color: textColor, pointerEvents: 'none' }}>
       <Row className="adventure-name">
         <Col xs={5}></Col>
         <Col xs={7}>
@@ -23,7 +23,7 @@ export default function Adventure({ adventure, onClickToEnter }) {
       </Row>
       <Row>
         <Col xs={5}></Col>
-        <Col xs={7}>
+        <Col xs={7} style={{pointerEvents: 'auto'}}>
           <Image
             className="adventure-image"
             width="100%"

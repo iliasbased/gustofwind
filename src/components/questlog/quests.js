@@ -13,23 +13,23 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { useQuests } from "../../hooks/useQuests";
 
-export default function Quests({ todaysQuests, repeatableQuests, refreshQuests }) {
+export default function Quests({ todaysQuests, dailyQuests, refreshQuests }) {
   const [currentQuest, setCurrentQuest] = useState(null);
   const [quests, setQuests] = useState([]);
   const [activeTab, setActiveTab] = useState([]);
   const [todayBorder, setTodayBorder] = useState({});
-  const [weeklyBorder, setWeeklyBorder] = useState({});
+  const [dailyBorder, setDailyBorder] = useState({});
   const [listBorder, setListBorder] = useState({});
 
   useEffect(() => {
     setTodayBorder(getRandomBorderSubtle());
-    setWeeklyBorder(getRandomBorderSubtle());
+    setDailyBorder(getRandomBorderSubtle());
     setListBorder(
       todaysQuests.length > 4 ? getRandomBorderSubtleLeftSide() : getRandomBorderSubtle()
     );
     setActiveTab("today");
     setQuests(todaysQuests);
-  }, [todaysQuests, repeatableQuests]);
+  }, [todaysQuests, dailyQuests]);
 
   function closePopup(refresh = false) {
     if (refresh) {
@@ -64,15 +64,15 @@ export default function Quests({ todaysQuests, repeatableQuests, refreshQuests }
           <Col>
             <button
               className={
-                activeTab == "week" ? "quest-button-active engraved" : "quest-button engraved"
+                activeTab == "daily" ? "quest-button-active engraved" : "quest-button engraved"
               }
-              style={weeklyBorder}
+              style={dailyBorder}
               onClick={() => {
-                setActiveTab("week");
-                setQuests(repeatableQuests);
+                setActiveTab("daily");
+                setQuests(dailyQuests);
               }}
             >
-              Repeatables
+              Dailies
             </button>
           </Col>
         </Row>

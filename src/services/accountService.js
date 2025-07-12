@@ -18,3 +18,9 @@ export async function deletePlayer(heroId) {
   return res.json();
 }
 
+export async function fetchAccountGamemasters() {
+  const res = await fetch(`${API_URL}/account/getAccountGamemasters/`);
+  if (!res.ok) throw new Error("Failed to fetch gamemasters");
+  return res.json();
+}
+

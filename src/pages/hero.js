@@ -66,7 +66,7 @@ export default function HeroSelection() {
           <Col xs={4}>
             <Row
               className="justify-content-end px-5 mx-3 engraved"
-              style={{ fontSize: "35px", fontFamily: "Garamond", fontWeight: "bold" }}
+              style={{ fontSize: "25px", fontFamily: "Garamond", fontWeight: "bold" }}
             >{`${players.length}/3`}</Row>
           </Col>
           <Col xs={4}></Col>

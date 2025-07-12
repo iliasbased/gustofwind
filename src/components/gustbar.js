@@ -9,7 +9,7 @@ export default function GustBar() {
     setBorderStyle(getRandomBorderSubtle());
   }, []);
 
-  let current = 0;
+  let current = 25;
   let max = 100;
   let percentage = Math.min((current / max) * 100, 100) -1.3;
   if (percentage < 0) {

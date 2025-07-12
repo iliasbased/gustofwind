@@ -14,7 +14,7 @@ export default function GHeader() {
   const [tavernBorder, setTavernBorder] = useState({});
   const [craftingBorder, setCraftingBorder] = useState({});
 
-  // sessionStorage.setItem("loggedIn", "true");
+  sessionStorage.setItem("loggedIn", "true");
   useEffect(() => {
     setCharacterBorder(getRandomBorderBottomOnly());
     setQuestLogBorder(getRandomBorderBottomOnly());

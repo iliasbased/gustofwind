@@ -29,7 +29,7 @@ export default function QuestLog() {
           <Col>
             <Quests
               todaysQuests={quests.filter((q) => q.repeatable == "0")}
-              repeatableQuests={quests.filter((q) => q.repeatable == "1")}
+              dailyQuests={quests.filter((q) => q.repeatable == "1")}
               refreshQuests={() => refreshQuests()}
             />
           </Col>

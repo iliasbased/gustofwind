@@ -35,7 +35,9 @@ export default function HeroSelectButton({ hero, onDelete, onSelectHero }) {
             <HeroPortrait hero={hero} />
           </Col>
           <Col xs={5} className="ps-4">
-            <Row className="hero-name engraved" style={getNameStyle(hero.name)}>{hero.name}</Row>
+            <Row className="hero-name engraved" style={getNameStyle(hero.name)}>
+              {hero.name}
+            </Row>
             <Row>
               <Container className="gust-bar ms-0 mt-2">
                 <Row className="justify-content-center">
@@ -44,7 +46,7 @@ export default function HeroSelectButton({ hero, onDelete, onSelectHero }) {
                       <Col
                         className="gust-bar-fill"
                         style={{
-                          width: `${hero.gust == 0 ? 0 : (hero.gust - 1.3)}%`,
+                          width: `${hero.gust == 0 ? 0 : hero.gust - 1.3}%`,
                           flex: "none",
                           height: "6.5px",
                           ...borderStyle,
@@ -58,15 +60,17 @@ export default function HeroSelectButton({ hero, onDelete, onSelectHero }) {
           </Col>
           <Col xs={3}>
             <Row className="justify-content-end pe-0">
-              <FontAwesomeIcon
-                className="hero-delete-icon"
-                icon={faTrash}
-                size="xs"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete(hero);
-                }}
-              />
+              {onDelete ? (
+                <FontAwesomeIcon
+                  className="hero-delete-icon"
+                  icon={faTrash}
+                  size="xs"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(hero);
+                  }}
+                />
+              ) : null}
             </Row>
             <Row className="h-100">
               <Col className="align-self-center engraved">

@@ -18,9 +18,11 @@ import GMDeletionPopup from "../components/gamemaster/gmDeletionPopup";
 import { useGamemaster } from "../context/gmContext";
 import HeroSelectButton from "../components/hero/heroSelectButton";
 import PlayerSearch from "../components/gamemaster/playerSearch";
+import { useHero } from "../context/heroContext";
 
 export default function GMPlayers() {
   const { gamemaster, selectGMPlayer } = useGamemaster();
+  const { clearHero } = useHero();
 
   const [borderStyle, setBorderStyle] = useState({});
   const [nextPage, setNextPage] = useState("");
@@ -28,7 +30,9 @@ export default function GMPlayers() {
   const [deletingGM, setDeletingGM] = useState(false);
   const navigate = useNavigate();
 
+
   useEffect(() => {
+    clearHero();
     if (gamemaster.players.length > 3) {
       setBorderStyle(getRandomBorderSubtleLeftSide());
     } else {
@@ -64,7 +68,7 @@ export default function GMPlayers() {
           <Col xs={4}></Col>
           <Col xs={4}>
             <Row className="justify-content-center engraved mb-4" style={{ fontSize: "40px" }}>
-              {gamemaster.name}'s puppets
+              {gamemaster.name}'s Players
             </Row>
           </Col>
           <Col xs={4}></Col>

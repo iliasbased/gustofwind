@@ -32,4 +32,10 @@ export async function submitQuestProof(questId, proofTxt, proofImg) {
   return res.json();
 }
 
+export async function fetchGamemasterQuests() {
+  const res = await fetch(`${API_URL}/quests/getGamemasterQuests/`);
+  // if (!res.ok) throw new Error("Failed to fetch quests");
+  return res.json();
+}
+
 

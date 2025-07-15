@@ -268,6 +268,19 @@ input[type="submit"],
   filter: brightness(1.2);
 }
 
+.gustofwind-back-button {
+  background: none;
+  color: rgba(255, 255, 255, 0.822);
+  border: none;
+  font-size: 30px;
+  z-index: 1000;
+  position: relative;
+}
+
+.gustofwind-back-button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
 .gustofwind-login {
   width: fit-content !important ;
 }
@@ -457,7 +470,7 @@ input[type="submit"],
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   border: 0;
   font-size: 35px;
-  opacity: 0.5;
+  opacity: 0.7;
   background-color: #282c34;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.2s ease-in-out;
@@ -997,7 +1010,6 @@ input[type="submit"],
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   opacity: 0.5;
   cursor: url("cursors/cursor-default.png"), auto !important;
-
 }
 
 .hero-create-button:hover {
@@ -1133,7 +1145,7 @@ input[type="submit"],
   font-size: 17px;
   padding: 10px;
   cursor: url("cursors/cursor-pointer.png"), pointer;
-  font-family: 'Calibri';
+  font-family: "Calibri";
 }
 
 .hero-creation-dropdown-menu {
@@ -1146,7 +1158,7 @@ input[type="submit"],
 }
 
 .hero-creation-dropdown-item {
-  font-family: 'Calibri';
+  font-family: "Calibri";
   cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
@@ -1241,7 +1253,7 @@ input[type="submit"],
   box-shadow: rgba(194, 66, 66, 0.2) 0px 0px 30px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
   border: 2px solid #161311;
   z-index: 1000;
-  font-family: 'AppleGaramond-Light';
+  font-family: "AppleGaramond-Light";
 }
 
 .menu {
@@ -1319,13 +1331,108 @@ input[type="submit"],
 .gm-player {
   text-align: left;
   font-size: 15px;
-  font-family: 'Calibri';
+  font-family: "Calibri";
 }
 
 .gm-players-container {
   overflow-y: auto;
   scrollbar-color: #3d4554 #282c34;
   scrollbar-width: thin;
+}
+
+.gm-player-container {
+  background: #698fa093;
+  box-shadow: inset rgba(37, 37, 37, 1) 0px 0px 500px, rgba(193, 199, 103, 0.2) 0px 0px 15px;
+}
+
+.gm-player-quests-container {
+  box-shadow: inset rgba(37, 37, 37, 1) 0px 0px 150px, rgba(37, 37, 37, 0.5) 0px 0px 15px,
+    inset rgba(37, 37, 37, 0.5) 0px 0px 15px;
+  background: #edeff3c7;
+}
+
+.gm-quest {
+  background-color: rgba(40, 44, 52, 0.7);
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 100;
+}
+
+.gm-quest-completed {
+  background-color: rgba(123, 189, 76, 0.7);
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 100;
+  opacity: 0.7;
+}
+
+.gm-quest-submitted {
+  background-color: rgba(192, 117, 74, 0.7);
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 100;
+}
+
+.quest-remove-button {
+  background: rgb(230, 109, 96);
+  width: 40px;
+  border: 0;
+  color: #dbdbdb;
+  margin-left: -24px;
+  font-family: "Impact";
+  font-size: 35px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 1;
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.quest-remove-button:hover {
+  width: 80px;
+  filter: brightness(1.1);
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.quest-add-button {
+  background: rgb(71, 170, 95);
+  width: 40px;
+  border: 0;
+  color: #dbdbdb;
+  margin-right: -24px;
+  font-family: "Impact";
+  font-size: 35px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  z-index: 1;
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  border-radius: 20px 0px 0px 20px;
+}
+
+.quest-add-button:hover {
+  width: 70px;
+  filter: brightness(1.1);
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.add-quest-button {
+  width: 200px;
+  border: 0;
+  background: rgb(71, 170, 95);
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 30px;
+}
+
+.add-quest-button:hover {
+  filter: brightness(1.1);
+  cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
 /*-------------------------------------------------------------------------*/

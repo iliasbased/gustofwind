@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchQuests } from "../services/questService";
+import { fetchGamemasterQuests } from "../services/questService";
 
-export function useQuests() {
+export function useGMQuests() {
   const [quests, setQuests] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,11 +17,11 @@ export function useQuests() {
     setLoading(true);
 
     try {
-      const data = await fetchQuests();
+      const data = await fetchGamemasterQuests();
       setQuests(Array.isArray(data) ? [...data] : []);
       setLoading(false);
     } catch (error) {
-      console.error("Failed to fetch quests:", error);
+      console.error("Failed to fetch gm quests:", error);
       setLoading(false);
     }
   }

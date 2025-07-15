@@ -17,15 +17,16 @@ import QuestLog from "./pages/questlog";
 import Character from "./pages/character";
 import HeroSelection from "./pages/hero";
 import GMPlayers from "./pages/gmplayers";
+import GMPlayer from "./pages/gmplayer";
 import { GamemasterProvider } from "./context/gmContext";
 import { HeroProvider } from "./context/heroContext";
 
 export default function GustOfWind() {
   return (
     <div className="fixed-app">
-      <GHeader />
       <GamemasterProvider>
         <HeroProvider>
+          <GHeader />
           <Routes>
             <Route path="/" element={<Intro />} />
             <Route path="/login" element={<Login />} />
@@ -34,6 +35,7 @@ export default function GustOfWind() {
             <Route path="/choice" element={<Choice />} />
             <Route path="/gamemaster" element={<GameMaster />} />
             <Route path="/gmplayers" element={<GMPlayers />} />
+            <Route path="/gmplayer" element={<GMPlayer />} />
             <Route path="/hero" element={<HeroSelection />} />
             <Route path="/character" element={<Character />} />
             <Route path="/tavern" element={<Tavern />} />

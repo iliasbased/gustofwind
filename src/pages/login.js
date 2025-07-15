@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SFadeInOut from "../layouts/fade-in-out";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
@@ -7,12 +7,22 @@ import SInput from "../components/input";
 import AccountService from "../services/account-service";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import SCentered from "../layouts/centered";
+import { useHero } from "../context/heroContext";
+import { useGamemaster } from "../context/gmContext";
 
 export default function Login() {
   const [fadeOut, setFadeOut] = useState(false);
   const [onFadeOutEnd, setOnFadeOutEnd] = useState(() => {});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { clearHero } = useHero();
+  const { clearGamemaster } = useGamemaster();  
+  
+  useEffect(() => {
+    clearHero();
+    clearGamemaster();
+  }, []);
 
   const navigate = useNavigate();
   const signIn = useSignIn();

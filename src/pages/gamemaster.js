@@ -12,9 +12,13 @@ import GMCreationPopup from "../components/gamemaster/gmCreationPopup";
 import { useAccountGamemasters } from "../hooks/useAccountGamemasters";
 import GMSelectButton from "../components/gamemaster/gmSelectButton";
 import GMDeletionPopup from "../components/gamemaster/gmDeletionPopup";
+import { useHero } from "../context/heroContext";
+import { useGamemaster } from "../context/gmContext";
 
 export default function GamemasterSelection() {
   const { gamemasters, refreshGamemasters } = useAccountGamemasters();
+  const { clearHero } = useHero();
+  const { selectGamemaster } = useGamemaster();
 
   const [borderStyle, setBorderStyle] = useState({});
   const [nextPage, setNextPage] = useState("");
@@ -24,6 +28,7 @@ export default function GamemasterSelection() {
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
+    clearHero();
   }, []);
 
   function closePopup() {
@@ -40,7 +45,7 @@ export default function GamemasterSelection() {
   }
 
   function onSelectGamemaster(gamemaster) {
-    sessionStorage.setItem("selectedGM", JSON.stringify(gamemaster));
+    selectGamemaster(gamemaster);
     setNextPage("/gmplayers");
   }
 

@@ -18,6 +18,21 @@ export default function getRandomBorder() {
   };
 }
 
+export function getRandomBorderRightOnly() {
+  function getRandomBool() {
+    return Math.random() < 0.5;
+  }
+  let topRight = getRandomBool();
+
+  const borderTopRightRadius = topRight ? "225px 15px" : "15px 225px";
+  const borderBottomRightRadius = !topRight ? "225px 15px" : "15px 225px";
+
+  return {
+    borderTopRightRadius: borderTopRightRadius,
+    borderBottomRightRadius: borderBottomRightRadius,
+  };
+}
+
 export function getRandomBorderLeftOnly() {
   function getRandomBool() {
     return Math.random() < 0.5;

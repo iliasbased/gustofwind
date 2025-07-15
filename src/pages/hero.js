@@ -11,8 +11,11 @@ import HeroSelectionButton from "../components/hero/heroSelectButton";
 import HeroCreationPopup from "../components/hero/heroCreationPopup";
 import { useAccountPlayers } from "../hooks/useAccountPlayers";
 import HeroDeletionPopup from "../components/hero/heroDeletionPopup";
+import { useHero } from "../context/heroContext";
 
 export default function HeroSelection() {
+  const { selectHero, clearHero } = useHero();
+
   const { players, refreshPlayers } = useAccountPlayers();
   const [borderStyle, setBorderStyle] = useState({});
   const [nextPage, setNextPage] = useState("");
@@ -22,6 +25,7 @@ export default function HeroSelection() {
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
+    clearHero();
   }, [players]);
 
   function closePopup() {
@@ -38,7 +42,7 @@ export default function HeroSelection() {
   }
 
   function onSelectHero(hero) {
-    sessionStorage.setItem("selectedHero", JSON.stringify(hero));
+    selectHero(hero);
     setNextPage("/character");
   }
 

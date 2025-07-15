@@ -6,10 +6,17 @@ import SFadeInOut from "../layouts/fade-in-out";
 import SCentered from "../layouts/centered";
 import { Container, Row, Col } from "react-bootstrap";
 import GButton from "../components/button";
+import { useHero } from "../context/heroContext";
 
 export default function Choice() {
   const [nextPage, setNextPage] = useState("");
   const navigate = useNavigate();
+
+  const { clearHero } = useHero();
+
+  useEffect(() => {
+    clearHero();
+  }, []);
 
   return (
     <SFadeInOut

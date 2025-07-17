@@ -1,52 +1,69 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "react-bootstrap";
-import SButton from "../components/button";
 import SFadeInOut from "../layouts/fade-in-out";
-import SCentered from "../layouts/centered";
 import { Container, Row, Col } from "react-bootstrap";
-import GButton from "../components/button";
-import getRandomBorder, {
-  getRandomBorderSubtle,
-  getRandomBorderSubtleLeftSide,
-} from "../utilities";
-import HeroSelectionButton from "../components/hero/heroSelectButton";
-import GMCreationPopup from "../components/gamemaster/gmCreationPopup";
-import { useAccountGamemasters } from "../hooks/useAccountGamemasters";
-import GMSelectButton from "../components/gamemaster/gmSelectButton";
-import GMDeletionPopup from "../components/gamemaster/gmDeletionPopup";
+import { getRandomBorderSubtle } from "../utilities";
 import { useGamemaster } from "../context/gmContext";
-import HeroSelectButton from "../components/hero/heroSelectButton";
-import PlayerSearch from "../components/gamemaster/playerSearch";
-import BackButton from "../components/backButton";
 import HeroPortrait from "../components/hero/heroPortrait";
 import GMPlayerQuests from "../components/gamemaster/gmPlayerQuests";
 import GMQuests from "../components/gamemaster/gmQuests";
+import QuestCreatePopup from "../components/gamemaster/questCreatePopup";
+import { useGMQuests } from "../hooks/useGMQuests";
+import { useQuests } from "../hooks/useQuests";
+import QuestEditPopup from "../components/gamemaster/questEditPopup";
+import QuestDeletePopup from "../components/gamemaster/questDeletePopup";
+import QuestAssignPopup from "../components/gamemaster/questAssignPopup";
+import QuestRemovePopup from "../components/gamemaster/questRemovePopup";
 
 export default function GMPlayer() {
-  const { gamemaster, gmPlayer } = useGamemaster();
-
+  const { gmPlayer } = useGamemaster();
+  const { quests, refreshQuests } = useQuests();
+  const { gmQuests, refreshGmQuests } = useGMQuests();
   const [borderStyle, setBorderStyle] = useState({});
   const [nextPage, setNextPage] = useState("");
-  const [showCreationPopup, setShowCreationPopup] = useState(false);
-  const [deletingGM, setDeletingGM] = useState(false);
+  const [showCreateQuest, setShowCreateQuest] = useState(false);
+  const [questEdited, setQuestEdited] = useState(null);
+  const [questDeleted, setQuestDeleted] = useState(null);
+  const [questAssigned, setQuestAssigned] = useState(null);
+  const [questRemoved, setQuestRemoved] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
   }, []);
 
-  function closePopup() {
-    setShowCreationPopup(false);
-    setDeletingGM(null);
+  function onNewQuest() {
+    setShowCreateQuest(true);
   }
 
-  function refresh() {
-    // refreshPlayers();
+  function onEditQuest(quest) {
+    setQuestEdited(quest);
   }
 
-  function onSelectHero(hero) {
-    setNextPage("/gmplayer");
+  function onDeleteQuest(quest) {
+    setQuestDeleted(quest);
+  }
+
+  function onAssignQuest(quest) {
+    setQuestAssigned(quest);
+  }
+  
+  function onRemoveQuest(quest) {
+    setQuestRemoved(quest);
+  }
+
+  function closePopup(refresh = false) {
+    setShowCreateQuest(false);
+    setQuestEdited(null);
+    setQuestDeleted(null);
+    setQuestAssigned(null);
+    setQuestRemoved(null);
+
+    if (refresh) {
+      refreshQuests();
+      refreshGmQuests();
+    }
   }
 
   return (
@@ -56,6 +73,11 @@ export default function GMPlayer() {
       }}
       fadeOut={nextPage != ""}
     >
+      <QuestCreatePopup show={showCreateQuest} closePopup={closePopup} />
+      <QuestEditPopup quest={questEdited} closePopup={closePopup} />
+      <QuestDeletePopup quest={questDeleted} closePopup={closePopup} />
+      <QuestAssignPopup quest={questAssigned} player={gmPlayer} closePopup={closePopup} />
+      <QuestRemovePopup quest={questRemoved} player={gmPlayer} closePopup={closePopup} />
       <Container>
         <Row>
           <Col xs={4}></Col>
@@ -93,8 +115,7 @@ export default function GMPlayer() {
                 <Col xs={3}>
                   <Row className="h-100">
                     <Col className="align-self-center engraved ps-5">
-                        lvl{" "}
-                        <b style={{ fontSize: "55px", fontFamily: "Impact" }}>{gmPlayer.level}</b>
+                      lvl <b style={{ fontSize: "55px", fontFamily: "Impact" }}>{gmPlayer.level}</b>
                     </Col>
                   </Row>
                 </Col>
@@ -105,10 +126,16 @@ export default function GMPlayer() {
         </Row>
         <Row className="m-5">
           <Col>
-            <GMPlayerQuests player={gmPlayer}/>
+            <GMPlayerQuests quests={quests} player={gmPlayer} onRemoveQuest={onRemoveQuest}/>
           </Col>
           <Col>
-            <GMQuests />
+            <GMQuests
+              quests={gmQuests}
+              onNewQuest={onNewQuest}
+              onEditQuest={onEditQuest}
+              onDeleteQuest={onDeleteQuest}
+              onAssignQuest={onAssignQuest}
+            />
           </Col>
         </Row>
       </Container>

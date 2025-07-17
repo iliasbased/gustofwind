@@ -1,13 +1,10 @@
-import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
 import getRandomBorder, { getRandomBorderSubtle, getRandomBorderRightOnly } from "../../utilities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotate, faCheck, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faRotate, faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-export default function GMPlayerQuest({ quest, onSelectQuest }) {
+export default function GMPlayerQuest({ quest, onRemoveQuest }) {
   const [borderStyle, setBorderStyle] = useState({});
   const [buttonBorder, setButtonBorder] = useState({});
   const [boxBorder, setBoxBorder] = useState({});
@@ -29,7 +26,7 @@ export default function GMPlayerQuest({ quest, onSelectQuest }) {
         </span>
       );
     }
-
+    
     if (quest.completed) {
       icon = (
         <span style={{ color: "rgb(80, 219, 127)" }}>
@@ -61,12 +58,7 @@ export default function GMPlayerQuest({ quest, onSelectQuest }) {
         );
       }
       return (
-        <button
-          className="quest-done"
-          disabled
-          style={buttonBorder}
-          onClick={() => onSelectQuest(quest)}
-        >
+        <button className="quest-done" disabled style={buttonBorder}>
           Not Done
         </button>
       );
@@ -116,8 +108,12 @@ export default function GMPlayerQuest({ quest, onSelectQuest }) {
       </Col>
       <Col xs={1} className="text-start align-self-center">
         {!quest.completed && !quest.submitted ? (
-          <button className="quest-remove-button" style={deleteBorder}>
-            <FontAwesomeIcon icon={faTrashCan} size="2xs" />
+          <button
+            className="quest-remove-button"
+            style={deleteBorder}
+            onClick={() => onRemoveQuest(quest)}
+          >
+            <FontAwesomeIcon icon={faMinus} size="2xs" />
           </button>
         ) : null}
       </Col>

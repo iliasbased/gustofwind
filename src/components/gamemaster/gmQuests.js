@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Dropdown } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
-import { useStarterWeapons } from "../../hooks/useStarterWeapons";
-import { createPlayer } from "../../services/accountService";
-import { useGMQuests } from "../../hooks/useGMQuests";
-import Quests from "../questlog/quests";
+import { Container, Row, Col } from "react-bootstrap";
+import { getRandomBorderSubtle, getRandomBorderSubtleLeftSide } from "../../utilities";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import GMQuest from "./gmQuest";
 
-export default function GMQuests({ gamemaster, onSelectQuest }) {
-  const { quests, loading, refreshQuests } = useGMQuests();
-
+export default function GMQuests({
+  quests,
+  onNewQuest,
+  onEditQuest,
+  onDeleteQuest,
+  onAssignQuest,
+}) {
   const [borderStyle, setBorderStyle] = useState({});
-  const [activeTab, setActiveTab] = useState("today");
 
   useEffect(() => {
-    setBorderStyle(getRandomBorderSubtle());
-  }, []);
+    if (quests.length > 4 ) {
+      setBorderStyle(getRandomBorderSubtleLeftSide());
+    } else {
+      setBorderStyle(getRandomBorderSubtle());
+    }
+  }, [quests]);
 
   return (
     <Container>
-      <Row className="mb-2">
-        <Col className="engraved" style={{ fontSize: "43px" }}>
+      <Row className="mb-3">
+        <Col className="engraved" style={{ fontSize: "41px" }}>
           My Quests
         </Col>
         <Col></Col>
@@ -31,7 +34,7 @@ export default function GMQuests({ gamemaster, onSelectQuest }) {
               className="add-quest-button engraved"
               style={borderStyle}
               onClick={() => {
-                //addquest
+                onNewQuest();
               }}
             >
               + New Quest
@@ -41,7 +44,7 @@ export default function GMQuests({ gamemaster, onSelectQuest }) {
       </Row>
       <Row>
         <Container
-          className="gm-player-quests-container"
+          className="gm-player-quests-container pe-0"
           style={{ height: "550px", ...borderStyle }}
         >
           <PerfectScrollbar
@@ -53,7 +56,12 @@ export default function GMQuests({ gamemaster, onSelectQuest }) {
             {quests.map((quest, index) => (
               <Row key={index} className="mt-2 mb-2 px-2">
                 <Col className="me-3">
-                  <GMQuest quest={quest} onSelectQuest={onSelectQuest} />
+                  <GMQuest
+                    quest={quest}
+                    onEditQuest={onEditQuest}
+                    onDeleteQuest={onDeleteQuest}
+                    onAssignQuest={onAssignQuest}
+                  />
                 </Col>
               </Row>
             ))}

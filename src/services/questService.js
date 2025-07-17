@@ -8,15 +8,15 @@ export async function fetchQuests() {
 
 export async function submitQuestProof(questId, proofTxt, proofImg) {
   const formData = new FormData();
-  
-  formData.append('questId', questId);
-  
+
+  formData.append("questId", questId);
+
   if (proofTxt && proofTxt.trim()) {
-    formData.append('proof_txt', proofTxt.trim());
+    formData.append("proof_txt", proofTxt.trim());
   }
-  
+
   if (proofImg) {
-    formData.append('proof_img', proofImg);
+    formData.append("proof_img", proofImg);
   }
 
   const res = await fetch(`${API_URL}/quests/submitQuestProof`, {
@@ -25,10 +25,10 @@ export async function submitQuestProof(questId, proofTxt, proofImg) {
   });
 
   if (!res.ok) {
-    const errorData = await res.json().catch(() => ({ message: 'Unknown error' }));
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
     throw new Error(errorData.message || `Failed to complete quest: ${res.status}`);
   }
-  
+
   return res.json();
 }
 
@@ -38,4 +38,105 @@ export async function fetchGamemasterQuests() {
   return res.json();
 }
 
+export async function submitQuest(name, description, gust) {
+  const res = await fetch(`${API_URL}/quests/submitQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name.trim(),
+      description: description.trim(),
+      gust: gust,
+    }),
+  });
 
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to submit quest: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function editQuest(questId, name, description, gust) {
+  const res = await fetch(`${API_URL}/quests/editQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      questId: questId,
+      name: name.trim(),
+      description: description.trim(),
+      gust: gust,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to edit quest: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function deleteQuest(questId) {
+  const res = await fetch(`${API_URL}/quests/deleteQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      questId: questId,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to delete quest: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function assignQuest(questId, playerId, isDaily) {
+  const res = await fetch(`${API_URL}/quests/assignQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      questId: questId,
+      playerId: playerId,
+      isDaily: isDaily,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to assign quest: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function removeQuest(questId, playerId) {
+  const res = await fetch(`${API_URL}/quests/removeQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      questId: questId,
+      playerId: playerId,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to remove quest: ${res.status}`);
+  }
+
+  return res.json();
+}

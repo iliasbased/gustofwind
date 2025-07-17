@@ -1,29 +1,28 @@
-import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
 import getRandomBorder, { getRandomBorderSubtle, getRandomBorderLeftOnly } from "../../utilities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotate, faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-export default function GMQuest({ quest, onSelectQuest }) {
+export default function GMQuest({ quest, onEditQuest, onDeleteQuest, onAssignQuest }) {
   const [borderStyle, setBorderStyle] = useState({});
   const [buttonBorder, setButtonBorder] = useState({});
-  const [boxBorder, setBoxBorder] = useState({});
   const [deleteBorder, setDeleteBorder] = useState({});
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
     setButtonBorder(getRandomBorder());
-    setBoxBorder(getRandomBorder());
     setDeleteBorder(getRandomBorderLeftOnly());
   }, []);
 
   return (
     <Row>
       <Col xs={1} className="text-end align-self-center">
-        <button className="quest-add-button" style={deleteBorder}>
+        <button
+          className="quest-add-button"
+          style={deleteBorder}
+          onClick={() => onAssignQuest(quest)}
+        >
           <FontAwesomeIcon icon={faPlus} size="2xs" />
         </button>
       </Col>
@@ -50,16 +49,26 @@ export default function GMQuest({ quest, onSelectQuest }) {
                 </Col>
               </Row>
               <Row className="mt-3">
-                <Col>
+                <Col className=" pe-0">
                   <button
                     className="quest-done"
-                    disabled
                     style={buttonBorder}
                     onClick={() => {
-                      /* editQuest(quest) */
+                      onEditQuest(quest);
                     }}
                   >
                     Edit
+                  </button>
+                </Col>
+                <Col className="ps-0">
+                  <button
+                    className="quest-done-trash"
+                    style={buttonBorder}
+                    onClick={() => {
+                      onDeleteQuest(quest);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} size="xs" />
                   </button>
                 </Col>
               </Row>

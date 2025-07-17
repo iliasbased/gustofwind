@@ -27,8 +27,8 @@ export function useGMQuests() {
   }
 
   return {
-    quests,
+    gmQuests: quests,
     loading,
-    refreshQuests,
+    refreshGmQuests: refreshQuests,
   };
 }

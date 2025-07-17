@@ -32,6 +32,19 @@ export async function submitQuestProof(questId, proofTxt, proofImg) {
   return res.json();
 }
 
+export async function fetchPlayerQuests(playerId) {
+  const res = await fetch(`${API_URL}/quests/getPlayerQuests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      playerId: playerId
+    }),
+  });
+  return res.json();
+}
+
 export async function fetchGamemasterQuests() {
   const res = await fetch(`${API_URL}/quests/getGamemasterQuests/`);
   // if (!res.ok) throw new Error("Failed to fetch quests");

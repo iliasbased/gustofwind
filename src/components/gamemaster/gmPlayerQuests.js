@@ -60,7 +60,8 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest }) {
             Dailies
           </button>
         </Col>
-        <Col></Col>
+        <Col>
+        </Col>
       </Row>
       <Row>
         <Container

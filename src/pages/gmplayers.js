@@ -95,11 +95,6 @@ export default function GMPlayers() {
                 <HeroSelectButton hero={hero} onSelectHero={onSelectHero} />
               </Row>
             ))}
-            {gamemaster.players.map((hero, index) => (
-              <Row key={index} className="m-1 mt-3">
-                <HeroSelectButton hero={hero} onSelectHero={onSelectHero} />
-              </Row>
-            ))}
           </Col>
         </Row>
       </Container>

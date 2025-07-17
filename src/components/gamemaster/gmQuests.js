@@ -37,7 +37,7 @@ export default function GMQuests({
                 onNewQuest();
               }}
             >
-              + New Quest
+              <span style={{fontFamily:'Impact', fontSize:'25px'}}>+</span> New Quest
             </button>
           </Row>
         </Col>

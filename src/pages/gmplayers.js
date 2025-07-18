@@ -21,7 +21,7 @@ import PlayerSearch from "../components/gamemaster/playerSearch";
 import { useHero } from "../context/heroContext";
 
 export default function GMPlayers() {
-  const { gamemaster, selectGMPlayer } = useGamemaster();
+  const { gamemaster, selectGMPlayer, refreshGMPlayers } = useGamemaster();
   const { clearHero } = useHero();
 
   const [borderStyle, setBorderStyle] = useState({});
@@ -32,6 +32,7 @@ export default function GMPlayers() {
 
 
   useEffect(() => {
+    refreshGMPlayers();
     clearHero();
     if (gamemaster.players.length > 3) {
       setBorderStyle(getRandomBorderSubtleLeftSide());

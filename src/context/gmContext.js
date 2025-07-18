@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { getPlayer, getGMPlayers } from '../services/playerService.js';
 
 const GamemasterContext = createContext();
 
@@ -30,13 +31,36 @@ export function GamemasterProvider({ children }) {
     sessionStorage.removeItem('selectedGM');
   };
 
+  const refreshPlayer = async () => {
+    let player = await getPlayer(selectedGMPlayer.id);
+    if (player) {
+      setSelectedGMPlayer(player);
+      sessionStorage.setItem('selectedGMPlayer', JSON.stringify(player));
+    } else {
+      console.error("Failed to refresh player data");
+    }
+  }
+
+  const refreshGMPlayers = async () => {
+    let players = await getGMPlayers(selectedGamemaster.id);
+    if (players && players.length > 0) {
+      let gm = {... selectedGamemaster};
+      gm.players = players;
+      setSelectedGamemaster(gm);
+    } else {
+      console.error("Failed to refresh player data");
+    }
+  }
+
   return (
     <GamemasterContext.Provider value={{
       gamemaster: selectedGamemaster,
       selectGamemaster,
       clearGamemaster,
       gmPlayer: selectedGMPlayer,
-      selectGMPlayer
+      selectGMPlayer,
+      refreshPlayer,
+      refreshGMPlayers
     }}>
       {children}
     </GamemasterContext.Provider>

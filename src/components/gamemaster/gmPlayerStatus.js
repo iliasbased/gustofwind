@@ -6,7 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
 import StatusCircle from "../statusCircle";
 
-export default function GMPlayer({ player }) {
+export default function GMPlayerStatus({ player }) {
   useEffect(() => {}, []);
 
   return (

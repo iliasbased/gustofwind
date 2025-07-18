@@ -592,6 +592,19 @@ input[type="submit"],
   cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
+.quest-approve {
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+  background-color: #ffffffd8;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.quest-approve:hover {
+  background-color: #44cadb;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
 .quest-done-completed {
   width: 130px;
   height: 50px;
@@ -633,7 +646,7 @@ input[type="submit"],
   position: fixed;
   background: #dbcebd;
   top: 20%;
-  left: 0;
+  left: 0%;
   right: 0;
   bottom: 0;
   width: 500px;
@@ -642,6 +655,41 @@ input[type="submit"],
   background-size: cover;
   color: #4d4242;
   z-index: 1000;
+}
+
+.quest-popup-left {
+  position: fixed;
+  background: #dbcebd;
+  top: 30%;
+  left: 0%;
+  right: 30%;
+  bottom: 0;
+  width: 500px;
+  height: 400px;
+  box-shadow: rgba(194, 134, 66, 0.45) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: cover;
+  color: #4d4242;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-popup-right {
+  position: fixed;
+  background: #dbcebd;
+  top: 20%;
+  left: 30%;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  height: 570px;
+  box-shadow: rgba(194, 134, 66, 0.45) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: cover;
+  color: #4d4242;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-height: 570px;
 }
 
 .quest-textarea {
@@ -795,7 +843,7 @@ input[type="submit"],
 }
 
 .engraved {
-  text-shadow: 5px 5px 5px rgba(22, 22, 22, 0.7);
+  text-shadow: 2px 2px 5px rgba(22, 22, 22, 0.7);
 }
 
 .inventory {
@@ -1505,6 +1553,31 @@ input[type="submit"],
   background: #c02121;
   border-radius: 5px;
   border: none;
+}
+
+.gust-info {
+  font-weight: bold;
+  font-family: Calibri;
+  text-shadow: 0 0 25px rgb(103, 205, 245), 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.gust-text {
+  font-weight: normal;
+  width: auto;
+  font-family: Impact;
+  font-size: 20px;
+  color: #47c0f0;
+  text-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.proof-text {
+  flex: 1;
+  font-size: 17px;
+  overflow-y: auto;
+  scrollbar-color: #3d4554 #282c34;
+  scrollbar-width: thin;
+  max-height: 105px;
+  font-family: Calibri;
 }
 
 /*-------------------------------------------------------------------------*/

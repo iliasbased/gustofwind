@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { getPlayer } from '../services/playerService.js';
 
 const HeroContext = createContext();
 
@@ -19,10 +20,21 @@ export function HeroProvider({ children }) {
     sessionStorage.removeItem('selectedHero');
   };
 
+  const refreshHero = async () => {
+    let hero = await getPlayer(selectedHero.id);
+    if (hero) {
+      setSelectedHero(hero);
+      sessionStorage.setItem('selectedHero', JSON.stringify(hero));
+    } else {
+      console.error("Failed to refresh hero data");
+    }
+  }
+
   return (
     <HeroContext.Provider value={{
       hero: selectedHero,
       selectHero,
+      refreshHero,
       clearHero
     }}>
       {children}

@@ -153,3 +153,23 @@ export async function removeQuest(questId, playerId) {
 
   return res.json();
 }
+
+export async function approveQuest(questId, playerId) {
+  const res = await fetch(`${API_URL}/quests/approveQuest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      questId: questId,
+      playerId: playerId,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to approve quest: ${res.status}`);
+  }
+
+  return res.json();
+}

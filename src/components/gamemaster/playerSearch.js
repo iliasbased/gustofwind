@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
-import GMPlayer from "./gmPlayer";
+import GMPlayer from "./gmPlayerStatus";
 
 export default function PlayerSearch({  }) {
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
-import GMPlayer from "./gmPlayer";
+import GMPlayerStatus from "./gmPlayerStatus";
 
 export default function GMSelectButton({ gamemaster, onDelete, onSelectGamemaster }) {
   const [borderStyle, setBorderStyle] = useState({});
@@ -54,7 +54,7 @@ export default function GMSelectButton({ gamemaster, onDelete, onSelectGamemaste
                 {gamemaster.players.length > 0 ? (
                   gamemaster.players.map((player) => (
                     <Row>
-                      <GMPlayer player={player} key={player.id} />
+                      <GMPlayerStatus player={player} key={player.id} />
                     </Row>
                   ))
                 ) : (

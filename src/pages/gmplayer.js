@@ -14,9 +14,10 @@ import QuestEditPopup from "../components/gamemaster/questEditPopup";
 import QuestDeletePopup from "../components/gamemaster/questDeletePopup";
 import QuestAssignPopup from "../components/gamemaster/questAssignPopup";
 import QuestRemovePopup from "../components/gamemaster/questRemovePopup";
+import QuestApprovePopup from "../components/gamemaster/questApprovePopup";
 
 export default function GMPlayer() {
-  const { gmPlayer } = useGamemaster();
+  const { gmPlayer, refreshPlayer } = useGamemaster();
   const { playerQuests, refreshPlayerQuests } = usePlayerQuests(gmPlayer.id);
   const { gmQuests, refreshGmQuests } = useGMQuests();
   const [borderStyle, setBorderStyle] = useState({});
@@ -26,11 +27,13 @@ export default function GMPlayer() {
   const [questDeleted, setQuestDeleted] = useState(null);
   const [questAssigned, setQuestAssigned] = useState(null);
   const [questRemoved, setQuestRemoved] = useState(null);
+  const [questApproved, setQuestApproved] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
+    refreshPlayer(gmPlayer.id);
   }, []);
 
   function onNewQuest() {
@@ -53,12 +56,17 @@ export default function GMPlayer() {
     setQuestRemoved(quest);
   }
 
+  function onApproveQuest(quest) {
+    setQuestApproved(quest);
+  }
+
   function closePopup(refresh = false) {
     setShowCreateQuest(false);
     setQuestEdited(null);
     setQuestDeleted(null);
     setQuestAssigned(null);
     setQuestRemoved(null);
+    setQuestApproved(null);
 
     if (refresh) {
       refreshPlayerQuests();
@@ -79,6 +87,7 @@ export default function GMPlayer() {
         <QuestDeletePopup quest={questDeleted} closePopup={closePopup} />
         <QuestAssignPopup quest={questAssigned} player={gmPlayer} closePopup={closePopup} />
         <QuestRemovePopup quest={questRemoved} player={gmPlayer} closePopup={closePopup} />
+        <QuestApprovePopup quest={questApproved} player={gmPlayer} closePopup={closePopup} refreshPlayer={refreshPlayer}/>
         <Container className="mt-5 pt-5">
           <Row>
             <Col xs={4}></Col>
@@ -132,6 +141,7 @@ export default function GMPlayer() {
                 quests={playerQuests}
                 player={gmPlayer}
                 onRemoveQuest={onRemoveQuest}
+                onApproveQuest={onApproveQuest}
               />
             </Col>
             <Col>

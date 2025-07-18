@@ -4,7 +4,7 @@ import getRandomBorder, { getRandomBorderSubtle, getRandomBorderRightOnly } from
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate, faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-export default function GMPlayerQuest({ quest, onRemoveQuest }) {
+export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) {
   const [borderStyle, setBorderStyle] = useState({});
   const [buttonBorder, setButtonBorder] = useState({});
   const [boxBorder, setBoxBorder] = useState({});
@@ -26,7 +26,7 @@ export default function GMPlayerQuest({ quest, onRemoveQuest }) {
         </span>
       );
     }
-    
+
     if (quest.completed) {
       icon = (
         <span style={{ color: "rgb(80, 219, 127)" }}>
@@ -52,7 +52,7 @@ export default function GMPlayerQuest({ quest, onRemoveQuest }) {
     } else {
       if (quest.proof_txt || quest.proof_img) {
         return (
-          <button className="quest-done" style={buttonBorder}>
+          <button className="quest-done" style={buttonBorder} onClick={()=>onApproveQuest(quest)}>
             Approve
           </button>
         );

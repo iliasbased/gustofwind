@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import getRandomBorder, { getRandomBorderSubtle, getRandomBorderRightOnly } from "../../utilities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotate, faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faRotate, faCheck, faMinus, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) {
   const [borderStyle, setBorderStyle] = useState({});
@@ -35,6 +35,14 @@ export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) 
       );
     }
 
+    if (quest.failed) {
+      icon = (
+        <span style={{ color: "rgb(197, 97, 94)" }}>
+          <FontAwesomeIcon icon={faXmark} size="xl"/>
+        </span>
+      );
+    }
+
     return (
       <div className="quest-box" style={boxBorder}>
         {icon}
@@ -43,6 +51,14 @@ export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) 
   }
 
   function getDoneButton() {
+    if (quest.failed) {
+      return (
+        <button className="quest-done" style={buttonBorder} disabled>
+          Failed
+        </button>
+      );
+    }
+
     if (quest.completed) {
       return (
         <button className="quest-done-completed" style={buttonBorder} disabled>
@@ -52,7 +68,7 @@ export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) 
     } else {
       if (quest.proof_txt || quest.proof_img) {
         return (
-          <button className="quest-done" style={buttonBorder} onClick={()=>onApproveQuest(quest)}>
+          <button className="quest-done" style={buttonBorder} onClick={() => onApproveQuest(quest)}>
             Approve
           </button>
         );
@@ -71,6 +87,10 @@ export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) 
   }
   if (quest.completed) {
     className = "gm-quest-completed";
+  }
+
+  if (quest.failed) {
+    className = "gm-quest-failed";
   }
 
   return (
@@ -107,7 +127,7 @@ export default function GMPlayerQuest({ quest, onRemoveQuest, onApproveQuest }) 
         </Container>
       </Col>
       <Col xs={1} className="text-start align-self-center">
-        {!quest.completed && !quest.submitted ? (
+        {!quest.completed && !quest.submitted && !quest.failed ? (
           <button
             className="quest-remove-button"
             style={deleteBorder}

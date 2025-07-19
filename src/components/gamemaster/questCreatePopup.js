@@ -4,8 +4,8 @@ import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
 import { submitQuest } from "../../services/questService";
 
 export default function QuestCreatePopup({ show, quest, closePopup }) {
-  const [name, setName] = useState(null);
-  const [description, setDescription] = useState(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [gust, setGust] = useState(5);
   const [borderStyle, setBorderStyle] = useState({});
   const [buttonBorder, setButtonBorder] = useState({});

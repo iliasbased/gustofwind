@@ -84,13 +84,19 @@ export default function Quests({ todaysQuests, dailyQuests, refreshQuests }) {
                 suppressScrollX: true,
               }}
             >
-              {quests.map((quest, index) => (
-                <Row key={index} className="mt-2 mb-2 px-2">
-                  <Col className="me-3">
-                    <Quest quest={quest} onSelectQuest={onSelectQuest} />
-                  </Col>
+              {quests.length === 0 ? (
+                <Row className="justify-content-center mt-3" style={{fontFamily: "Calibri", color: "#333"}}>
+                  Lazy GM, no quests assigned yet.
                 </Row>
-              ))}
+              ) : (
+                quests.map((quest, index) => (
+                  <Row key={index} className="mt-2 mb-2 px-2">
+                    <Col className="me-3">
+                      <Quest quest={quest} onSelectQuest={onSelectQuest} />
+                    </Col>
+                  </Row>
+                ))
+              )}
             </PerfectScrollbar>
           </Col>
         </Row>

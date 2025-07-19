@@ -32,16 +32,8 @@ export async function submitQuestProof(questId, proofTxt, proofImg) {
   return res.json();
 }
 
-export async function fetchPlayerQuests(playerId) {
-  const res = await fetch(`${API_URL}/quests/getPlayerQuests`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      playerId: playerId
-    }),
-  });
+export async function getPlayerQuests(playerId) {
+  const res = await fetch(`${API_URL}/quests/getPlayerQuests/${playerId}`);
   return res.json();
 }
 
@@ -113,7 +105,7 @@ export async function deleteQuest(questId) {
   return res.json();
 }
 
-export async function assignQuest(questId, playerId, isDaily) {
+export async function assignQuest(questId, playerId, type) {
   const res = await fetch(`${API_URL}/quests/assignQuest`, {
     method: "POST",
     headers: {
@@ -122,7 +114,7 @@ export async function assignQuest(questId, playerId, isDaily) {
     body: JSON.stringify({
       questId: questId,
       playerId: playerId,
-      isDaily: isDaily,
+      type: type,
     }),
   });
 

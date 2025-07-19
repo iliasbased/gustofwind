@@ -14,7 +14,7 @@ export default function GMQuests({
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
-    if (quests.length > 4 ) {
+    if (quests.length > 4) {
       setBorderStyle(getRandomBorderSubtleLeftSide());
     } else {
       setBorderStyle(getRandomBorderSubtle());
@@ -23,9 +23,12 @@ export default function GMQuests({
 
   return (
     <Container>
+      <Row className="mb-2">
+        <Col> </Col>
+      </Row>
       <Row className="mb-3">
-        <Col className="engraved" style={{ fontSize: "41px" }}>
-          My Quests
+        <Col xs={8} className="engraved" style={{ fontSize: "41px" }}>
+          Quest List
         </Col>
         <Col></Col>
         <Col>
@@ -37,7 +40,7 @@ export default function GMQuests({
                 onNewQuest();
               }}
             >
-              <span style={{fontFamily:'Impact', fontSize:'25px'}}>+</span> New Quest
+              <span style={{ fontFamily: "Impact", fontSize: "25px" }}>+</span> New Quest
             </button>
           </Row>
         </Col>
@@ -45,7 +48,7 @@ export default function GMQuests({
       <Row>
         <Container
           className="gm-player-quests-container pe-0"
-          style={{ height: "550px", ...borderStyle }}
+          style={{ height: "575px", ...borderStyle }}
         >
           <PerfectScrollbar
             className="perfect-scrollbar"
@@ -55,7 +58,7 @@ export default function GMQuests({
           >
             {quests.map((quest, index) => (
               <Row key={index} className="mt-2 mb-2 px-2">
-                <Col className="me-3">
+                <Col className="me-3" style={{ marginTop: "11px" }}>
                   <GMQuest
                     quest={quest}
                     onEditQuest={onEditQuest}

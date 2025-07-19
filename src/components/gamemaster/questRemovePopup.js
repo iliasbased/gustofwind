@@ -52,7 +52,7 @@ export default function QuestRemovePopup({ quest, player, closePopup }) {
           >
             {player.name}
           </span>
-          's {quest.repeatable ? "daily" : "today's"} tasks?
+          's {quest.repeatable ? "daily" : "current"} tasks?
         </Row>
         <Row className="mt-5 px-3 justify-content-center">
           <Col>

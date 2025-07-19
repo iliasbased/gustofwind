@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchPlayerQuests } from "../services/questService";
+import { getPlayerQuests } from "../services/questService";
 
 export function usePlayerQuests(playerId) {
   const [quests, setQuests] = useState([]);
@@ -17,8 +17,8 @@ export function usePlayerQuests(playerId) {
     setLoading(true);
 
     try {
-      const data = await fetchPlayerQuests(playerId);
-      setQuests(Array.isArray(data) ? [...data] : []);
+      const data = await getPlayerQuests(playerId);
+      setQuests(data);
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch gm quests:", error);

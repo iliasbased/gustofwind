@@ -34,7 +34,7 @@ export default function GMPlayer() {
   useEffect(() => {
     setBorderStyle(getRandomBorderSubtle());
     refreshPlayer(gmPlayer.id);
-  }, []);
+  }, [playerQuests]);
 
   function onNewQuest() {
     setShowCreateQuest(true);
@@ -87,8 +87,13 @@ export default function GMPlayer() {
         <QuestDeletePopup quest={questDeleted} closePopup={closePopup} />
         <QuestAssignPopup quest={questAssigned} player={gmPlayer} closePopup={closePopup} />
         <QuestRemovePopup quest={questRemoved} player={gmPlayer} closePopup={closePopup} />
-        <QuestApprovePopup quest={questApproved} player={gmPlayer} closePopup={closePopup} refreshPlayer={refreshPlayer}/>
-        <Container className="mt-5 pt-5">
+        <QuestApprovePopup
+          quest={questApproved}
+          player={gmPlayer}
+          closePopup={closePopup}
+          refreshPlayer={refreshPlayer}
+        />
+        <Container className="mt-3 pt-5">
           <Row>
             <Col xs={4}></Col>
             <Col xs={4}>
@@ -136,15 +141,17 @@ export default function GMPlayer() {
             <Col xs={4}></Col>
           </Row>
           <Row className="m-5">
-            <Col>
-              <GMPlayerQuests
-                quests={playerQuests}
-                player={gmPlayer}
-                onRemoveQuest={onRemoveQuest}
-                onApproveQuest={onApproveQuest}
-              />
+            <Col className="me-3">
+              {playerQuests ? (
+                <GMPlayerQuests
+                  quests={playerQuests}
+                  player={gmPlayer}
+                  onRemoveQuest={onRemoveQuest}
+                  onApproveQuest={onApproveQuest}
+                />
+              ) : null}
             </Col>
-            <Col>
+            <Col className="ms-3">
               <GMQuests
                 quests={gmQuests}
                 onNewQuest={onNewQuest}

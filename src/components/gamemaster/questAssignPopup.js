@@ -24,8 +24,8 @@ export default function QuestAssignPopup({ quest, player, closePopup }) {
     return null;
   }
 
-  const handleAssign = async (isDaily) => {
-    await assignQuest(quest.id, player.id, isDaily);
+  const handleAssign = async (type) => {
+    await assignQuest(quest.id, player.id, type);
     closePopup(true);
   };
 
@@ -42,7 +42,7 @@ export default function QuestAssignPopup({ quest, player, closePopup }) {
           {`<< ${quest.name} >>`}
         </Row>
         <Row
-          className="mt-2 px-3 mb-3 justify-content-center engraved"
+          className="mt-2 px-3 mb-5 justify-content-center engraved"
           style={{ fontFamily: "Calibri", fontSize: "20px" }}
         >
           Do you want to add this quest to{" "}
@@ -51,39 +51,56 @@ export default function QuestAssignPopup({ quest, player, closePopup }) {
             style={{ fontFamily: "BeyondWonderland", fontSize: "20px" }}
           >
             {player.name}
-          </span>
-          's today's tasks?
+          </span> as a one-time task or assign it as a repeatable daily quest for them?
         </Row>
-        <Row
-          className="mt-2 px-3 mb-3 justify-content-center engraved"
-          style={{ fontFamily: "Calibri", fontSize: "25px" }}
-        >
-          OR
-        </Row>
-        <Row
-          className="mt-2 px-3 mb-3 justify-content-center engraved"
-          style={{ fontFamily: "Calibri", fontSize: "20px" }}
-        >
-          Assign it as a repeatable daily task for them?
-        </Row>
+
         <Row className="mt-5 px-3 justify-content-center">
           <Col>
-            <Row className="justify-content-center">
-              <button
-                className="quest-done"
-                style={{ width: "200px", ...buttonBorder }}
-                onClick={()=>handleAssign(false)}
-              >
-                Add to Today
-              </button>
+            <Row>
+              <Col xs={4} className="align-self-center">
+                <Row
+                  className="justify-content-center mb-2"
+                  style={{ fontFamily: "Calibri", fontSize: "20px" }}
+                >
+                  Add to:
+                </Row>
+              </Col>
+              <Col>
+                <Row className="justify-content-start">
+                  <button
+                    className="quest-done mb-2 mx-0"
+                    style={{ width: "150px", height: "50px", ...buttonBorder }}
+                    onClick={() => handleAssign("today")}
+                  >
+                    Today
+                  </button>
+                </Row>
+                <Row className="justify-content-start">
+                  <button
+                    className="quest-done mx-0"
+                    style={{ width: "150px", height: "50px", ...buttonBorder }}
+                    onClick={() => handleAssign("tomorrow")}
+                  >
+                    Tomorrow
+                  </button>
+                </Row>
+              </Col>
             </Row>
           </Col>
-          <Col>
+          <Col xs={1} className="align-self-center">
+            <Row
+              className="justify-content-center"
+              style={{ fontFamily: "Calibri", fontSize: "25px" }}
+            >
+              OR
+            </Row>
+          </Col>
+          <Col className="align-self-center">
             <Row className="justify-content-center">
               <button
                 className="quest-done"
                 style={{ width: "200px", ...buttonBorder }}
-                onClick={()=>handleAssign(true)}
+                onClick={() => handleAssign("daily")}
               >
                 Assign Daily
               </button>

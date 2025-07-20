@@ -54,17 +54,17 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
     if (todayTab == "yesterday") {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      return `${player.name}'s quests yesterday - ` + yesterday.toLocaleDateString();
+      return `${player.name}'s quests yesterday - ` + yesterday.toLocaleDateString('en-GB');
     }
 
     if (todayTab == "tomorrow") {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      return `${player.name}'s quests for tomorrow - ` + tomorrow.toLocaleDateString();
+      return `${player.name}'s quests for tomorrow - ` + tomorrow.toLocaleDateString('en-GB');
     }
 
     const today = new Date();
-    return `${player.name}'s quests for today - ` + today.toLocaleDateString();
+    return `${player.name}'s quests for today - ` + today.toLocaleDateString('en-GB');
   }
 
   useEffect(() => {
@@ -80,12 +80,20 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
 
     let available = 0;
     let awarded = 0;
-    selectedQuests.today?.forEach((quest) => {
+    quests.today?.forEach((quest) => {
       available += quest.reward;
       if (quest.completed) {
         awarded += quest.reward;
       }
     });
+
+    quests.daily?.forEach((quest) => {
+      available += quest.reward;
+      if (quest.completed) {
+        awarded += quest.reward;
+      }
+    });
+
     setAvailableGust(available);
     setAwardedGust(awarded > 100 ? 100 : awarded);
   }, [quests, activeTab, todayTab]);

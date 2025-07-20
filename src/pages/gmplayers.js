@@ -68,27 +68,17 @@ export default function GMPlayers() {
         <Row>
           <Col xs={4}></Col>
           <Col xs={4}>
-            <Row className="justify-content-center engraved mb-4" style={{ fontSize: "40px" }}>
+            <Row className="justify-content-center engraved mb-5" style={{ fontSize: "40px" }}>
               {gamemaster.name}'s Players
             </Row>
           </Col>
           <Col xs={4}></Col>
         </Row>
-        <Row>
+        <Row className="mb-4">
           <PlayerSearch />
         </Row>
-        <Row className="justify-content-end ">
-          <Col xs={4}></Col>
-          <Col xs={4}>
-            <Row
-              className="justify-content-end px-5 mx-3 engraved"
-              style={{ fontSize: "25px", fontFamily: "Garamond", fontWeight: "bold" }}
-            >{`${gamemaster.players.length}/5`}</Row>
-          </Col>
-          <Col xs={4}></Col>
-        </Row>
       </Container>
-      <Container className="hero-container p-1" style={{height:'360px', ...borderStyle}}>
+      <Container className="hero-container p-1" style={{height:'450px', ...borderStyle}}>
         <Row className="justify-content-center w-100 h-100 gm-players-container">
           <Col className="align-self-start">
             {gamemaster.players.map((hero, index) => (

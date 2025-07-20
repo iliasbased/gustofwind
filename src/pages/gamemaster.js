@@ -37,7 +37,7 @@ export default function GamemasterSelection() {
   }
 
   function refresh() {
-    // refreshPlayers();
+    refreshGamemasters();
   }
 
   function onDelete(gamemaster) {

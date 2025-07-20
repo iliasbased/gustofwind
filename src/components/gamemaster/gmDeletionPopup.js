@@ -94,7 +94,7 @@ export default function GMDeletionPopup({ gamemaster, closePopup, refresh }) {
         <Row>
           <Col className="text-center mt-5">
             <button
-              className="hero-deletion-yes engraved"
+              className="hero-deletion-yes engraved p-3"
               style={borderStyle}
               onClick={() => {
                 setCurrentStep(1);
@@ -105,7 +105,7 @@ export default function GMDeletionPopup({ gamemaster, closePopup, refresh }) {
           </Col>
           <Col className="text-center mt-5">
             <button
-              className="hero-deletion-no engraved"
+              className="hero-deletion-no engraved p-3"
               style={borderStyle}
               onClick={() => {
                 exitPopup();
@@ -128,7 +128,7 @@ export default function GMDeletionPopup({ gamemaster, closePopup, refresh }) {
           exitPopup();
         }}
       />
-      <Container className="hero-deletion-popup p-3" style={borderStyle}>
+      <Container className="hero-deletion-popup p-3" style={{height:'460px', ...borderStyle}}>
         {currentStep == 0 ? getConfirmation() : null}
         {currentStep == 1 ? getDelete() : null}
       </Container>

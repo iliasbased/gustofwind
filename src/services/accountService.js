@@ -24,3 +24,20 @@ export async function fetchAccountGamemasters() {
   return res.json();
 }
 
+export async function removePlayerGamemaster(gamemasterId) {
+  const res = await fetch(`${API_URL}/account/removePlayerGamemaster/${gamemasterId}`);
+  if (!res.ok) throw new Error("Failed to remove gamemaster");
+  return res.json();
+}
+
+export async function acceptGamemasterRequest(gamemasterId) {
+  const res = await fetch(`${API_URL}/account/acceptGamemasterRequest/${gamemasterId}`);
+  if (!res.ok) throw new Error("Failed to accept gamemaster request");
+  return res.json();
+}
+
+export async function declineGamemasterRequest(gamemasterId) {
+  const res = await fetch(`${API_URL}/account/declineGamemasterRequest/${gamemasterId}`);
+  if (!res.ok) throw new Error("Failed to decline gamemaster request");
+  return res.json();
+}

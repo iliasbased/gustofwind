@@ -1,7 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000/api";
 
-export async function fetchPlayerItems() {
-  const playerId = JSON.parse(sessionStorage.getItem("selectedHero")).id;
+export async function fetchPlayerItems(playerId) {
   const res = await fetch(`${API_URL}/items/getPlayerItems/${playerId}/`);
   // if (!res.ok) throw new Error("Failed to fetch player items");
   return res.json();

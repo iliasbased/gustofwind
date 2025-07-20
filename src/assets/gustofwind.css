@@ -343,13 +343,14 @@ input[type="submit"],
   border: 1px solid #161311;
   border-width: 0px 2px 2px 2px;
   background-color: #51e671;
-  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 5px, rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  box-shadow: inset rgba(0, 0, 0, 0.65) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 5px;
   color: #dbdbdb;
   font-family: "Calibri";
   font-weight: bold;
   width: 70px;
   margin-right: 3px;
   margin-left: 3px;
+  margin-top: 2px;
 }
 
 .base-ui {
@@ -1634,6 +1635,7 @@ input[type="submit"],
 
 .gust-info {
   font-family: Calibri;
+  color: #333;
   text-shadow: 0 0 15px rgb(255, 255, 255);
 }
 
@@ -1774,6 +1776,112 @@ input[type="submit"],
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   font-size: 20px;
   padding: 0;
+}
+
+.gmplayerquest-button {
+  width: 100%;
+  height: 70px;
+  padding: 0;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  border: 0;
+  font-size: 35px;
+  opacity: 0.7;
+  background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.gmplayerquest-button:active {
+  transform: scale(0.95);
+}
+
+.gmplayerquest-button-active {
+  width: 100%;
+  height: 70px;
+  padding: 0;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(255, 255, 255, 0.35) 0px 0px 15px;
+  background-color: #72b76b;
+  color: rgba(255, 255, 255, 0.8);
+  border: 0;
+  font-size: 35px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.gmplayerquest-button:hover {
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+  opacity: 1;
+}
+
+.gmplayerquest-button-active:hover {
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.quest-search-input {
+  width: 250px;
+  height: 35px;
+  color: #333;
+  background: #dbdbdb;
+  box-shadow: rgba(38, 80, 27, 0.45) 0px 0px 30px, inset rgba(61, 61, 61, 0.35) 0px 0px 10px;
+  border: 0;
+  font-size: 18px;
+  font-family: Calibri;
+}
+
+.quest-search-input:focus {
+  outline: none;
+}
+
+.sort-button {
+  width: auto;
+  font-family: Calibri;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  border: 0;
+  opacity: 0.7;
+  background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.sort-button:active {
+  transform: scale(0.95);
+}
+
+.sort-button-active {
+  width: auto;
+  font-family: Calibri;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(255, 255, 255, 0.35) 0px 0px 15px;
+  border: 0;
+  opacity: 1;
+  font-weight: bold;
+  background-color: #72b76b;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.sort-button:hover {
+  background-color: #3d4554;
+  color: #ffffff;
+  opacity: 1;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+}
+
+.sort-button-selected {
+  font-weight: bold;
+  font-family: Calibri;
+  text-shadow: 0 0 25px rgb(103, 205, 245), 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.sort-button:active {
+  transform: scale(0.95);
+}
+
+.sort-button-active:active {
+  transform: scale(0.95);
 }
 
 /*-------------------------------------------------------------------------*/

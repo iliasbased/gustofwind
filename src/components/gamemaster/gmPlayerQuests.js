@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { getRandomBorderSubtle, getRandomBorderSubtleLeftSide } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle, getRandomBorderSubtleLeftSide } from "../../utilities";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import GMPlayerQuest from "./gmPlayerQuest";
 
 export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApproveQuest }) {
   const [selectedQuests, setSelectedQuests] = useState([]);
   const [borderStyle, setBorderStyle] = useState({});
+  const [daybuttonBorder1, setDaybuttonBorder1] = useState({});
+  const [daybuttonBorder2, setDaybuttonBorder2] = useState({});
+  const [daybuttonBorder3, setDaybuttonBorder3] = useState({});
   const [activeTab, setActiveTab] = useState("today");
   const [todayTab, setTodayTab] = useState("today");
   const [availableGust, setAvailableGust] = useState(0);
@@ -73,6 +76,10 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
     } else {
       setBorderStyle(getRandomBorderSubtle());
     }
+
+    setDaybuttonBorder1(getRandomBorder());
+    setDaybuttonBorder2(getRandomBorder());
+    setDaybuttonBorder3(getRandomBorder());
   }, []);
 
   useEffect(() => {
@@ -119,7 +126,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
                     setActiveTab("today");
                     setTodayTab("yesterday");
                   }}
-                  style={borderStyle}
+                  style={daybuttonBorder1}
                 >
                   Yesterday
                 </button>
@@ -133,7 +140,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
                     setActiveTab("today");
                     setTodayTab("today");
                   }}
-                  style={borderStyle}
+                  style={daybuttonBorder2}
                 >
                   Today
                 </button>
@@ -147,7 +154,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
                     setActiveTab("today");
                     setTodayTab("tomorrow");
                   }}
-                  style={borderStyle}
+                  style={daybuttonBorder3}
                 >
                   Tomorrow
                 </button>
@@ -162,20 +169,20 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
         <Col>
           <button
             className={
-              activeTab == "today" ? "quest-button-active engraved" : "quest-button engraved"
+              activeTab == "today" ? "gmplayerquest-button-active engraved" : "gmplayerquest-button engraved"
             }
             style={borderStyle}
             onClick={() => {
               setActiveTab("today");
             }}
           >
-            {`${player.name}'s Quests`}
+            {`Quests`}
           </button>
         </Col>
         <Col>
           <button
             className={
-              activeTab == "daily" ? "quest-button-active engraved" : "quest-button engraved"
+              activeTab == "daily" ? "gmplayerquest-button-active engraved" : "gmplayerquest-button engraved"
             }
             style={borderStyle}
             onClick={() => {
@@ -188,7 +195,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
         <Col className="gust-info align-self-center">
           <Row className="justify-content-end" style={{ alignItems: "center" }}>
             <Col xs={9}>
-              <Row className="justify-content-end engraved">{`Gust Available Today:`}</Row>
+              <Row className="justify-content-end">{`Gust Available Today:`}</Row>
             </Col>
             <Col className="gust-text">
               <Row className="justify-content-end">{`${availableGust}/100`}</Row>
@@ -196,7 +203,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
           </Row>
           <Row style={{ alignItems: "center" }}>
             <Col xs={9}>
-              <Row className="justify-content-end engraved">{`Gust Awarded Today:`}</Row>
+              <Row className="justify-content-end">{`Gust Awarded Today:`}</Row>
             </Col>
             <Col className="gust-text">
               <Row className="justify-content-end">{`${awardedGust}/100`}</Row>
@@ -217,7 +224,7 @@ export default function GMPlayerQuests({ quests, player, onRemoveQuest, onApprov
           >
             {" "}
             {selectedQuests.length === 0 ? (
-              <Row className="mt-3 justify-content-center" style={{ fontFamily: "Calibri" }}>
+              <Row className="mt-3 justify-content-center engraved" style={{ fontFamily: "Calibri" }}>
                 No quests have been set here.
               </Row>
             ) : (

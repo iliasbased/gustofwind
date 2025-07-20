@@ -15,6 +15,7 @@ export default function GHeader() {
   const [characterBorder, setCharacterBorder] = useState({});
   const [questLogBorder, setQuestLogBorder] = useState({});
   const [skillBookBorder, setSkillBookBorder] = useState({});
+  const [shopBorder, setShopBorder] = useState({});
   const [tavernBorder, setTavernBorder] = useState({});
   const [craftingBorder, setCraftingBorder] = useState({});
 
@@ -23,6 +24,7 @@ export default function GHeader() {
     setCharacterBorder(getRandomBorderBottomOnly());
     setQuestLogBorder(getRandomBorderBottomOnly());
     setSkillBookBorder(getRandomBorderBottomOnly());
+    setShopBorder(getRandomBorderBottomOnly());
     setTavernBorder(getRandomBorderBottomOnly());
     setCraftingBorder(getRandomBorderBottomOnly());
   }, []);
@@ -86,6 +88,23 @@ export default function GHeader() {
                     <Image
                       width="35px"
                       src={`/assets/images/items/header/abilities.png`}
+                      className="mt-1 mb-2"
+                    />
+                  </button>
+                  <button
+                    className={
+                      window.location.pathname == "/shop"
+                        ? "header-button-active"
+                        : "header-button"
+                    }
+                    onClick={() => {
+                      navigate("/shop");
+                    }}
+                    style={shopBorder}
+                  >
+                    <Image
+                      width="35px"
+                      src={`/assets/images/items/header/shop.png`}
                       className="mt-1 mb-2"
                     />
                   </button>

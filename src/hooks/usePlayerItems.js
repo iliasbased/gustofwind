@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchPlayerItems } from "../services/itemService";
 
-export function usePlayerItems() {
+export function usePlayerItems(playerId) {
   const [playerItems, setPlayerItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,9 +15,9 @@ export function usePlayerItems() {
 
   async function fetchItems() {
     setLoading(true);
-    
+
     try {
-      const data = await fetchPlayerItems();
+      const data = await fetchPlayerItems(playerId);
       setPlayerItems(Array.isArray(data) ? [...data] : []);
       setLoading(false);
     } catch (error) {

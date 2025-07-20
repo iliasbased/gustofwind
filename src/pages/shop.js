@@ -12,10 +12,9 @@ import { useHero } from "../context/heroContext";
 
 export const PlayerDataContext = React.createContext();
 
-export default function Character() {
+export default function Shop() {
   const { hero } = useHero();
   const { playerItems, refreshItems, setPlayerItems } = usePlayerItems(hero.id);
-  const { playerStats, refreshStats } = usePlayerStats();
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -31,7 +30,6 @@ export default function Character() {
       }
 
       await refreshItems();
-      refreshStats();
     }
   }
 
@@ -109,12 +107,9 @@ export default function Character() {
       </Container>
       <Container className="base-ui" style={borderStyle}>
         <PlayerDataContext.Provider
-          value={{ playerItems, playerStats, refreshItems, refreshStats, setPlayerItems }}
+          value={{ playerItems, refreshItems, setPlayerItems }}
         >
           <Row>
-            <Col className="pe-0" xs={3}>
-              <Stats />
-            </Col>
             <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
               <Col className="px-0" xs={3}>
                 <Gear />

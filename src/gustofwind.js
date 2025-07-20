@@ -19,8 +19,10 @@ import HeroSelection from "./pages/hero";
 import GMPlayers from "./pages/gmplayers";
 import GMPlayer from "./pages/gmplayer";
 import Settings from "./pages/settings";
+import Shop from "./pages/shop";
 import { GamemasterProvider } from "./context/gmContext";
 import { HeroProvider } from "./context/heroContext";
+
 
 export default function GustOfWind() {
   return (
@@ -43,6 +45,7 @@ export default function GustOfWind() {
             <Route path="/questlog" element={<QuestLog />} />
             <Route path="/combat" element={<Combat />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/shop" element={<Shop />} />
             <Route element={<AuthOutlet fallbackPath="/" />}></Route>
           </Routes>
         </HeroProvider>

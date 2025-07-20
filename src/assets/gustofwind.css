@@ -557,31 +557,21 @@ input[type="submit"],
 }
 
 .quest-completed {
-  background-color: rgba(123, 189, 76, 0.7);
+  background-color: rgba(123, 189, 76, 0.6);
   padding: 10px;
   padding-bottom: 10px;
   padding-top: 10px;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   z-index: 100;
-  opacity: 0.7;
 }
 
 .quest-submitted {
-  background-color: rgba(192, 117, 74, 0.7);
+  background-color: rgba(192, 117, 74, 0.6);
   padding: 10px;
   padding-bottom: 10px;
   padding-top: 10px;
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
   z-index: 100;
-  opacity: 0.7;
-}
-
-.quest-submitted:hover {
-  opacity: 1;
-}
-
-.quest-completed:hover {
-  opacity: 1;
 }
 
 .quest-name {

@@ -53,8 +53,8 @@ export default function Quest({ quest, onSelectQuest }) {
     } else {
       if (quest.proof_txt || quest.proof_img) {
         return (
-          <button className="quest-done" style={buttonBorder}>
-            Submitted
+          <button className="quest-done" style={buttonBorder} onClick={()=>onSelectQuest(quest)}>
+            Edit
           </button>
         );
       }

@@ -1,119 +1,186 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CharacterPortait from "../components/combat/character-portait";
-import CombatLog from "../components/combat/combat-log";
+import CombatLog from "../components/combat/combatLog";
 import Loot from "../components/combat/loot";
 import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
+import { useHero } from "../context/heroContext";
+import HeroPortrait from "../components/hero/heroPortrait";
+import CombatParticipant from "../components/combat/combatParticipant";
+import SkillBar from "../components/combat/skillBar";
+import ItemBar from "../components/combat/itemBar";
+import Target from "../components/combat/target";
 
 export default function Combat() {
-  let { playerItems } = usePlayerItems();
-  let { secondaryStats } = usePlayerStats(playerItems);
+  const { hero } = useHero();
+  useEffect(() => {}, []);
 
-  const loot = [
+  let log = [
+    "Norewind attacks Goblin for 10 damage.",
+    "Goblin attacks Norewind for 5 damage.",
+    "Norewind heals for 8 health.",
+    "Goblin is defeated.",
+  ];
+
+  hero.skills = [
     {
-      type: "common",
-      chance: 1,
-      loot: [
-        { name: "Gold", amount: 10 },
-        { name: "Potion", amount: 1 },
-      ],
+      name: "Slash",
+      description: "A quick slash with your sword.",
+      cooldown: 0,
+      icon: "assets/images/skills/pyromancer/fireball.png",
     },
     {
-      type: "rare",
-      chance: 0.3,
-      loot: [
-        { name: "Rare Gem", amount: 1 },
-        { name: "Magic Potion", amount: 1 },
-      ],
+      name: "Shield Bash",
+      description: "Bash the enemy with your shield.",
+      cooldown: 2,
+      icon: "assets/images/skills/pyromancer/fireball.png",
     },
     {
-      type: "epic",
-      chance: 0.2,
-      loot: [
-        { name: "Epic Sword", amount: 1 },
-        { name: "Epic Shield", amount: 1 },
-      ],
+      name: "Heal",
+      description: "Heal yourself or an ally.",
+      cooldown: 3,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Slash",
+      description: "A quick slash with your sword.",
+      cooldown: 0,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Shield Bash",
+      description: "Bash the enemy with your shield.",
+      cooldown: 2,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Heal",
+      description: "Heal yourself or an ally.",
+      cooldown: 3,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Slash",
+      description: "A quick slash with your sword.",
+      cooldown: 0,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Shield Bash",
+      description: "Bash the enemy with your shield.",
+      cooldown: 2,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Heal",
+      description: "Heal yourself or an ally.",
+      cooldown: 3,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Slash",
+      description: "A quick slash with your sword.",
+      cooldown: 0,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Shield Bash",
+      description: "Bash the enemy with your shield.",
+      cooldown: 2,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Heal",
+      description: "Heal yourself or an ally.",
+      cooldown: 3,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Shield Bash",
+      description: "Bash the enemy with your shield.",
+      cooldown: 2,
+      icon: "assets/images/skills/pyromancer/fireball.png",
+    },
+    {
+      name: "Heal",
+      description: "Heal yourself or an ally.",
+      cooldown: 3,
+      icon: "assets/images/skills/pyromancer/fireball.png",
     },
   ];
 
-  const [enemies, setEnemies] = useState([
+  hero.itemSkills = [
     {
-      name: "Goblin",
-      currentHealth: 50,
-      maxHealth: 50,
-      minDamage: 5,
-      maxDamage: 6,
+      name: "Potion",
+      description: "A healing potion that restores 50 health.",
+      cooldown: 0,
+      icon: "assets/images/items/base/potion_health.png",
     },
     {
-      name: "Orc",
-      currentHealth: 50,
-      maxHealth: 80,
-      minDamage: 10,
-      maxDamage: 12,
+      name: "Mana Potion",
+      description: "A mana potion that restores 30 mana.",
+      cooldown: 0,
+      icon: "assets/images/items/base/potion_mana.png",
     },
-    {
-      name: "Troll",
-      currentHealth: 120,
-      maxHealth: 120,
-      minDamage: 15,
-      maxDamage: 25,
-    },
-  ]);
-  const [player, setPlayer] = useState({
-    name: "Norewind",
-    currentHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
-    maxHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
-    minDamage: secondaryStats.find((stat) => stat.id === "min_dmg").value,
-    maxDamage: secondaryStats.find((stat) => stat.id === "max_dmg").value,
-  });
-
-  const [combatText, setCombatText] = useState([]);
-  const [playerTurn, setPlayerTurn] = useState(true);
-
-  useEffect(() => {
-    setPlayer({
-      name: "Norewind",
-      currentHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
-      maxHealth: secondaryStats.find((stat) => stat.id === "max_hp").value,
-      minDamage: secondaryStats.find((stat) => stat.id === "min_dmg").value,
-      maxDamage: secondaryStats.find((stat) => stat.id === "max_dmg").value,
-    });
-    setCombatText([<p>{`You engage combat against ${enemies[0].name}`}</p>]);
-  }, [secondaryStats]);
+  ]
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col xs={3}>
-            <CharacterPortait character={player} />
-          </Col>
-          <Col xs={6}>
-            <Container className="combat-log">
-              <Row className="justify-content-center">
-                <CombatLog
-                  player={player}
-                  setPlayer={setPlayer}
-                  enemies={enemies}
-                  setEnemies={setEnemies}
-                  combatText={combatText}
-                  setCombatText={setCombatText}
-                  playerTurn={playerTurn}
-                  setPlayerTurn={setPlayerTurn}
-                />
+    <Container className="combat-bg">
+      <Row className="combat">
+        <Col xs={3}>
+          <Row className="mb-4 justify-content-end">
+            <CombatParticipant participant={hero} isHero={true} isAlly={true} />
+          </Row>
+          <Row className="mb-4">
+            <CombatParticipant participant={hero} isHero={true} isAlly={true} />
+          </Row>
+          <Row className="mb-4">
+            <CombatParticipant participant={hero} isHero={true} isAlly={true} />
+          </Row>
+        </Col>
+        <Col xs={6}>
+          <Row className="engraved" style={{ fontSize: "60px" }}>
+            <Col className="me-5">
+              <Row className="justify-content-end engraved">
+                It's
+                <HeroPortrait hero={hero} style={{ marginLeft: "15px", marginRight: "5px" }} />
+                's Turn
               </Row>
-            </Container>
-          </Col>
-          <Col xs={3}>
-            {enemies.length > 0 ? (
-              <CharacterPortait character={enemies[0]} />
-            ) : (
-              <Loot loot={loot} />
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </>
+            </Col>
+            <Col className="ms-5  ">
+              <Row className="justify-content-start">
+                Time Left: <span style={{ fontFamily: "Impact", width: "auto" }}>120</span>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <CombatLog log={log} />
+          </Row>
+          <Row className="mt-3">
+            <Col xs={6}>
+              <SkillBar skills={hero.skills} />
+            </Col>
+            <Col xs={2}>
+              <ItemBar skills={hero.itemSkills} />
+            </Col>
+            <Col xs={4}>
+              <Target target={hero} isHero={true} isAlly={false} />
+            </Col>
+          </Row>
+        </Col>
+        <Col xs={3}>
+          <Row className="mb-4">
+            <CombatParticipant participant={hero} isHero={true} isAlly={false} />
+          </Row>
+          <Row className="mb-4">
+            <CombatParticipant participant={hero} isHero={true} isAlly={false} />
+          </Row>
+          <Row className="mb-4">
+            <CombatParticipant participant={hero} isHero={true} isAlly={false} />
+          </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 }

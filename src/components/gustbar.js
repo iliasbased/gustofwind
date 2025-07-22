@@ -25,7 +25,7 @@ export default function GustBar() {
         <Col xs={6} className="align-self-center mt-1">
           <Row className="gust-bar-wrapper" style={borderStyle}>
             <Col className="gust-bar-fill" style={{ width: `${percentage}%`, flex: "none", ...borderStyle }}></Col>
-            <span className="dusty" style={{ position: "absolute", top:'-8%' }}>
+            <span className="dusty" style={{ position: "absolute", top:'-10%', left: '-1%' }}>
               Gust
             </span>
             <span className="gust-bar-value">

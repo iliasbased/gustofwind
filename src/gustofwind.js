@@ -22,7 +22,8 @@ import Settings from "./pages/settings";
 import Shop from "./pages/shop";
 import { GamemasterProvider } from "./context/gmContext";
 import { HeroProvider } from "./context/heroContext";
-
+import GMLayout from "./layouts/gmLayout";
+import HeroLayout from "./layouts/heroLayout";
 
 export default function GustOfWind() {
   return (
@@ -36,16 +37,23 @@ export default function GustOfWind() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/choice" element={<Choice />} />
+
             <Route path="/gamemaster" element={<GameMaster />} />
-            <Route path="/gmplayers" element={<GMPlayers />} />
-            <Route path="/gmplayer" element={<GMPlayer />} />
+            <Route element={<GMLayout />}>
+              <Route path="/gmplayers" element={<GMPlayers />} />
+              <Route path="/gmplayer" element={<GMPlayer />} />
+            </Route>
+
             <Route path="/hero" element={<HeroSelection />} />
-            <Route path="/character" element={<Character />} />
-            <Route path="/tavern" element={<Tavern />} />
-            <Route path="/questlog" element={<QuestLog />} />
-            <Route path="/combat" element={<Combat />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route element={<HeroLayout />}>
+              <Route path="/character" element={<Character />} />
+              <Route path="/tavern" element={<Tavern />} />
+              <Route path="/questlog" element={<QuestLog />} />
+              <Route path="/combat" element={<Combat />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/shop" element={<Shop />} />
+            </Route>
+
             <Route element={<AuthOutlet fallbackPath="/" />}></Route>
           </Routes>
         </HeroProvider>

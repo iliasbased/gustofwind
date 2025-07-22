@@ -1,7 +1,5 @@
 import { getRandomBorderTopOnlySubtle } from "../../utilities";
 import { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Image } from "react-bootstrap";
 
 export default function HeroPortrait({ hero, style = {} }) {
@@ -11,13 +9,12 @@ export default function HeroPortrait({ hero, style = {} }) {
     setBorderStyle(getRandomBorderTopOnlySubtle());
   }, []);
 
-  function getNameStyle(name, low, high) {
+  function getNameStyle(name) {
     if (name.length >= 15) {
-      return { fontSize: "0.8rem" };
-    } else if (name.length > 10) {
-      return { fontSize: "0.9rem" };
+      return { fontSize: "0.7rem" };
     }
-    return {};
+
+    return { fontSize: "1rem" };
   }
 
   return (
@@ -26,22 +23,24 @@ export default function HeroPortrait({ hero, style = {} }) {
         className="hero-portrait-name dusty m-0"
         style={{ ...getNameStyle(hero.name), ...borderStyle }}
       >
-        {hero.name}
+        <Col className="align-self-center">
+          <Row>{hero.name}</Row>
+        </Col>
       </Row>
       <Row className="hero-portrait-weapons m-0">
-        {hero.weapon0 ? (
-          <Col className="align-self-center px-2 text-center">
-            <Image src={hero.weapon0} className="hero-portait-image" />
+        {hero.weapon0 && (
+          <Col className="align-self-center px-1 text-center">
+            <Row className="justify-content-center">
+              <Image src={hero.weapon0} className="hero-portrait-image" />
+            </Row>
           </Col>
-        ) : (
-          ""
         )}
-        {hero.weapon1 ? (
-          <Col className="align-self-center px-2 text-center">
-            <Image src={hero.weapon1} className="hero-portrait-image" />
+        {hero.weapon1 && (
+          <Col className="align-self-center px-1 text-center">
+            <Row>
+              <Image src={hero.weapon1} className="hero-portrait-image" />
+            </Row>
           </Col>
-        ) : (
-          ""
         )}
       </Row>
     </Container>

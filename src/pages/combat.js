@@ -29,85 +29,86 @@ export default function Combat() {
       description: "A quick slash with your sword.",
       cooldown: 0,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "A",
     },
     {
       name: "Shield Bash",
       description: "Bash the enemy with your shield.",
       cooldown: 2,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "1",
     },
     {
       name: "Heal",
       description: "Heal yourself or an ally.",
       cooldown: 3,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "2",
     },
     {
       name: "Slash",
       description: "A quick slash with your sword.",
       cooldown: 0,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "3",
     },
     {
       name: "Shield Bash",
       description: "Bash the enemy with your shield.",
       cooldown: 2,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "4",
     },
     {
       name: "Heal",
       description: "Heal yourself or an ally.",
       cooldown: 3,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "5",
     },
     {
       name: "Slash",
       description: "A quick slash with your sword.",
       cooldown: 0,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "X",
     },
     {
       name: "Shield Bash",
       description: "Bash the enemy with your shield.",
       cooldown: 2,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "Alt+1",
     },
     {
       name: "Heal",
       description: "Heal yourself or an ally.",
       cooldown: 3,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "Alt+2",
     },
     {
       name: "Slash",
       description: "A quick slash with your sword.",
       cooldown: 0,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "Alt+3",
     },
     {
       name: "Shield Bash",
       description: "Bash the enemy with your shield.",
       cooldown: 2,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "Alt+4",
     },
     {
       name: "Heal",
       description: "Heal yourself or an ally.",
       cooldown: 3,
       icon: "assets/images/skills/pyromancer/fireball.png",
+      hotkey: "Alt+5",
     },
-    {
-      name: "Shield Bash",
-      description: "Bash the enemy with your shield.",
-      cooldown: 2,
-      icon: "assets/images/skills/pyromancer/fireball.png",
-    },
-    {
-      name: "Heal",
-      description: "Heal yourself or an ally.",
-      cooldown: 3,
-      icon: "assets/images/skills/pyromancer/fireball.png",
-    },
+    
   ];
 
   hero.itemSkills = [
@@ -123,19 +124,32 @@ export default function Combat() {
       cooldown: 0,
       icon: "assets/images/items/base/potion_mana.png",
     },
+    {
+      name: "Potion",
+      description: "A healing potion that restores 50 health.",
+      cooldown: 0,
+      icon: "assets/images/items/base/potion_health.png",
+    },
+    {
+      name: "Mana Potion",
+      description: "A mana potion that restores 30 mana.",
+      cooldown: 0,
+      icon: "assets/images/items/base/potion_mana.png",
+
+    },
   ]
 
   return (
     <Container className="combat-bg">
       <Row className="combat">
-        <Col xs={3}>
-          <Row className="mb-4 justify-content-end">
+        <Col xs={3} style={{marginTop:'120px'}}>
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={true} />
           </Row>
-          <Row className="mb-4">
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={true} />
           </Row>
-          <Row className="mb-4">
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={true} />
           </Row>
         </Col>
@@ -143,8 +157,8 @@ export default function Combat() {
           <Row className="engraved" style={{ fontSize: "60px" }}>
             <Col className="me-5">
               <Row className="justify-content-end engraved">
-                It's
-                <HeroPortrait hero={hero} style={{ marginLeft: "15px", marginRight: "5px" }} />
+                <span style={{ marginRight: "5px", width: "auto" }} >It's</span>
+                <HeroPortrait hero={hero}/>
                 's Turn
               </Row>
             </Col>
@@ -169,14 +183,14 @@ export default function Combat() {
             </Col>
           </Row>
         </Col>
-        <Col xs={3}>
-          <Row className="mb-4">
+        <Col xs={3} style={{marginTop:'120px'}}>
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={false} />
           </Row>
-          <Row className="mb-4">
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={false} />
           </Row>
-          <Row className="mb-4">
+          <Row className="mb-1 justify-content-center">
             <CombatParticipant participant={hero} isHero={true} isAlly={false} />
           </Row>
         </Col>

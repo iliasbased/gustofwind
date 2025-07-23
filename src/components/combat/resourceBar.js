@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
+import { getRandomBorderSubtle } from "../../utilities";
 
 export default function ResourceBar({ current, max, isHP, isAlly }) {
-  useEffect(() => {}, []);
+  const [borderStyle, setBorderStyle] = useState({});
+
+  useEffect(() => {
+    setBorderStyle(getRandomBorderSubtle());
+  }, []);
 
   let percentage = Math.min((current / max) * 100, 100);
   if (percentage < 0) {
@@ -11,14 +16,14 @@ export default function ResourceBar({ current, max, isHP, isAlly }) {
   }
 
   const fillStyle = {
-    height: "20px",
+    height: "40px",
     width: `${percentage}%`,
   };
 
   const textStyle = {
-    height: "20px",
+    height: "40px",
     fontFamily: "Impact",
-    fontSize: "14px",
+    fontSize: "22px",
   };
 
   function getClassName() {
@@ -29,15 +34,15 @@ export default function ResourceBar({ current, max, isHP, isAlly }) {
   }
 
   return (
-    <Container className="resource-bar position-relative">
-      <Row className={`m-0 ${getClassName()}`} style={fillStyle}>
+    <Container className="resource-bar mb-1" style={borderStyle}>
+      <Row className={`m-0 ${getClassName()}`} style={{ ...borderStyle, ...fillStyle }}>
         <Col className="p-0"></Col>
       </Row>
       <Row 
         className="m-0 position-absolute w-100" 
         style={{ ...textStyle, top: 0, left: 0 }}
       >
-        <Col style={{ paddingRight: '2px'}} className="d-flex align-items-center justify-content-end">
+        <Col style={{ paddingRight: '5px'}} className="d-flex align-items-center justify-content-end engraved">
           {current} / {max}
         </Col>
       </Row>

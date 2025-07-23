@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SButton from "../components/button";
 import SInput from "../components/input";
-import AccountService from "../services/account-service";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 export default function ForgotPassword() {
@@ -17,7 +16,7 @@ export default function ForgotPassword() {
   const signIn = useSignIn();
 
   async function login() {
-    let response = await new AccountService().attemptLogin(email, password);
+    /* let response = await new AccountService().attemptLogin(email, password);
     if (
       signIn({
         auth: {
@@ -34,7 +33,7 @@ export default function ForgotPassword() {
       setOnFadeOutEnd(() => navigate("/choice"));
       setFadeOut(true);
       return;
-    }
+    } */
 
     console.log("errorrrrrasdfads");
   }

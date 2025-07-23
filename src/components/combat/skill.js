@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
-import { Container, Image } from "react-bootstrap";
-import HeroPortrait from "../hero/heroPortrait";
+import { Image } from "react-bootstrap";
+import { getRandomBorderSubtle } from "../../utilities";
 
-export default function Skill({ effect, style }) {
-  useEffect(() => {}, []);
+export default function Skill({ skill, style, imageStyle }) {
+  const [borderStyle, setBorderStyle] = useState({});
+
+  useEffect(() => {
+    setBorderStyle(getRandomBorderSubtle());
+  }, []);
 
   return (
-    <Container className="skill-container">
-      <Image className="skill" src={effect.icon} alt={effect.name} style={style} />
-    </Container>
+    <button className="skill" style={{ ...style, ...borderStyle }}>
+      <Image
+        style={{ ...imageStyle, ...borderStyle }}
+        src={skill.icon}
+        alt={skill.name}
+      />
+      <div className="hotkey">{skill.hotkey}</div>
+    </button>
   );
 }

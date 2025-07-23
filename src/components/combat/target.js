@@ -13,7 +13,7 @@ export default function Target({ target, isHero, isAlly }) {
       <Row className="justify-content-center engraved mb-3" style={{fontSize: "30px"}}>
         You are targeting:
       </Row>
-      <Row>
+      <Row className="justify-content-center">
         {
           isHero ? (
             <HeroPortrait hero={target} />

@@ -7,7 +7,7 @@ export default function StatusBar({ effects }) {
   useEffect(() => {}, []);
 
   return (
-    <Container className="status-bar mt-1">
+    <Container className="status-bar">
       <Row>{effects.map(effect => (
         <Col xs="auto" key={effect.name} className="p-0">
           <Effect effect={effect}/>

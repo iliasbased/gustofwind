@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
-import HeroPortrait from "../hero/heroPortrait";
+import { getRandomBorderSubtle } from "../../utilities";
 
 export default function Effect({ effect }) {
-  useEffect(() => {}, []);
+  const [borderStyle, setBorderStyle] = useState({});
 
-  return <Image className={effect.isBuff ? "buff" : "debuff"} src={effect.icon} alt={effect.name} />;
+  useEffect(() => {
+    setBorderStyle(getRandomBorderSubtle());
+  }, []);
+
+  return (
+    <Image
+      className={effect.isBuff ? "buff" : "debuff"}
+      src={effect.icon}
+      alt={effect.name}
+      style={borderStyle}
+    />
+  );
 }

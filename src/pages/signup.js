@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import SButton from "../components/button";
 import SInput from "../components/input";
-import AccountService from "../services/account-service";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 import SSpeechBubble from "../components/speech-bubble";
 
@@ -22,29 +21,6 @@ export default function SignUp() {
 
   const navigate = useNavigate();
   const signIn = useSignIn();
-
-  async function login() {
-    let response = await new AccountService().attemptLogin(email, password);
-    if (
-      signIn({
-        auth: {
-          token: response.token,
-          type: "Bearer",
-        },
-        // refresh: response.token,
-        userState: {
-          name: "React User",
-          uid: 123456,
-        },
-      })
-    ) {
-      setOnFadeOutEnd(() => navigate("/"));
-      setFadeOut(true);
-      return;
-    }
-
-    console.log("errorrrrrasdfads");
-  }
 
   function signUp() {
     console.log(name, surname, email, phoneNo, password, passwordConfirm);

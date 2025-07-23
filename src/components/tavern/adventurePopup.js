@@ -1,10 +1,13 @@
-import { use, useContext } from "react";
-import { useEffect, useState } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
-import { PlayerDataContext } from "../../pages/character";
+import { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import getRandomBorder from "../../utilities";
+import { useAdventures } from "../../context/adventureContext";
+import { useHero } from "../../context/heroContext";
 
 export default function AdventurePopup({ adventure, closePopup }) {
+  const { startAdventure } = useAdventures();
+  const { hero } = useHero();
+
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
@@ -33,8 +36,7 @@ export default function AdventurePopup({ adventure, closePopup }) {
               className="adventure-difficulty-button"
               style={{ backgroundColor: "#40c057", ...getRandomBorder() }}
               onClick={() => {
-                //create a new combat row
-                //move to combat page
+                startAdventure(adventure, 1, [hero.id]);
               }}
             >
               Easy
@@ -45,8 +47,7 @@ export default function AdventurePopup({ adventure, closePopup }) {
               className="adventure-difficulty-button"
               style={{ backgroundColor: "#ffd43b", ...getRandomBorder() }}
               onClick={() => {
-                //create a new combat row
-                //move to combat page
+                startAdventure(adventure, 2, [hero.id]);
               }}
             >
               Medium
@@ -57,8 +58,7 @@ export default function AdventurePopup({ adventure, closePopup }) {
               className="adventure-difficulty-button"
               style={{ backgroundColor: "#fa5252", ...getRandomBorder() }}
               onClick={() => {
-                //create a new combat row
-                //move to combat page
+                startAdventure(adventure, 3, [hero.id]);
               }}
             >
               Hard

@@ -18,7 +18,7 @@ export default function HeroPortrait({ hero, style = {} }) {
   }
 
   return (
-    <Container className="hero-portrait p-0" style={{ ...style, ...borderStyle }}>
+    <Container className="hero-portrait p-0 m-0" style={{ ...style, ...borderStyle }}>
       <Row
         className="hero-portrait-name dusty m-0"
         style={{ ...getNameStyle(hero.name), ...borderStyle }}

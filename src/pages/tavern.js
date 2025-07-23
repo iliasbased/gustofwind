@@ -3,26 +3,16 @@ import { Container, Row, Col } from "react-bootstrap";
 import FadeInOut from "../layouts/fade-in-out";
 import Adventure from "../components/tavern/adventure";
 import AdventurePopup from "../components/tavern/adventurePopup";
+import { useAdventures } from "../context/adventureContext";
 
 export default function Tavern() {
+  const { adventures, getAdventures } = useAdventures();
   const [currentAdventure, setCurrentAdventure] = useState(null);
-  let availableAdventures = [
-    {
-      id: 1,
-      name: "Ice Kingdom",
-      img: "/assets/images/adventures/ice_kingdom.png",
-      description:
-        "Once a thriving empire, now entombed in silence. Cracked towers and frozen battlements pierce the sky, their glory buried beneath centuries of ice. The wind howls through hollow halls, echoing the last breath of a kingdom long forgotten. Only frost endures.",
-    },
-    {
-      id: 2,
-      name: "Rotten Fairyland",
-      img: "/assets/images/adventures/rotten_fairyland.png",
-      description:
-        "Once a realm of wonder, now twisted by decay. The air reeks of sweet rot, and the trees whisper with malice. Here, fairy tales fester—and nothing is as harmless as it seems.",
-    },
-  ];
 
+  useEffect(() => {
+    getAdventures();
+  }, []);
+  
   function closePopup() {
     setCurrentAdventure(null);
   }
@@ -30,7 +20,7 @@ export default function Tavern() {
   function onClickToEnter(adventure) {
     setCurrentAdventure(adventure);
   }
-
+  
   return (
     <>
       <AdventurePopup adventure={currentAdventure} closePopup={closePopup} />
@@ -44,7 +34,7 @@ export default function Tavern() {
           </Col>
           <Col xs={5} className="adventures-bg " style={{pointerEvents: "none"  }}>
             <Container style={{ overflowY: "auto", height: "100%" }}>
-              {availableAdventures.map((adventure) => (
+              {adventures.map((adventure) => (
                 <Row
                   className="justify-content-end"
                   style={{ paddingTop: "30px" }}

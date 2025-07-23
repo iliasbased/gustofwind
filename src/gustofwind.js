@@ -22,6 +22,7 @@ import Settings from "./pages/settings";
 import Shop from "./pages/shop";
 import { GamemasterProvider } from "./context/gmContext";
 import { HeroProvider } from "./context/heroContext";
+import { AdventureProvider } from "./context/adventureContext.js";
 import GMLayout from "./layouts/gmLayout";
 import HeroLayout from "./layouts/heroLayout";
 
@@ -30,32 +31,37 @@ export default function GustOfWind() {
     <div className="fixed-app">
       <GamemasterProvider>
         <HeroProvider>
-          <GHeader />
-          <Routes>
-            <Route path="/" element={<Intro />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
-            <Route path="/choice" element={<Choice />} />
+          <AdventureProvider>
+            <GHeader />
+            <Routes>
+              <Route path="/" element={<Intro />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
 
-            <Route path="/gamemaster" element={<GameMaster />} />
-            <Route element={<GMLayout />}>
-              <Route path="/gmplayers" element={<GMPlayers />} />
-              <Route path="/gmplayer" element={<GMPlayer />} />
-            </Route>
+              {/* accountLayout */}
+              <Route path="/choice" element={<Choice />} />
 
-            <Route path="/hero" element={<HeroSelection />} />
-            <Route element={<HeroLayout />}>
-              <Route path="/character" element={<Character />} />
-              <Route path="/tavern" element={<Tavern />} />
-              <Route path="/questlog" element={<QuestLog />} />
-              <Route path="/combat" element={<Combat />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/shop" element={<Shop />} />
-            </Route>
+              <Route path="/gamemaster" element={<GameMaster />} />
+              <Route element={<GMLayout />}>
+                <Route path="/gmplayers" element={<GMPlayers />} />
+                <Route path="/gmplayer" element={<GMPlayer />} />
+              </Route>
 
-            <Route element={<AuthOutlet fallbackPath="/" />}></Route>
-          </Routes>
+              <Route path="/hero" element={<HeroSelection />} />
+              <Route element={<HeroLayout />}>
+                <Route path="/character" element={<Character />} />
+                <Route path="/tavern" element={<Tavern />} />
+                <Route path="/questlog" element={<QuestLog />} />
+                <Route path="/combat" element={<Combat />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/shop" element={<Shop />} />
+              </Route>
+              {/* accountLayout */}
+
+              <Route element={<AuthOutlet fallbackPath="/" />}></Route>
+            </Routes>
+          </AdventureProvider>
         </HeroProvider>
       </GamemasterProvider>
       <GFooter />

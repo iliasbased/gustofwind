@@ -31,7 +31,7 @@ export default function HeroSelectButton({ hero, onDelete, onSelectHero }) {
     >
       <Container className="h-100 pt-2">
         <Row>
-          <Col xs={4}>
+          <Col xs={4} className="ps-4">
             <HeroPortrait hero={hero} />
           </Col>
           <Col xs={5} className="ps-4">

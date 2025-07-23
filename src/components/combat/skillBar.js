@@ -11,7 +11,7 @@ export default function SkillBar({ skills }) {
       <Row>
         {skills.map((skill) => (
           <Col xs="auto" key={skill.name} className="p-0">
-            <Skill effect={skill} />
+            <Skill skill={skill} imageStyle={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </Col>
         ))}
       </Row>

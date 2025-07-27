@@ -4,7 +4,7 @@ import SFadeInOut from "../layouts/fade-in-out";
 import { useEffect, useState } from "react";
 import GustBar from "./gustbar";
 import Menu from "./menu";
-import { getRandomBorderBottomOnly } from "../utilities";
+import { getRandomBorderBottomOnly } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
 import BackButton from "./backButton";
 

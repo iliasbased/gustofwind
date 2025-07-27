@@ -1,17 +1,13 @@
-import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
 import Quest from "./quest";
-import getRandomBorder, {
+import {
   getRandomBorderSubtle,
   getRandomBorderSubtleLeftSide,
-} from "../../utilities";
+} from "../../utilities/borderUtility";
 import QuestPopup from "./questPopup";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { useQuests } from "../../hooks/useQuests";
 
 export default function Quests({ todaysQuests, dailyQuests, refreshQuests }) {
   const [currentQuest, setCurrentQuest] = useState(null);

@@ -1,8 +1,6 @@
-import { getRandomBorderSubtle } from "../../utilities";
+import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function PlayerGamemaster({ request, onAccept, onDecline }) {
   const [borderStyle, setBorderStyle] = useState({});

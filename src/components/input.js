@@ -1,4 +1,4 @@
-import getRandomBorder from "../utilities";
+import getRandomBorder from "../utilities/borderUtility";
 import { useState, useEffect } from "react";
 
 export default function SInput({  onChange, type, placeholder, style, className }) {

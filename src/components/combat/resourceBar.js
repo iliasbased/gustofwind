@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
-import { getRandomBorderSubtle } from "../../utilities";
+import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 
-export default function ResourceBar({ current, max, isHP, isAlly }) {
+export default function ResourceBar({ current, max, isHP, isAlly, isEmpty }) {
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -33,16 +33,27 @@ export default function ResourceBar({ current, max, isHP, isAlly }) {
     return "mana-bar-fill";
   }
 
+  if (isEmpty || max === 0) {
+    return (
+      <Container className="resource-bar mb-1" style={borderStyle}>
+        <Row
+          className={`m-0 ${getClassName()}`}
+          style={{ backgroundColor: "transparent", ...borderStyle, ...fillStyle }}
+        ></Row>
+      </Container>
+    );
+  }
+
   return (
     <Container className="resource-bar mb-1" style={borderStyle}>
       <Row className={`m-0 ${getClassName()}`} style={{ ...borderStyle, ...fillStyle }}>
         <Col className="p-0"></Col>
       </Row>
-      <Row 
-        className="m-0 position-absolute w-100" 
-        style={{ ...textStyle, top: 0, left: 0 }}
-      >
-        <Col style={{ paddingRight: '5px'}} className="d-flex align-items-center justify-content-end engraved">
+      <Row className="m-0 position-absolute w-100" style={{ ...textStyle, top: 0, left: 0 }}>
+        <Col
+          style={{ paddingRight: "5px" }}
+          className="d-flex align-items-center justify-content-end engraved"
+        >
           {current} / {max}
         </Col>
       </Row>

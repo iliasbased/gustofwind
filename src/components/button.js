@@ -1,4 +1,4 @@
-import getRandomBorder from "../utilities";
+import getRandomBorder from "../utilities/borderUtility";
 import { useState, useEffect, useRef } from "react";
 
 export default function GButton({ activateOnEnter, disabled, size, onClick, style, children }) {

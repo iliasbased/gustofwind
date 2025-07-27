@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle, getRandomBorderSubtleLeftSide } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle, getRandomBorderSubtleLeftSide } from "../../utilities/borderUtility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import GMPlayerQuest from "./gmPlayerQuest";
 

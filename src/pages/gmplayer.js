@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SFadeInOut from "../layouts/fade-in-out";
 import { Container, Row, Col } from "react-bootstrap";
-import { getRandomBorderSubtle } from "../utilities";
+import { getRandomBorderSubtle } from "../utilities/borderUtility";
 import { useGamemaster } from "../context/gmContext";
 import HeroPortrait from "../components/hero/heroPortrait";
 import GMPlayerQuests from "../components/gamemaster/gmPlayerQuests";

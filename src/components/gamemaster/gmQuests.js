@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import getRandomBorder, {
   getRandomBorderSubtle,
   getRandomBorderSubtleLeftSide,
-} from "../../utilities";
+} from "../../utilities/borderUtility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import GMQuest from "./gmQuest";
 

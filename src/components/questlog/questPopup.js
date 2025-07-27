@@ -1,9 +1,6 @@
-import { use, useContext } from "react";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
-import { PlayerDataContext } from "../../pages/character";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
-import { text } from "@fortawesome/fontawesome-svg-core";
+import { Container, Row, Col } from "react-bootstrap";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { submitQuestProof } from "../../services/questService";
 
 export default function QuestPopup({ quest, closePopup }) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { getRandomBorderSubtle } from "../../utilities";
+import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { removeQuest } from "../../services/questService";
 
 export default function QuestRemovePopup({ quest, player, closePopup }) {

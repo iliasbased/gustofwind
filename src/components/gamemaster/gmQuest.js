@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle, getRandomBorderLeftOnly } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle, getRandomBorderLeftOnly } from "../../utilities/borderUtility";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 

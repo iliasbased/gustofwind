@@ -440,6 +440,23 @@ input[type="submit"],
   cursor: url("cursors/cursor-door.png"), pointer;
 }
 
+.popup-overlay-noexit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.8);
+  z-index: 950;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
 .adventure-popup {
   position: fixed;
   background: #282c34;
@@ -807,6 +824,7 @@ input[type="submit"],
   height: 38px;
   margin-bottom: 5px;
   cursor: url("cursors/cursor-pointer.png"), pointer;
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3));
 }
 
 .slot-icon:active {
@@ -817,6 +835,7 @@ input[type="submit"],
   width: 48px;
   height: 48px;
   cursor: url("cursors/cursor-pointer.png"), pointer;
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3));
 }
 
 .slot-icon-large:active {
@@ -936,7 +955,7 @@ input[type="submit"],
 .slot-bag {
   width: 50px;
   height: 50px;
-  background: radial-gradient(circle, rgba(140, 130, 129, 1) 0%, rgba(82, 73, 71, 1) 100%);
+  background: radial-gradient(circle, rgba(140, 130, 129, 1) 20%, rgba(82, 73, 71, 1) 100%);
   border: 1px solid #161311;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px 5px 15px;
   padding: 0;
@@ -1144,7 +1163,11 @@ input[type="submit"],
   border: 2px solid #282c34;
   width: 110px;
   height: 100px;
-  box-shadow: rgba(194, 134, 66, 0.25) 0px 0px 20px;
+  box-shadow: rgba(241, 167, 82, 0.35) 0px 0px 20px;
+}
+
+.empty-hero-portrait {
+  box-shadow: rgba(165, 164, 163, 0.25) 0px 0px 20px, inset rgba(20, 15, 9, 0.5) 0px 0px 20px;
 }
 
 .hero-portrait-name {
@@ -1171,11 +1194,44 @@ input[type="submit"],
 .hero-portrait-image {
   width: 60px;
   margin-left: 5px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+}
+
+.enemy-portrait {
+  border: 2px solid #282c34;
+  width: 110px;
+  height: 100px;
+  box-shadow: rgba(241, 82, 82, 0.35) 0px 0px 20px;
+}
+
+.enemy-portrait-name {
+  font-size: 20px;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: #ffffffb6;
+  background-color: rgb(143 101 101);
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.685) 0px 1px 1px;
+  padding-left: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  height: 29px;
+  position: relative;
+}
+
+.enemy-portrait-image-background {
+  background: radial-gradient(circle, rgb(212, 150, 144) 0%, rgb(105, 89, 89) 100%);
+  box-shadow: inset rgba(0, 0, 0, 0.3) 0px 0px 10px;
+  height: 67px;
+  z-index: 50;
+}
+
+.enemy-portrait-image {
+  margin-top: -11px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+  scale: 0.9;
 }
 
 .hero-creation-popup {
-  width: 500px;
-  height: 500px;
   position: fixed;
   background: radial-gradient(circle, #2e2a29 0%, #282c34 100%);
   top: 30%;
@@ -1187,6 +1243,7 @@ input[type="submit"],
   box-shadow: rgba(194, 134, 66, 0.2) 0px 0px 50px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
   border: 2px solid #161311;
   z-index: 1000;
+  color: #dbdbdd;
 }
 
 .hero-creation-text {
@@ -1365,6 +1422,7 @@ input[type="submit"],
   box-shadow: rgba(194, 66, 66, 0.2) 0px 0px 30px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
   border: 2px solid #161311;
   z-index: 1000;
+  color: #dbdbdd;
 }
 
 .menu {
@@ -1545,6 +1603,10 @@ input[type="submit"],
 
 .quest-add-button:active {
   transform: scale(0.95);
+}
+
+.quest-add-button:focus-visible {
+  outline: none;
 }
 
 .quest-add-button:hover {
@@ -1882,7 +1944,7 @@ input[type="submit"],
 }
 
 .combat-bg {
-  background: url("images/adventures/ice_kingdom/icekingdom1.png") no-repeat left center fixed;
+  /* background: url("images/adventures/ice_kingdom/icekingdom1.png") no-repeat left center fixed; */
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -1928,7 +1990,8 @@ input[type="submit"],
 
 .status-bar {
   width: 230px;
-  max-height: 60px;
+  height: 32px;
+  max-height: 32px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #3d4554 #282c34;
@@ -1968,6 +2031,20 @@ input[type="submit"],
   position: relative;
 }
 
+.empty-skill {
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  background: radial-gradient(circle, rgba(140, 130, 129, 1) 0%, rgba(82, 73, 71, 1) 100%);
+  width: 65px;
+  height: 65px;
+  border: 2px solid #333;
+  margin-top: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 0;
+  position: relative;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, inset rgba(0, 0, 0, 0.8) 0px 0px 8px;
+}
+
 .skill::after {
   content: "";
   position: absolute;
@@ -1988,11 +2065,11 @@ input[type="submit"],
 
 .skill:hover {
   cursor: url("cursors/cursor-pointer.png"), pointer;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .skill:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .item-bar {
@@ -2017,15 +2094,53 @@ input[type="submit"],
   width: auto;
   padding: 0;
   margin: 0;
+  transition: all 0.1s ease-in-out;
 }
 
 .target-button:hover {
   cursor: url("cursors/cursor-pointer.png"), pointer;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .target-button:active {
   transform: scale(0.95);
+}
+
+.start-combat-popup {
+  width: 800px;
+  height: 620px;
+  position: fixed;
+  /* background: radial-gradient(circle, #2e2a29 0%, #282c34 100%); */
+  background: url("images/adventures/ice_kingdom/icekingdom1.png") no-repeat center center fixed;
+  top: 18%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: rgba(102, 22, 17, 0.3) 0px 0px 100px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 2px solid #161311;
+  z-index: 1000;
+  color: #dbdbdb;
+}
+
+.start-combat-button {
+  background: radial-gradient(circle, #942c2c 0%, #413131 100%);
+  height: 80px;
+  width: 280px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 40px;
+  padding: 0;
+}
+
+.start-combat-button:active {
+  transform: scale(0.95);
+}
+
+.start-combat-button:hover {
+  background: radial-gradient(circle, #b11f1f 0%, #413131 100%);
+
+  cursor: url("cursors/cursor-pointer.png"), pointer;
 }
 
 /*-------------------------------------------------------------------------*/

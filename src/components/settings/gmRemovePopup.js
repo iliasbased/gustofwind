@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Dropdown } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import { Container, Row, Col } from "react-bootstrap";
+import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { removePlayerGamemaster } from "../../services/accountService";
 
 export default function GMRemovePopup({ gamemaster, closePopup }) {

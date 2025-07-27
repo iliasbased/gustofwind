@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import SFadeInOut from "../layouts/fade-in-out";
-import { getRandomBorderSubtle } from "../utilities";
+import { getRandomBorderSubtle } from "../utilities/borderUtility";
 import { usePlayerGamemasters } from "../hooks/usePlayerGamemasters";
 import { useHero } from "../context/heroContext";
 import PlayerGamemaster from "../components/settings/playerGamemaster";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Dropdown } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { useStarterWeapons } from "../../hooks/useStarterWeapons";
 import HeroPortrait from "./heroPortrait";
 import { createPlayer } from "../../services/accountService";

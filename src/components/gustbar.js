@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
 
 export default function GustBar() {

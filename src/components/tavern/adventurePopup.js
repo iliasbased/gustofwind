@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import getRandomBorder from "../../utilities";
+import getRandomBorder from "../../utilities/borderUtility";
 import { useAdventures } from "../../context/adventureContext";
 import { useHero } from "../../context/heroContext";
 

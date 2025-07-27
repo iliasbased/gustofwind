@@ -1,13 +1,11 @@
 import React, { useEffect, useState, Context } from "react";
 import { Container, Row, Col, Fade } from "react-bootstrap";
 import Gear from "../components/character/gear";
-import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
-import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
-import { getRandomBorderLeftOnly } from "../utilities";
+import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
 
 export const PlayerDataContext = React.createContext();

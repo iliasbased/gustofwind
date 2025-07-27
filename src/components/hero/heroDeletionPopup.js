@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Dropdown } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { deletePlayer } from "../../services/accountService";
 
 export default function HeroDeletionPopup({ hero, closePopup, refresh }) {

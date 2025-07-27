@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderLeftOnly } from "../utilities";
+import getRandomBorder, { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons/faVolumeHigh";
 import { useNavigate } from "react-router-dom";

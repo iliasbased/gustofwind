@@ -1,9 +1,6 @@
-import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate, faCheck } from "@fortawesome/free-solid-svg-icons";
 

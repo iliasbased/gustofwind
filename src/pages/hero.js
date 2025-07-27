@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "react-bootstrap";
-import SButton from "../components/button";
 import SFadeInOut from "../layouts/fade-in-out";
-import SCentered from "../layouts/centered";
 import { Container, Row, Col } from "react-bootstrap";
-import GButton from "../components/button";
-import getRandomBorder, { getRandomBorderSubtle } from "../utilities";
+import { getRandomBorderSubtle } from "../utilities/borderUtility";
 import HeroSelectionButton from "../components/hero/heroSelectButton";
 import HeroCreationPopup from "../components/hero/heroCreationPopup";
 import { useAccountPlayers } from "../hooks/useAccountPlayers";

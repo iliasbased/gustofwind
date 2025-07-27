@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { submitQuest } from "../../services/questService";
 
 export default function QuestCreatePopup({ show, quest, closePopup }) {

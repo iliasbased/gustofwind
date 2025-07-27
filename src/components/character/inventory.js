@@ -2,7 +2,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import Slot from "./slot";
 import { PlayerDataContext } from "../../pages/character";
-import {getRandomBorderTopOnly} from "../../utilities";
+import {getRandomBorderTopOnly} from "../../utilities/borderUtility";
 
 export default function Inventory() {
   const { playerItems } = useContext(PlayerDataContext);

@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
+import EnemyPortrait from "./enemyPortrait";
 import ResourceBar from "./resourceBar";
 import StatusBar from "./statusBar";
 
-export default function CombatParticipant({ participant, isHero, isAlly }) {
+export default function Combatant({ combatant, isTargeted, onSelectTarget }) {
+  if (!combatant) {
+    return null;
+  }
 
-  participant.stats = participant.stats || {
-    currentHealth: 50,
-    maxHealth: 100,
-    currentMana: 50,
-    maxMana: 50,
-  };
+  const isEnemy = combatant.player_id == null;
+  const isAlly = combatant.team_id == 0;
 
-  participant.status = {
+  /* combatant.status = {
     buffs: [
       {
         name: "Healing Touch",
@@ -48,35 +48,44 @@ export default function CombatParticipant({ participant, isHero, isAlly }) {
         isBuff: false,
       },
     ],
-  };
+  }; */
+
+  let style = isAlly ? { outline: "2px solid #4caf50" } : { outline: "2px solid #ff4d4d" };
+  if (!isTargeted) {
+    style = {};
+  }
 
   return (
-    <Container className="combat-participant">
+    <Container style={{ width: "auto" }}>
       <Row>
         <Col xs={4} className="pe-5 mb-1">
           <Row className="justify-content-end">
             <div className="target-button">
-              {
-                isHero ? (
-                  <HeroPortrait hero={participant} />
-                ) : null /* <EnemyPortrait enemy={participant} /> */
-              }
+              {isEnemy ? (
+                <EnemyPortrait
+                  enemy={combatant.info}
+                  style={style}
+                  onSelectTarget={onSelectTarget}
+                />
+              ) : (
+                <HeroPortrait hero={combatant.info} style={style} onSelectTarget={onSelectTarget} />
+              )}
             </div>
           </Row>
         </Col>
         <Col xs={8}>
           <Row className="justify-content-start mt-1">
             <ResourceBar
-              current={participant.stats.currentHealth}
-              max={participant.stats.maxHealth}
+              current={combatant.stats.find((stat) => stat.stat_id == "curr_hp").value}
+              max={combatant.stats.find((stat) => stat.stat_id == "max_hp").value}
               isHP={true}
               isAlly={isAlly}
             />
           </Row>
           <Row className="justify-content-start">
             <ResourceBar
-              current={participant.stats.currentMana}
-              max={participant.stats.maxMana}
+              current={combatant.stats.find((stat) => stat.stat_id == "curr_mp")?.value || 0}
+              max={combatant.stats.find((stat) => stat.stat_id == "max_mp")?.value || 0}
               isHP={false}
               isAlly={isAlly}
             />
@@ -84,10 +93,10 @@ export default function CombatParticipant({ participant, isHero, isAlly }) {
         </Col>
       </Row>
       <Row className="justify-content-start">
-        <StatusBar effects={participant.status.buffs} />
+        <StatusBar effects={combatant.status.buffs} />
       </Row>
       <Row className="justify-content-start">
-        <StatusBar effects={participant.status.debuffs} />
+        <StatusBar effects={combatant.status.debuffs} />
       </Row>
     </Container>
   );

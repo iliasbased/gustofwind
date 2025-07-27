@@ -1,7 +1,7 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useDroppable } from "@dnd-kit/core";
 import Item from "./item";
-import getRandomBorder, { getRandomBorderSubtle } from "../../utilities";
+import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { useEffect, useState } from "react";
 
 export default function Slot({ id, type, disabled, item, selectedHeader }) {

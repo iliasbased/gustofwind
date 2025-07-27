@@ -7,7 +7,7 @@ import { DndContext, closestCorners } from "@dnd-kit/core";
 import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
-import { getRandomBorderLeftOnly } from "../utilities";
+import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
 
 export const PlayerDataContext = React.createContext();

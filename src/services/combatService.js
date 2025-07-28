@@ -53,13 +53,16 @@ export async function startCombat(combatId) {
 export async function endPlayerTurn(combatId, action) {
   console.log("Sending player action:", action);
 
-  const res = await fetch(`/api/combat/${combatId}/action`, {
+  const res = await fetch(`${API_URL}/combat/endTurn/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       // Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    body: JSON.stringify(action),
+    body: JSON.stringify({
+      combatId: combatId,
+      action: action,
+    }),
   });
 
   if (!res.ok) {

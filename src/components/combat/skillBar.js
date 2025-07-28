@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
 import Skill from "./skill";
 
-export default function SkillBar({ skills, attemptCast }) {
+export default function SkillBar({ skills, attemptCast, pressedSkill }) {
   useEffect(() => {}, []);
 
   if (!skills || skills.length === 0) {
@@ -20,6 +20,7 @@ export default function SkillBar({ skills, attemptCast }) {
           skill={skill}
           imageStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
           attemptCast={attemptCast}
+          isPressed={skill.id === pressedSkill?.id}
         />
       );
       continue;

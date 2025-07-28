@@ -26,20 +26,8 @@ export function AdventureProvider({ children }) {
         console.log('Connected to combat stream for combat', data.combatId);
         break;
         
-      case 'combat_started':
-        console.log('Combat started, updating state');
-        setCombat(data.combat);
-        
-        if (data.enemyActions?.length > 0) {
-          console.log(`Adding ${data.enemyActions.length} enemy actions to log`);
-          data.enemyActions.forEach(action => {
-            addToCombatLog(formatEnemyAction(action));
-          });
-        }
-        break;
-        
-      case 'turn_completed':
-        console.log('Turn completed, updating combat state');
+      case 'new_turn':
+        console.log('New turn started, updating combat state');
         setCombat(data.combat);
         
         if (data.playerAction) {
@@ -48,7 +36,7 @@ export function AdventureProvider({ children }) {
         }
         
         if (data.enemyActions?.length > 0) {
-          console.log(`Adding ${data.enemyActions.length} enemy responses to log`);
+          console.log(`Adding ${data.enemyActions.length} enemy actions to log`);
           data.enemyActions.forEach(action => {
             addToCombatLog(formatEnemyAction(action));
           });
@@ -64,7 +52,7 @@ export function AdventureProvider({ children }) {
 
   function addToCombatLog(message) {
     setCombatLog(prev => {
-      const newLog = [...prev, message];
+      const newLog = [message, ...prev];
       return newLog;
     });
   };

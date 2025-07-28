@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
 import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 
-export default function Skill({ skill, style, imageStyle, isEmpty, attemptCast }) {
+export default function Skill({ skill, style, imageStyle, isEmpty, attemptCast, isPressed }) {
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Skill({ skill, style, imageStyle, isEmpty, attemptCast }
 
   return (
     <button
-      className="skill"
+      className={`skill ${isPressed ? 'pressed' : ''}`} // ✅ Add pressed class
       style={{ ...style, ...borderStyle }}
       onClick={() => attemptCast(skill)}
     >

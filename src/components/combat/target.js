@@ -3,14 +3,20 @@ import { Container, Row, Col } from "react-bootstrap";
 import HeroPortrait from "../hero/heroPortrait";
 import EnemyPortrait from "./enemyPortrait";
 
-export default function Target({ target }) {
+export default function Target({ target, noTargetAlert }) {
   useEffect(() => {}, []);
 
   if (!target) {
     return (
-      <Container>
-        <Row className="justify-content-center engraved mb-3" style={{ fontSize: "30px" }}>
-          You are targeting:
+      <Container className="h-100">
+        <Row className="engraved mb-3 h-100">
+          <Col
+            className={`align-self-center text-center ${
+              noTargetAlert ? "no-target-alert" : "no-target"
+            }`}
+          >
+            You have no target!
+          </Col>
         </Row>
       </Container>
     );

@@ -16,14 +16,11 @@ import { startCombat } from "../services/combatService";
 export default function Combat() {
   const { hero } = useHero();
   const [myCombatant, setMyCombatant] = useState(null);
-  const { combat, getActiveCombat, combatLog, isConnected, endTurn } = useAdventures();
+  const { combat, getActiveCombat, combatLog, endTurn } = useAdventures();
   const [target, setTarget] = useState();
   const [turnCombatant, setTurnCombatant] = useState(null);
-
-  const myCombatantRef = useRef(null);
-  const turnCombatantRef = useRef(null);
-  const targetRef = useRef(null);
-  const combatRef = useRef(null);
+  const [pressedSkill, setPressedSkill] = useState(null);
+  const [noTargetAlert, setNoTargetAlert] = useState(false);
 
   useEffect(() => {
     if (!combat) {
@@ -33,103 +30,105 @@ export default function Combat() {
 
     const currentTurn = combat.turn_index;
     const combatants = [...combat.team0, ...combat.team1];
-    const combatant = combatants.find((c) => c.turn_order === currentTurn);
-    const me = combatants.find((c) => c.player_id === hero.id);
+    setTurnCombatant(combatants.find((c) => c.turn_order === currentTurn));
+    setMyCombatant(combatants.find((c) => c.player_id === hero.id));
 
-    setTurnCombatant(combatant);
-    setMyCombatant(me);
+    function onKeyDown(e) {
+      const currentCombatants = [...combat.team0, ...combat.team1];
+      const currentTurnCombatant = currentCombatants.find((c) => c.turn_order === combat.turn_index);
+      const currentMe = currentCombatants.find((c) => c.player_id === hero.id);
 
-    turnCombatantRef.current = combatant;
-    myCombatantRef.current = me;
-    combatRef.current = combat;
-
-    document.addEventListener("keydown", (e) => onKeyDown(e));
-
-    return () => {
-      document.removeEventListener("keydown", (e) => onKeyDown(e));
-    };
-  }, [combat]);
-
-  useEffect(() => {
-    targetRef.current = target;
-  }, [target]);
-
-  function onKeyDown(e) {
-    const currentTurnCombatant = turnCombatantRef.current;
-    const currentMyCombatant = myCombatantRef.current;
-    const currentTarget = targetRef.current;
-    const currentCombat = combatRef.current;
-
-    if (currentTurnCombatant && currentTurnCombatant.player_id !== hero.id) {
-      return;
-    }
-
-    //TARGETING
-    if (e.key === "Tab") {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const currentIndex = currentCombat.team1.findIndex((c) => c.id === currentTarget?.id);
-      const direction = e.shiftKey ? -1 : 1;
-
-      let nextIndex = (currentIndex + direction) % currentCombat.team1.length;
-      if (nextIndex < 0) {
-        nextIndex = currentCombat.team1.length - 1;
-      }
-
-      setTarget(currentCombat.team1[nextIndex]);
-      return;
-    }
-
-    if (e.key === "Escape") {
-      setTarget(null);
-      return;
-    }
-
-    if (["F1", "F2", "F3", "F5", "F6", "F7"].includes(e.key)) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    let allies = currentCombat.team0;
-    let enemies = currentCombat.team1;
-
-    allies.forEach((c, i) => {
-      if (e.key === `F${i + 1}`) {
-        setTarget(c);
+      if (currentTurnCombatant && currentTurnCombatant.player_id !== hero.id) {
         return;
       }
-    });
 
-    enemies.forEach((c, i) => {
-      if (e.key === `F${i + 5}`) {
-        setTarget(c);
-        return;
-      }
-    });
-
-    //SKILLS
-    for (const skill of currentMyCombatant.skills) {
-      if (e.key === skill.hotkey.toLowerCase()) {
+      //TARGETING
+      if (e.key === "Tab") {
         e.preventDefault();
         e.stopPropagation();
 
-        attemptCast(skill);
+        const currentIndex = combat.team1.findIndex((c) => c.id === target?.id);
+        const direction = e.shiftKey ? -1 : 1;
+
+        let nextIndex = (currentIndex + direction) % combat.team1.length;
+        if (nextIndex < 0) {
+          nextIndex = combat.team1.length - 1;
+        }
+
+        setTarget(combat.team1[nextIndex]);
         return;
       }
+
+      if (e.key === "Escape") {
+        setTarget(null);
+        return;
+      }
+
+      if (["F1", "F2", "F3", "F5", "F6", "F7"].includes(e.key)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      let allies = combat.team0;
+      let enemies = combat.team1;
+
+      allies.forEach((c, i) => {
+        if (e.key === `F${i + 1}`) {
+          setTarget(c);
+          return;
+        }
+      });
+
+      enemies.forEach((c, i) => {
+        if (e.key === `F${i + 5}`) {
+          setTarget(c);
+          return;
+        }
+      });
+
+      //SKILLS
+      if (currentMe && currentMe.skills) {
+        for (const skill of currentMe.skills) {
+          if (e.key === skill.hotkey.toLowerCase()) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            attemptCast(skill);
+            return;
+          }
+        }
+      }
     }
-  }
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [combat, target]);
 
   function attemptCast(skill) {
+    setPressedSkill(skill);
+    setTimeout(() => setPressedSkill(null), 100);
+
+    const currentCombatants = [...combat.team0, ...combat.team1];
+    const currentTurnCombatant = currentCombatants.find((c) => c.turn_order === combat.turn_index);
+
+    if (currentTurnCombatant && currentTurnCombatant.player_id !== hero.id) {
+      console.log("It's not your turn!");
+      return;
+    }
+
     if (skill.cooldown > 0) {
       alert(`Skill ${skill.name} is on cooldown!`);
       return;
     }
 
-    if (target) {
-      // skill.castSkill(target);
-    } else {
-      alert("No target selected!");
+    if (!target) {
+      if (!noTargetAlert) {
+        setNoTargetAlert(true);
+        setTimeout(() => setNoTargetAlert(false), 500);
+      }
       return;
     }
 
@@ -140,13 +139,6 @@ export default function Combat() {
   function onSelectTarget(selectedTarget) {
     setTarget(selectedTarget);
   }
-
-  let log = [
-    "Norewind attacks Goblin for 10 damage.",
-    "Goblin attacks Norewind for 5 damage.",
-    "Norewind heals for 8 health.",
-    "Goblin is defeated.",
-  ];
 
   function getTurnText() {
     return (
@@ -215,7 +207,7 @@ export default function Combat() {
               {combat.team0[1] ? (
                 <Combatant
                   combatant={combat.team0[1]}
-                  isTargeted={target == combat.team0[1]}
+                  isTargeted={target?.id == combat.team0[1]?.id}
                   onSelectTarget={() => onSelectTarget(combat.team0[1])}
                 />
               ) : (
@@ -226,7 +218,7 @@ export default function Combat() {
               {combat.team0[0] ? (
                 <Combatant
                   combatant={combat.team0[0]}
-                  isTargeted={target == combat.team0[0]}
+                  isTargeted={target?.id == combat.team0[0]?.id}
                   onSelectTarget={() => onSelectTarget(combat.team0[0])}
                 />
               ) : (
@@ -237,7 +229,7 @@ export default function Combat() {
               {combat.team0[2] ? (
                 <Combatant
                   combatant={combat.team0[2]}
-                  isTargeted={target == combat.team0[2]}
+                  isTargeted={target?.id == combat.team0[2]?.id}
                   onSelectTarget={() => onSelectTarget(combat.team0[2])}
                 />
               ) : (
@@ -250,15 +242,19 @@ export default function Combat() {
               {combat.turn_index === 0 || !turnCombatant ? getAdventureName() : getTurnText()}
             </Row>
             <Row>
-              <CombatLog log={log} />
+              <CombatLog log={combatLog} />
             </Row>
             <Row className="mt-3">
               <Col xs={6}>
-                <SkillBar skills={myCombatant?.skills} attemptCast={attemptCast} />
+                <SkillBar
+                  skills={myCombatant?.skills}
+                  attemptCast={attemptCast}
+                  pressedSkill={pressedSkill}
+                />
               </Col>
               <Col xs={2}>{/* <ItemBar skills={hero.itemSkills} /> */}</Col>
               <Col xs={4}>
-                <Target target={target} />
+                <Target target={target} noTargetAlert={noTargetAlert} />
               </Col>
             </Row>
           </Col>
@@ -267,7 +263,7 @@ export default function Combat() {
               {combat.team1[1] ? (
                 <Combatant
                   combatant={combat.team1[1]}
-                  isTargeted={target == combat.team1[1]}
+                  isTargeted={target?.id == combat.team1[1]?.id}
                   onSelectTarget={() => onSelectTarget(combat.team1[1])}
                 />
               ) : (
@@ -277,7 +273,7 @@ export default function Combat() {
             <Row className="mb-5 justify-content-center">
               <Combatant
                 combatant={combat.team1[0]}
-                isTargeted={target == combat.team1[0]}
+                isTargeted={target?.id == combat.team1[0]?.id}
                 onSelectTarget={() => onSelectTarget(combat.team1[0])}
               />
             </Row>
@@ -285,7 +281,7 @@ export default function Combat() {
               {combat.team1[2] ? (
                 <Combatant
                   combatant={combat.team1[2]}
-                  isTargeted={target == combat.team1[2]}
+                  isTargeted={target?.id == combat.team1[2]?.id}
                   onSelectTarget={() => onSelectTarget(combat.team1[2])}
                 />
               ) : (

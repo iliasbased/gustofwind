@@ -1978,14 +1978,17 @@ input[type="submit"],
 
 .hp-bar-fill-ally {
   background-color: #4caf50;
+  transition: all 0.2s ease-in-out;
 }
 
 .hp-bar-fill-enemy {
   background-color: #ff4d4d;
+  transition: all 0.2s ease-in-out;
 }
 
 .mana-bar-fill {
   background-color: #2196f3;
+  transition: all 0.2s ease-in-out;
 }
 
 .status-bar {
@@ -2045,6 +2048,10 @@ input[type="submit"],
   box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, inset rgba(0, 0, 0, 0.8) 0px 0px 8px;
 }
 
+.empty-skll:focus-visible {
+  outline: none;
+}
+
 .skill::after {
   content: "";
   position: absolute;
@@ -2069,7 +2076,15 @@ input[type="submit"],
 }
 
 .skill:active {
-  transform: scale(0.98);
+  transform: scale(0.95);
+}
+
+.skill:focus-visible {
+  outline: none;
+}
+
+.skill.pressed {
+  transform: scale(0.95);
 }
 
 .item-bar {
@@ -2104,6 +2119,17 @@ input[type="submit"],
 
 .target-button:active {
   transform: scale(0.95);
+}
+
+.no-target {
+  font-size: 30px;
+  transition: all 0.1s ease-in-out;
+}
+
+.no-target-alert {
+  font-size: 35px;
+  color: rgb(240, 66, 47);
+  transition: all 0.1s ease-in-out;
 }
 
 .start-combat-popup {

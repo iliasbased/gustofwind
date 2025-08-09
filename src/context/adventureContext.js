@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { initCombat, fetchActiveCombat, endPlayerTurn } from "../services/combatService";
-import { fetchAdventures } from "../services/adventureService";
+import { initCombat, fetchActiveCombat, endPlayerTurn, acceptPlayerLoot } from "../services/combatService";
+import { fetchAdventures, fetchLoot } from "../services/adventureService";
 import { useNavigate } from "react-router-dom";
 import { useCombatSSE } from "../hooks/useCombatSSE";
-import { formatPlayerAction, formatEnemyAction } from "../utilities/combatUtility";
+import { formatPlayerAction, formatEnemyAction, formatEnvironmentAction } from "../utilities/combatUtility";
 import { useCallback } from "react";
 
 
@@ -25,7 +25,11 @@ export function AdventureProvider({ children }) {
       case 'connected':
         console.log('Connected to combat stream for combat', data.combatId);
         break;
-        
+
+      case "combatant_died":
+        addToCombatLog(formatEnvironmentAction(data.environmentAction));
+        break;
+
       case 'new_turn':
         console.log('New turn started, updating combat state');
         setCombat(data.combat);
@@ -42,7 +46,11 @@ export function AdventureProvider({ children }) {
           });
         }
         break;
-        
+    case 'combat_ended':
+      console.log('Combat ended for combat', data.combatId);
+      setCombat(data.combat);
+      break;
+
       default:
         console.warn('Unknown SSE message type:', data.type, data);
     }
@@ -68,7 +76,7 @@ export function AdventureProvider({ children }) {
       adventure.levels.find((adventureLevel) => adventureLevel.level == level).id,
       party
     );
-    setCombat(combat.id);
+    setCombat(combat);
     navigate("/combat");
   }
 
@@ -79,17 +87,21 @@ export function AdventureProvider({ children }) {
 
   async function getActiveCombat() {
     const combat = await fetchActiveCombat();
-
-    if (!combat) {
-      navigate("/tavern");
-      return;
-    }
-
     setCombat(combat);
   }
 
   async function endTurn(action) {
     await endPlayerTurn(combat.id, action);
+  }
+
+  async function getLoot() {
+    const loot = await fetchLoot();
+    return loot;
+  }
+
+  async function acceptLoot() {
+    await acceptPlayerLoot(combat.id);
+    setCombat(null);
   }
 
   return (
@@ -104,7 +116,9 @@ export function AdventureProvider({ children }) {
         startAdventure,
         stopAdventure,
         getActiveCombat,
-        endTurn
+        endTurn,
+        getLoot,
+        acceptLoot
       }}
     >
       {children}

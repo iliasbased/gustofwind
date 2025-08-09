@@ -856,6 +856,7 @@ input[type="submit"],
   border: 2px solid #161311;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px, inset rgba(0, 0, 0, 0.35) 0px 5px 15px;
   animation: slideIn 0.2s;
+  z-index: 1000;
 }
 
 .item-tooltip-hide {
@@ -2112,6 +2113,18 @@ input[type="submit"],
   transition: all 0.1s ease-in-out;
 }
 
+.target-button-dead {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  filter:grayscale(1);
+  transition: all 0.1s ease-in-out;
+}
+
+.target-button-dead:hover {
+  transform: scale(1.02);
+}
+
 .target-button:hover {
   cursor: url("cursors/cursor-pointer.png"), pointer;
   transform: scale(1.02);
@@ -2167,6 +2180,85 @@ input[type="submit"],
   background: radial-gradient(circle, #b11f1f 0%, #413131 100%);
 
   cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.end-combat-popup {
+  width: 800px;
+  height: 520px;
+  position: fixed;
+  /* background: radial-gradient(circle, #2e2a29 0%, #282c34 100%); */
+  background: url("images/adventures/ice_kingdom/icekingdom1.png") no-repeat center center fixed;
+  top: 18%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: rgba(102, 22, 17, 0.3) 0px 0px 100px, inset rgba(0, 0, 0, 0.35) 0px 0px 25px;
+  border: 2px solid #161311;
+  z-index: 1000;
+  color: #dbdbdb;
+}
+
+.grab-loot-button {
+  background: radial-gradient(circle, #35942c 0%, #314132 100%);
+  height: 80px;
+  width: 280px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 40px;
+  padding: 0;
+}
+
+.grab-loot-button:active {
+  transform: scale(0.95);
+}
+
+.grab-loot-button:hover {
+  background: radial-gradient(circle, rgb(29, 187, 55) 0%, #314132 100%);
+
+  cursor: url("cursors/cursor-pointer.png"), pointer;
+}
+
+.tavern-return-button {
+  background: radial-gradient(circle, #5e5037 0%, #413a31 100%);
+  height: 80px;
+  width: 300px;
+  border: 0;
+  color: #dbdbdb;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0px 0px 15px, rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  font-size: 40px;
+  padding: 0;
+}
+
+.tavern-return-button:active {
+  transform: scale(0.95);
+}
+
+.tavern-return-button:hover {
+  background: radial-gradient(circle, #968059 0%, #413a31 100%);
+  cursor: url("cursors/cursor-door.png"), pointer !important;
+}
+
+.victory {
+  font-size: 60px;
+  color: #43bb38;
+}
+
+.defeat {
+  font-size: 60px;
+  color: #bb3737;
+}
+
+.item-quantity {
+  position: absolute;
+  top: 20px;
+  left: 12px;
+  font-size: 15px;
+  color: #dbdbdb;
+  text-shadow: #000 0px 0px 5px;
+  font-family: Impact;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 /*-------------------------------------------------------------------------*/

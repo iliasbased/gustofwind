@@ -67,24 +67,6 @@ export default function StartCombatPopup({ adventureLevel, showPopup, startComba
               )}
             </Col>
           ))}
-          {team1.map((enemy, index) => (
-            <Col xs={2} key={index} className="d-flex justify-content-center">
-              {enemy.player_id ? (
-                <HeroPortrait hero={enemy.info} />
-              ) : (
-                <EnemyPortrait enemy={enemy.info} />
-              )}
-            </Col>
-          ))}
-          {team1.map((enemy, index) => (
-            <Col xs={2} key={index} className="d-flex justify-content-center">
-              {enemy.player_id ? (
-                <HeroPortrait hero={enemy.info} />
-              ) : (
-                <EnemyPortrait enemy={enemy.info} />
-              )}
-            </Col>
-          ))}
         </Row>
         <Row>
           <Col className="d-flex justify-content-center mt-5">

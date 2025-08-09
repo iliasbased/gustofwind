@@ -25,6 +25,7 @@ import { HeroProvider } from "./context/heroContext";
 import { AdventureProvider } from "./context/adventureContext.js";
 import GMLayout from "./layouts/gmLayout";
 import HeroLayout from "./layouts/heroLayout";
+import CombatLayout from "./layouts/combatLayout";
 
 export default function GustOfWind() {
   return (
@@ -50,12 +51,14 @@ export default function GustOfWind() {
 
               <Route path="/hero" element={<HeroSelection />} />
               <Route element={<HeroLayout />}>
-                <Route path="/character" element={<Character />} />
-                <Route path="/tavern" element={<Tavern />} />
-                <Route path="/questlog" element={<QuestLog />} />
+                <Route element={<CombatLayout />}>
+                  <Route path="/character" element={<Character />} />
+                  <Route path="/tavern" element={<Tavern />} />
+                  <Route path="/questlog" element={<QuestLog />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/shop" element={<Shop />} />
+                </Route>
                 <Route path="/combat" element={<Combat />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/shop" element={<Shop />} />
               </Route>
               {/* accountLayout */}
 

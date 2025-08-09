@@ -12,19 +12,23 @@ import EmptyCombatant from "../components/combat/emptyCombatant";
 import EnemyPortrait from "../components/combat/enemyPortrait";
 import StartCombatPopup from "../components/combat/startCombatPopup";
 import { startCombat } from "../services/combatService";
+import EndCombatPopup from "../components/combat/endCombatPopup";
+import { useNavigate } from "react-router-dom";
 
 export default function Combat() {
   const { hero } = useHero();
   const [myCombatant, setMyCombatant] = useState(null);
-  const { combat, getActiveCombat, combatLog, endTurn } = useAdventures();
+  const { combat, getActiveCombat, combatLog, endTurn, getLoot, acceptLoot } = useAdventures();
   const [target, setTarget] = useState();
   const [turnCombatant, setTurnCombatant] = useState(null);
   const [pressedSkill, setPressedSkill] = useState(null);
   const [noTargetAlert, setNoTargetAlert] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!combat) {
-      getActiveCombat();
+    console.log(combat, 'combat');
+    if (!combat || combat.error) {
+      navigate("/tavern");
       return;
     }
 
@@ -32,22 +36,23 @@ export default function Combat() {
     const combatants = [...combat.team0, ...combat.team1];
     setTurnCombatant(combatants.find((c) => c.turn_order === currentTurn));
     setMyCombatant(combatants.find((c) => c.player_id === hero.id));
+    const myTarget = combatants.find((c) => c.id === target?.id);
+    if (myTarget?.status === "dead") {
+      setTarget(null);
+    }
 
     function onKeyDown(e) {
       const currentCombatants = [...combat.team0, ...combat.team1];
-      const currentTurnCombatant = currentCombatants.find((c) => c.turn_order === combat.turn_index);
       const currentMe = currentCombatants.find((c) => c.player_id === hero.id);
-
-      if (currentTurnCombatant && currentTurnCombatant.player_id !== hero.id) {
-        return;
-      }
 
       //TARGETING
       if (e.key === "Tab") {
         e.preventDefault();
         e.stopPropagation();
 
-        const currentIndex = combat.team1.findIndex((c) => c.id === target?.id);
+        const currentIndex = combat.team1
+          .filter((c) => c.status !== "dead")
+          .findIndex((c) => c.id === target?.id);
         const direction = e.shiftKey ? -1 : 1;
 
         let nextIndex = (currentIndex + direction) % combat.team1.length;
@@ -55,7 +60,8 @@ export default function Combat() {
           nextIndex = combat.team1.length - 1;
         }
 
-        setTarget(combat.team1[nextIndex]);
+        const nextTarget = combat.team1.filter((c) => c.status !== "dead")[nextIndex];
+        setTarget(nextTarget);
         return;
       }
 
@@ -113,6 +119,7 @@ export default function Combat() {
 
     const currentCombatants = [...combat.team0, ...combat.team1];
     const currentTurnCombatant = currentCombatants.find((c) => c.turn_order === combat.turn_index);
+    const currentMe = currentCombatants.find((c) => c.player_id === hero.id);
 
     if (currentTurnCombatant && currentTurnCombatant.player_id !== hero.id) {
       console.log("It's not your turn!");
@@ -124,7 +131,7 @@ export default function Combat() {
       return;
     }
 
-    if (!target) {
+    if (!target && skill.target_type !== "none") {
       if (!noTargetAlert) {
         setNoTargetAlert(true);
         setTimeout(() => setNoTargetAlert(false), 500);
@@ -132,7 +139,7 @@ export default function Combat() {
       return;
     }
 
-    endTurn({ type: "cast_skill", skill, targetId: target?.id, casterId: myCombatant.id });
+    endTurn({ type: "cast_skill", skill, targetId: target?.id, casterId: currentMe.id });
     console.log(`Casting skill: ${skill.name} on target: ${target?.info.name || "No target"}`);
   }
 
@@ -193,6 +200,14 @@ export default function Combat() {
         adventureLevel={combat.adventureLevel}
         team1={combat.team1}
         startCombat={attemptStartCombat}
+      />
+
+      <EndCombatPopup
+        showPopup={combat.status == "finished"}
+        adventureLevel={combat.adventureLevel}
+        getLoot={getLoot}
+        acceptLoot={acceptLoot}
+        isVictory={combat.victory_team_id == myCombatant?.team_id}
       />
       <Container
         className="combat-bg"

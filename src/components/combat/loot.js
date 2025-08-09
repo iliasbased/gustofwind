@@ -1,37 +1,26 @@
-import { useEffect, useState } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import LootSlot from "./lootSlot";
 
-export default function Loot({ loot }) {
-  let lootItems = [];
-  let lootQuality = "common";
-
+export default function Loot({ items }) {
   useEffect(() => {
-    loot.forEach((e) => {
-      let roll = Math.random();
-      if (roll <= e.chance) {
-        lootItems.push(e.loot);
-        lootQuality = e.type;
-      }
-    });
+    
   }, []);
 
   return (
     <>
-      <Container className="loot">
-        <Row className="align-items-center" style={{ height: "80%" }}>
-          <Col>
-            <Row className="justify-content-center">
-              <Image
-                style={{ width: "40%" }}
-                src={`/assets/images/items/base/loot_${lootQuality}.png`}
-                className="m-2"
-              />
-            </Row>
-
-            <Row className="justify-content-center">
-              <button style={{ width: "60%" }}>Claim</button>
-            </Row>
+      <Container className="">
+        <Row className="justify-content-center mb-3" >
+          <Col xs="auto" className="text-center" style={{ fontSize: "20px", fontFamily: "Calibri" }}>
+            Your Loot:
           </Col>
+        </Row>
+        <Row className="justify-content-center">
+          {items.map((item, i) => (
+            <Col xs="auto" key={i}>
+              <LootSlot item={item} />
+            </Col>
+          ))}
         </Row>
       </Container>
     </>

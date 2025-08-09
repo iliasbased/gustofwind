@@ -72,3 +72,21 @@ export async function endPlayerTurn(combatId, action) {
 
   return res.json();
 }
+
+export async function acceptPlayerLoot(combatId) {
+  const res = await fetch(`${API_URL}/combat/acceptLoot/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({
+      combatId: combatId,
+    }),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({ message: "Unknown error" }));
+    throw new Error(errorData.message || `Failed to accept loot: ${res.status}`);
+  }
+  return res.json();
+}

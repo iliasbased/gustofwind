@@ -10,6 +10,8 @@ export default function Combatant({ combatant, isTargeted, onSelectTarget }) {
     return null;
   }
 
+  console.log("Combatant:", combatant);
+
   const isEnemy = combatant.player_id == null;
   const isAlly = combatant.team_id == 0;
 
@@ -60,15 +62,23 @@ export default function Combatant({ combatant, isTargeted, onSelectTarget }) {
       <Row>
         <Col xs={4} className="pe-5 mb-1">
           <Row className="justify-content-end">
-            <div className="target-button">
+            <div
+              className={`${combatant.status === "dead" ? "target-button-dead" : "target-button"}`}
+              >
               {isEnemy ? (
                 <EnemyPortrait
                   enemy={combatant.info}
+                  isDead={combatant.status === "dead"}
                   style={style}
                   onSelectTarget={onSelectTarget}
                 />
               ) : (
-                <HeroPortrait hero={combatant.info} style={style} onSelectTarget={onSelectTarget} />
+                <HeroPortrait
+                  hero={combatant.info}
+                  style={style}
+                  onSelectTarget={onSelectTarget}
+                  isDead={combatant.status === "dead"}
+                />
               )}
             </div>
           </Row>

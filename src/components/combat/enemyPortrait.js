@@ -2,7 +2,7 @@ import { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 
-export default function EnemyPortrait({ enemy, onSelectTarget, style = {} }) {
+export default function EnemyPortrait({ enemy, onSelectTarget, isDead, style = {} }) {
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function EnemyPortrait({ enemy, onSelectTarget, style = {} }) {
     <Container
       className="enemy-portrait p-0 m-0"
       style={{ ...style, ...borderStyle }}
-      onClick={onSelectTarget}
+      onClick={isDead ? undefined : onSelectTarget}
     >
       <Row
         className="enemy-portrait-name dusty m-0"

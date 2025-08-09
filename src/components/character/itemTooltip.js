@@ -115,17 +115,19 @@ export default function ItemTooltip({ item, visible }) {
       <Row style={{ fontSize: "16px" }} className="mx-1 impact">
         <Col style={{ textAlign: "end", color: "gold" }}>
           <Image src={`assets/images/items/base/coin.png`} style={{ width: "20px" }} />{" "}
-          {item.template.basePrice}
+          {item.quantity > 1 ? item.template.basePrice * item.quantity : item.template.basePrice}
         </Col>
       </Row>
     );
   }
 
+  console.log(visible, "Item tooltip visibility");
+
   return (
     <Container className={visible ? "item-tooltip-show" : "item-tooltip-hide"}>
       <Row>
         <Col xs={9} className="align-self-center">
-          {item.template.name}
+          {item.quantity > 1 ? `${item.quantity} ` : ""}{item.template.name}
         </Col>
         <Col xs={3}>
           <Image src={item.template.icon} className={"slot-icon-large"} />

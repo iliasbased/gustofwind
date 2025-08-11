@@ -1,12 +1,16 @@
 import { Container, Row, Col, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { useDraggable } from "@dnd-kit/core";
-import { PlayerDataContext } from "../../pages/character";
 import { useState, useRef, useContext } from "react";
 import ItemTooltip from "./itemTooltip";
 import { changeSlot } from "../../services/itemService";
+import { useItems } from "../../context/itemContext";
+import { usePlayerStats } from "../../hooks/usePlayerStats";
+import { useStats } from "../../context/statsContext";
 
 export default function Item({ type, disabled, item, isLarge }) {
-  const { playerItems, setPlayerItems, refreshItems, refreshStats } = useContext(PlayerDataContext);
+  const { playerItems, setPlayerItems, refreshItems } = useItems();
+  const { refreshStats } = useStats();
+
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({

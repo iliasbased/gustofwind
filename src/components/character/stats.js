@@ -5,9 +5,10 @@ import { usePlayerStats } from "../../hooks/usePlayerStats";
 import { PlayerDataContext } from "../../pages/character";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import { useStats } from "../../context/statsContext";
 
 export default function Stats() {
-  let { playerStats } = useContext(PlayerDataContext);
+  const { playerStats } = useStats();
 
   if (!playerStats || playerStats.length === 0) {
     return "";

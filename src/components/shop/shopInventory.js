@@ -1,12 +1,11 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
-import Slot from "./slot";
-import { PlayerDataContext } from "../../pages/character";
+import Slot from "../character/slot";
+import { PlayerDataContext } from "../../pages/shop";
 import {getRandomBorderTopOnly} from "../../utilities/borderUtility";
-import { useItems } from "../../context/itemContext";
 
-export default function Inventory() {
-  const { playerItems } = useItems();
+export default function ShopInventory() {
+  const { playerItems } = useContext(PlayerDataContext);
   const [borderStyle, setBorderStyle] = useState({});
   useEffect(() => {
     setBorderStyle(getRandomBorderTopOnly());

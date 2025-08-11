@@ -4,18 +4,14 @@ import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import { usePlayerItems } from "../hooks/usePlayerItems";
 import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
 import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
-import { useHero } from "../context/heroContext";
-
-export const PlayerDataContext = React.createContext();
+import { useItems } from "../context/itemContext";
 
 export default function Character() {
-  const { hero } = useHero();
-  const { playerItems, refreshItems, setPlayerItems } = usePlayerItems(hero.id);
-  const { playerStats, refreshStats } = usePlayerStats();
+  const { refreshStats } = usePlayerStats();
+  const { playerItems, refreshItems, setPlayerItems } = useItems();
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -108,23 +104,19 @@ export default function Character() {
         </Row>
       </Container>
       <Container className="base-ui" style={borderStyle}>
-        <PlayerDataContext.Provider
-          value={{ playerItems, playerStats, refreshItems, refreshStats, setPlayerItems }}
-        >
-          <Row>
-            <Col className="pe-0" xs={3}>
-              <Stats />
+        <Row>
+          <Col className="pe-0" xs={3}>
+            <Stats />
+          </Col>
+          <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+            <Col className="px-0" xs={3}>
+              <Gear />
             </Col>
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-              <Col className="px-0" xs={3}>
-                <Gear />
-              </Col>
-              <Col className="ps-0" xs={6}>
-                <Inventory />
-              </Col>
-            </DndContext>
-          </Row>
-        </PlayerDataContext.Provider>
+            <Col className="ps-0" xs={6}>
+              <Inventory />
+            </Col>
+          </DndContext>
+        </Row>
       </Container>
     </>
   );

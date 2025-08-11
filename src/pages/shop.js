@@ -7,6 +7,7 @@ import { usePlayerItems } from "../hooks/usePlayerItems";
 import { changeSlot } from "../services/itemService";
 import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
+import ShopInventory from "../components/shop/shopInventory";
 
 export const PlayerDataContext = React.createContext();
 
@@ -97,7 +98,7 @@ export default function Shop() {
           <Col xs={4}></Col>
           <Col xs={4}>
             <Row className="justify-content-center engraved mb-4" style={{ fontSize: "40px" }}>
-              C h a r a c t e r
+              Shop
             </Row>
           </Col>
           <Col xs={4}></Col>
@@ -109,8 +110,8 @@ export default function Shop() {
         >
           <Row>
             <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-              <Col className="px-0" xs={3}>
-                <Gear />
+              <Col className="px-0" xs={6}>
+                {/* <ShopInventory /> */}
               </Col>
               <Col className="ps-0" xs={6}>
                 <Inventory />

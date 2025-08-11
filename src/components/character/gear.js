@@ -1,10 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useContext } from "react";
 import Slot from "./slot";
-import { PlayerDataContext } from "../../pages/character";
+import { useItems } from "../../context/itemContext";
 
 export default function Gear() {
-  const { playerItems } = useContext(PlayerDataContext);
+  const { playerItems } = useItems();
 
   const getName = () => {
     return (

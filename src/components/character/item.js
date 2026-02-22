@@ -4,11 +4,10 @@ import { useState, useRef, useContext } from "react";
 import ItemTooltip from "./itemTooltip";
 import { changeSlot } from "../../services/itemService";
 import { useItems } from "../../context/itemContext";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
 import { useStats } from "../../context/statsContext";
 
-export default function Item({ type, disabled, item, isLarge }) {
-  const { playerItems, setPlayerItems, refreshItems } = useItems();
+export default function Item({ type, disabled, item, isLarge, shop, sell }) {
+  const { playerItems, setPlayerItems, refreshItems, setShopItems } = useItems();
   const { refreshStats } = useStats();
 
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -33,6 +32,11 @@ export default function Item({ type, disabled, item, isLarge }) {
     e.preventDefault();
     e.stopPropagation();
 
+    if (sell) {
+      sellItem();
+      return;
+    }
+
     if (e.button === 2) {
       if (item.equipped) {
         await unequipItem();
@@ -43,6 +47,12 @@ export default function Item({ type, disabled, item, isLarge }) {
 
     await refreshItems();
     refreshStats();
+  }
+
+  function sellItem() {
+    setShopItems((prevItems) => [...prevItems, item]);
+    setPlayerItems((prevItems) => prevItems.filter((i) => i.id !== item.id));
+    item.slot = "sold";
   }
 
   async function equipItem() {

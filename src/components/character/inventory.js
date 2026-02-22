@@ -1,11 +1,10 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import Slot from "./slot";
-import { PlayerDataContext } from "../../pages/character";
 import {getRandomBorderTopOnly} from "../../utilities/borderUtility";
 import { useItems } from "../../context/itemContext";
 
-export default function Inventory() {
+export default function Inventory({shop}) {
   const { playerItems } = useItems();
   const [borderStyle, setBorderStyle] = useState({});
   useEffect(() => {
@@ -93,6 +92,7 @@ export default function Inventory() {
           type="bag"
           item={playerItems.find((item) => item.slot == "bag" + i)}
           selectedHeader={headers.find((e) => e.selected)}
+          sell={shop}
         />
       );
     }

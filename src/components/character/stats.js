@@ -1,8 +1,6 @@
 import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { useStats } from "../../context/statsContext";

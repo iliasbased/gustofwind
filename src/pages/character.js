@@ -4,13 +4,13 @@ import Gear from "../components/character/gear";
 import Stats from "../components/character/stats";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import { usePlayerStats } from "../hooks/usePlayerStats";
 import { changeSlot } from "../services/itemService";
 import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { useItems } from "../context/itemContext";
+import { useStats } from "../context/statsContext";
 
 export default function Character() {
-  const { refreshStats } = usePlayerStats();
+  const { refreshStats } = useStats();
   const { playerItems, refreshItems, setPlayerItems } = useItems();
   const [borderStyle, setBorderStyle] = useState({});
 

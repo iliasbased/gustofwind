@@ -4,7 +4,7 @@ import Item from "./item";
 import getRandomBorder, { getRandomBorderSubtle } from "../../utilities/borderUtility";
 import { useEffect, useState } from "react";
 
-export default function Slot({ id, type, disabled, item, selectedHeader }) {
+export default function Slot({ id, type, disabled, item, selectedHeader, sell }) {
   const [borderStyleSubtle, setBorderStyleSubtle] = useState({});
   const [borderStyle, setBorderStyle] = useState({});
 
@@ -41,7 +41,17 @@ export default function Slot({ id, type, disabled, item, selectedHeader }) {
         ref={setNodeRef}
       >
         <Row>
-          <Col>{item ? <Item item={item} /> : ""}</Col>
+          <Col>{item ? <Item item={item} sell={sell}/> : ""}</Col>
+        </Row>
+      </Container>
+    );
+  }
+
+  if (type == "shop") {
+    return (
+      <Container className={"slot-shop"} style={borderStyleSubtle} ref={setNodeRef}>
+        <Row>
+          <Col>{item ? <Item item={item} shop={true}/> : ""}</Col>
         </Row>
       </Container>
     );

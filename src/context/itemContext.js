@@ -8,6 +8,7 @@ const ItemContext = createContext();
 export function ItemProvider({ children }) {
   const { hero } = useHero();
   const [playerItems, setPlayerItems] = useState([]);
+  const [shopItems, setShopItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const refreshItems = useCallback(async () => {
@@ -38,6 +39,8 @@ export function ItemProvider({ children }) {
         setPlayerItems,
         refreshItems,
         loading,
+        shopItems,
+        setShopItems,
       }}
     >
       {children}

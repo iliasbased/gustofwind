@@ -1,13 +1,10 @@
 import { use, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import { usePlayerStats } from "../../hooks/usePlayerStats";
-import { PlayerDataContext } from "../../pages/character";
 
 export default function Adventure({ adventure, onClickToEnter }) {
   const [textColor, setTextColor] = useState("white");
   const [textOpacity, setTextOpacity] = useState(0);
-
 
   return (
     <Container className="adventure-container" style={{ color: textColor, pointerEvents: 'none' }}>

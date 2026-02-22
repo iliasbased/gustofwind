@@ -1,19 +1,15 @@
 import React, { useEffect, useState, Context } from "react";
 import { Container, Row, Col, Fade } from "react-bootstrap";
-import Gear from "../components/character/gear";
 import Inventory from "../components/character/inventory";
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import { usePlayerItems } from "../hooks/usePlayerItems";
 import { changeSlot } from "../services/itemService";
 import { getRandomBorderLeftOnly } from "../utilities/borderUtility";
 import { useHero } from "../context/heroContext";
 import ShopInventory from "../components/shop/shopInventory";
-
-export const PlayerDataContext = React.createContext();
+import { useItems } from "../context/itemContext";
 
 export default function Shop() {
-  const { hero } = useHero();
-  const { playerItems, refreshItems, setPlayerItems } = usePlayerItems(hero.id);
+  const { playerItems, refreshItems, setPlayerItems } = useItems();
   const [borderStyle, setBorderStyle] = useState({});
 
   useEffect(() => {
@@ -25,10 +21,10 @@ export default function Shop() {
       if (event.over.data.current.type == "bag") {
         await dropItemInBag(event.active.data.current.item, event.over);
       } else {
-        await dropItemInGear(event.active.data.current.item, event.over);
+        await dropItemShop(event.active.data.current.item, event.over);
       }
 
-      await refreshItems();
+      // await refreshItems();
     }
   }
 
@@ -50,15 +46,15 @@ export default function Shop() {
 
     if (slot.data.current.item) {
       slot.data.current.item.slot = draggableSlot;
-      changeSlot(slot.data.current.item.id, draggableSlot);
+      // changeSlot(slot.data.current.item.id, draggableSlot);
     }
 
     item.slot = droppableSlot;
     setPlayerItems([...playerItems]);
-    await changeSlot(item.id, droppableSlot);
+    // await changeSlot(item.id, droppableSlot);
   }
 
-  async function dropItemInGear(item, slot) {
+  async function dropItemShop(item, slot) {
     if (slot.data.current.disabled) {
       return;
     }
@@ -82,13 +78,12 @@ export default function Shop() {
     if (slot.data.current.item) {
       slot.data.current.item.slot = draggableSlot;
       slot.data.current.item.equipped = draggableEquipped;
-      changeSlot(slot.data.current.item.id, slot.data.current.item.slot);
+      // changeSlot(slot.data.current.item.id, slot.data.current.item.slot);
     }
 
     item.slot = droppableSlot;
-    item.equipped = true;
     setPlayerItems([...playerItems]);
-    await changeSlot(item.id, item.slot);
+    // await changeSlot(item.id, item.slot);
   }
 
   return (
@@ -105,20 +100,16 @@ export default function Shop() {
         </Row>
       </Container>
       <Container className="base-ui" style={borderStyle}>
-        <PlayerDataContext.Provider
-          value={{ playerItems, refreshItems, setPlayerItems }}
-        >
-          <Row>
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-              <Col className="px-0" xs={6}>
-                {/* <ShopInventory /> */}
-              </Col>
-              <Col className="ps-0" xs={6}>
-                <Inventory />
-              </Col>
-            </DndContext>
-          </Row>
-        </PlayerDataContext.Provider>
+        <Row>
+          <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+            <Col className="px-0" xs={6}>
+              <ShopInventory />
+            </Col>
+            <Col className="ps-0" xs={6}>
+              <Inventory shop/>
+            </Col>
+          </DndContext>
+        </Row>
       </Container>
     </>
   );
